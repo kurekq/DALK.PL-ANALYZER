@@ -66,11 +66,11 @@ body {
     align-items: center;
 }
 
-.match__host {
+.match__winner {
     color:rgb(17,32,43);
 }
 
-.match__guest {
+.match__looser {
     color:rgb(102,115,124);
     margin-bottom:4px;
 }
