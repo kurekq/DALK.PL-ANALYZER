@@ -124,7 +124,7 @@ body {
 }
 
 
-.match__statistics, .match__mvp {
+.match__description, .match__mvp {
     padding: 7px 10px;
     color: rgb(17,32,43);
     font-size: 12px;
@@ -133,7 +133,7 @@ body {
     text-align: center;
 }
 
-.match__statistics {
+.match__description {
     background-color: rgb(243,244,245);
 }
 

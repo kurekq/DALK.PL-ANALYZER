@@ -131,6 +131,7 @@
     <Compile Include="Models\Matches\League.cs" />
     <Compile Include="Models\Matches\Match.cs" />
     <Compile Include="Models\Matches\IStage.cs" />
+    <Compile Include="Models\Matches\Player.cs" />
     <Compile Include="Models\Matches\PlayOff.cs" />
     <Compile Include="Models\Matches\PlayOffsSpecialNames.cs" />
     <Compile Include="Models\Matches\PlayOffStage.cs" />

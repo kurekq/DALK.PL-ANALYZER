@@ -8,12 +8,28 @@ namespace DALK.PL_ANALYZER.Models.Matches
     public class Team
     {
         private string name;
-        public string IconUrl { get; }
+
+        private string _url;
+        public string IconUrl
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_url))
+                {
+                    DefaultIcons di = new DefaultIcons();
+                    return di.GetDefaultIcon(StructureWithIcons.TEAM);
+                }
+                else
+                {
+                    return _url;
+                }
+            }
+        }
 
         public Team (string name, string url = "")
         {
             this.name = name;
-            this.IconUrl = url;
+            this._url = url;
         }
 
         public override string ToString()
