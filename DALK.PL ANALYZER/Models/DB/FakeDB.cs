@@ -8,29 +8,6 @@ namespace DALK.PL_ANALYZER.Models.DB
 {
     public class FakeDB
     {
-        /*
-            public League League { get; set; }
-
-            public IStage Stage { get; set; }
-
-            public DateTime DateTime { get; set; }
-
-            public Team Home { get; set; }
-            public int HomePoints { get; set; }
-
-            public Team Away { get; set; }
-            public int AwayPoints { get; set; }
-
-            public Team Winner
-            {
-                get
-                {
-                    return HomePoints > AwayPoints ? Home : Away;
-                }
-            }
-            public Player MVP { get; set; }
-            public string MatchDescription { get; set; }
-         */
         public IEnumerable<Match> GetMatches()
         {
             List<Team> teams = GetTeams().ToList<Team>();
@@ -87,7 +64,7 @@ namespace DALK.PL_ANALYZER.Models.DB
                 MatchDescription = "Totalnie zmiażdżyliśmy przeciwników.",
                 MVP = new MVP() { Player = Kaczor, PerformanceDesciption = "Double-duble, 17 punktów, 10 zbiórek" },
                 Season = ourSeason,
-                Stage = stages[1]
+                Stage = stages[2]
             };
 
             yield return new Match()
@@ -102,7 +79,7 @@ namespace DALK.PL_ANALYZER.Models.DB
                 MatchDescription = "Przeciwnicy ograli nas pressingiem w drugiej połowie, ",
                 MVP = new MVP() { Player = Mrozo, PerformanceDesciption = "16 punktów, 9 zbiórek" },
                 Season = ourSeason,
-                Stage = stages[1]
+                Stage = stages[3]
             };
 
             yield return new Match()
@@ -117,7 +94,7 @@ namespace DALK.PL_ANALYZER.Models.DB
                 MatchDescription = "Ustawiiśmy się 3 zawodnikami \"na dole\" i przeciwnicy rzucili nam 10 trójek.",
                 MVP = new MVP() { Player = Obol, PerformanceDesciption = "6 punktów (3/5), 12 zbiórek" },
                 Season = ourSeason,
-                Stage = stages[1]
+                Stage = stages[4]
             };
 
             yield return new Match()
@@ -132,7 +109,7 @@ namespace DALK.PL_ANALYZER.Models.DB
                 MatchDescription = "Mecz przegrany 1 punktem w dogrywce, Kudłaty i Mrozo zepsuli buzzer-beatery. 50 sekund przed końcem meczu wygrywaliśmy 4 punktami. Przeciwnicy grali w piatkę.",
                 MVP = new MVP() { Player = Kurek, PerformanceDesciption = "5 punktów (2/3), 18 zbiórek, 2 asysty, 2 bloki" },
                 Season = ourSeason,
-                Stage = stages[1]
+                Stage = stages[5]
             };
         }
 

@@ -9,5 +9,10 @@ namespace DALK.PL_ANALYZER.Models.Matches
     {
         public Player Player { get; set; }
         public string PerformanceDesciption { get; set; }
+
+        public override string ToString()
+        {
+            return Player.ToString() + (string.IsNullOrEmpty(PerformanceDesciption) ? string.Empty : (" (" + PerformanceDesciption + ")"));
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
     public class Player
     {
         private string _firstName;
-        public string Name
+        public string FirstName
         {
             get
             {
@@ -39,6 +39,11 @@ namespace DALK.PL_ANALYZER.Models.Matches
             this._firstName = firstName;
             this._surname = surName;
             this._team = team;
+        }
+
+        public override string ToString()
+        {
+            return this.FirstName + " " + this.Surname;
         }
     }
 }

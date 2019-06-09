@@ -14,7 +14,7 @@ namespace DALK.PL_ANALYZER.Controllers
         public ViewResult Index()
         {
             List<Match> matches = new FakeDB().GetMatches().ToList<Match>();
-            return View();
+            return View(matches);
         }
     }
 }

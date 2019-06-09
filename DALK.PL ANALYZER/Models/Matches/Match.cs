@@ -21,6 +21,13 @@ namespace DALK.PL_ANALYZER.Models.Matches
         public Team Away { get; set; }
         public int AwayPoints { get; set; }
 
+        public int WinnerPoints
+        {
+            get
+            {
+                return Math.Max(HomePoints, AwayPoints);
+            }
+        }
         public Team Winner
         {
             get
@@ -28,6 +35,23 @@ namespace DALK.PL_ANALYZER.Models.Matches
                 return HomePoints > AwayPoints ? Home : Away;
             }
         }
+
+        public int LooserPoints
+        {
+            get
+            {
+                return Math.Min(HomePoints, AwayPoints);
+            }
+        }
+        public Team Looser
+        {
+            get
+            {
+                return HomePoints > AwayPoints ? Away : Home;
+            }
+        }
+
+
 
         public MVP MVP { get; set; }
         public string MatchDescription { get; set; }

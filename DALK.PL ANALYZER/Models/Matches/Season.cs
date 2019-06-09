@@ -9,9 +9,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
     {
         public int FirstYear { get; set; }
         public int SecondYear { get; set; }
-
         public bool IsSummerSeason { get; set; }
-
         public string GetName()
         {
             string name = FirstYear.ToString();
@@ -21,5 +19,10 @@ namespace DALK.PL_ANALYZER.Models.Matches
                 name += " Letnia";
             return name;
         }
+        public override string ToString()
+        {
+            return GetName();
+        }
+
     }
 }

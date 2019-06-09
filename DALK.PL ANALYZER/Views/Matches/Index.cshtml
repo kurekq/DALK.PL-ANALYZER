@@ -4,162 +4,33 @@
     ViewBag.Title = "Meczyki";
 }
 
-<div class="layer matches">
-
-    <div class="match">
-        <div class="match__heading">
-            <div class="match__gametitle">Kolejka 6, Grupa D</div>
-            <div class="match__level">2 Liga 2019, 2019-06-02 14:45</div>
-        </div>
-        <div class="match__result">
-            <div class="match__team match__winner">
-                <img class="match__icon" src="http://cdn.nba.net/assets/logos/teams/secondary/web/LAL.svg">
-                <div class="match__teamname">KSP Gospoda</div>
-                <div class="match__score">54</div>
+    <div class="layer matches">
+        @foreach (DALK.PL_ANALYZER.Models.Matches.Match m in Model)
+        {
+            <div class="match">
+                <div class="match__heading">
+                    <div class="match__gametitle">@m.Stage.GetStageName(), @m.Group.ToString()</div>
+                    <div class="match__level">@m.League @m.Season, @m.DateTime.ToString("yyyy-MM-dd HH:mm:ss")</div>
+                </div>
+                <div class="match__result">
+                    <div class="match__team match__winner">
+                        <img class="match__icon" src="@m.Winner.IconUrl">
+                        <div class="match__teamname">@m.Winner.ToString()</div>
+                        <div class="match__score">@m.WinnerPoints</div>
+                    </div>
+                    <div class="match__team match__looser">
+                        <img class="match__icon" src="@m.Looser.IconUrl">
+                        <div class="match__teamname">@m.Looser.ToString()</div>
+                        <div class="match__score">@m.LooserPoints</div>
+                    </div>
+                </div>
+                <div class="match__description">@m.MatchDescription</div>
+                <div class="match__mvp">MVP - @m.MVP.ToString()</div>
+                <div class="match__navigation">
+                    <a href="#" class="match__button">ZOBACZ</a>
+                    <a href="#" class="match__button">SZCZEGÓŁY</a>
+                    <a href="#" class="match__button">ANALIZUJ</a>
+                </div>
             </div>
-            <div class="match__team match__looser">
-                <img class="match__icon" src="http://cdn.nba.net/assets/logos/teams/secondary/web/ORL.svg">
-                <div class="match__teamname">WakeTrip</div>
-                <div class="match__score">53</div>
-            </div>
-        </div>
-        <div class="match__description">Najlepsze 25 minut w życiu Gumy - 1 asysta!!!</div>
-        <div class="match__mvp">MVP - Piotr Ludwig</div>
-        <div class="match__navigation">
-            <a href="#" class="match__button">ZOBACZ</a>
-            <a href="#" class="match__button">SZCZEGÓŁY</a>
-            <a href="#" class="match__button">ANALIZUJ</a>
-        </div>
+        }
     </div>
-
-    <div class="match">
-        <div class="match__heading">
-            <div class="match__gametitle">Kolejka 6, Grupa D</div>
-            <div class="match__level">2 Liga 2019, 2019-06-02 14:45</div>
-        </div>
-        <div class="match__result">
-            <div class="match__team match__winner">
-                <img class="match__icon" src="http://cdn.nba.net/assets/logos/teams/secondary/web/LAL.svg">
-                <div class="match__teamname">KSP Gospoda</div>
-                <div class="match__score">54</div>
-            </div>
-            <div class="match__team match__looser">
-                <img class="match__icon" src="http://cdn.nba.net/assets/logos/teams/secondary/web/ORL.svg">
-                <div class="match__teamname">WakeTrip</div>
-                <div class="match__score">53</div>
-            </div>
-        </div>
-        <div class="match__description">Najlepsze 25 minut w życiu Gumy - 1 asysta!!!</div>
-        <div class="match__mvp">MVP - Piotr Ludwig</div>
-        <div class="match__navigation">
-            <a href="#" class="match__button">ZOBACZ</a>
-            <a href="#" class="match__button">SZCZEGÓŁY</a>
-            <a href="#" class="match__button">ANALIZUJ</a>
-        </div>
-    </div>
-
-    <div class="match">
-        <div class="match__heading">
-            <div class="match__gametitle">Kolejka 6, Grupa D</div>
-            <div class="match__level">2 Liga 2019, 2019-06-02 14:45</div>
-        </div>
-        <div class="match__result">
-            <div class="match__team match__winner">
-                <img class="match__icon" src="http://cdn.nba.net/assets/logos/teams/secondary/web/LAL.svg">
-                <div class="match__teamname">KSP Gospoda</div>
-                <div class="match__score">54</div>
-            </div>
-            <div class="match__team match__looser">
-                <img class="match__icon" src="http://cdn.nba.net/assets/logos/teams/secondary/web/ORL.svg">
-                <div class="match__teamname">WakeTrip</div>
-                <div class="match__score">53</div>
-            </div>
-        </div>
-        <div class="match__description">Najlepsze 25 minut w życiu Gumy - 1 asysta!!!</div>
-        <div class="match__mvp">MVP - Piotr Ludwig</div>
-        <div class="match__navigation">
-            <a href="#" class="match__button">ZOBACZ</a>
-            <a href="#" class="match__button">SZCZEGÓŁY</a>
-            <a href="#" class="match__button">ANALIZUJ</a>
-        </div>
-    </div>
-
-    <div class="match">
-        <div class="match__heading">
-            <div class="match__gametitle">Kolejka 6, Grupa D</div>
-            <div class="match__level">2 Liga 2019, 2019-06-02 14:45</div>
-        </div>
-        <div class="match__result">
-            <div class="match__team match__winner">
-                <img class="match__icon" src="http://cdn.nba.net/assets/logos/teams/secondary/web/LAL.svg">
-                <div class="match__teamname">KSP Gospoda</div>
-                <div class="match__score">54</div>
-            </div>
-            <div class="match__team match__looser">
-                <img class="match__icon" src="http://cdn.nba.net/assets/logos/teams/secondary/web/ORL.svg">
-                <div class="match__teamname">WakeTrip</div>
-                <div class="match__score">53</div>
-            </div>
-        </div>
-        <div class="match__description">Najlepsze 25 minut w życiu Gumy - 1 asysta!!!</div>
-        <div class="match__mvp">MVP - Piotr Ludwig</div>
-        <div class="match__navigation">
-            <a href="#" class="match__button">ZOBACZ</a>
-            <a href="#" class="match__button">SZCZEGÓŁY</a>
-            <a href="#" class="match__button">ANALIZUJ</a>
-        </div>
-    </div>
-
-    <div class="match">
-        <div class="match__heading">
-            <div class="match__gametitle">Kolejka 6, Grupa D</div>
-            <div class="match__level">2 Liga 2019, 2019-06-02 14:45</div>
-        </div>
-        <div class="match__result">
-            <div class="match__team match__winner">
-                <img class="match__icon" src="http://cdn.nba.net/assets/logos/teams/secondary/web/LAL.svg">
-                <div class="match__teamname">KSP Gospoda</div>
-                <div class="match__score">54</div>
-            </div>
-            <div class="match__team match__looser">
-                <img class="match__icon" src="http://cdn.nba.net/assets/logos/teams/secondary/web/ORL.svg">
-                <div class="match__teamname">WakeTrip</div>
-                <div class="match__score">53</div>
-            </div>
-        </div>
-        <div class="match__description">Najlepsze 25 minut w życiu Gumy - 1 asysta!!!</div>
-        <div class="match__mvp">MVP - Piotr Ludwig</div>
-        <div class="match__navigation">
-            <a href="#" class="match__button">ZOBACZ</a>
-            <a href="#" class="match__button">SZCZEGÓŁY</a>
-            <a href="#" class="match__button">ANALIZUJ</a>
-        </div>
-    </div>
-
-    <div class="match">
-        <div class="match__heading">
-            <div class="match__gametitle">Kolejka 6, Grupa D</div>
-            <div class="match__level">2 Liga 2019, 2019-06-02 14:45</div>
-        </div>
-        <div class="match__result">
-            <div class="match__team match__winner">
-                <img class="match__icon" src="http://cdn.nba.net/assets/logos/teams/secondary/web/LAL.svg">
-                <div class="match__teamname">KSP Gospoda</div>
-                <div class="match__score">54</div>
-            </div>
-            <div class="match__team match__looser">
-                <img class="match__icon" src="http://cdn.nba.net/assets/logos/teams/secondary/web/ORL.svg">
-                <div class="match__teamname">WakeTrip</div>
-                <div class="match__score">53</div>
-            </div>
-        </div>
-        <div class="match__description">Najlepsze 25 minut w życiu Gumy - 1 asysta!!!</div>
-        <div class="match__mvp">MVP - Piotr Ludwig</div>
-        <div class="match__navigation">
-            <a href="#" class="match__button">ZOBACZ</a>
-            <a href="#" class="match__button">SZCZEGÓŁY</a>
-            <a href="#" class="match__button">ANALIZUJ</a>
-        </div>
-    </div>
-
-</div>
