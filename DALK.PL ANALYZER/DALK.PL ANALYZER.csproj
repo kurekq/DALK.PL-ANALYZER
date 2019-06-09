@@ -125,6 +125,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Matches\DefaultIcons.cs" />
     <Compile Include="Models\Matches\Group.cs" />
     <Compile Include="Models\Matches\GroupStage.cs" />
     <Compile Include="Models\Matches\League.cs" />
@@ -133,6 +134,8 @@
     <Compile Include="Models\Matches\PlayOff.cs" />
     <Compile Include="Models\Matches\PlayOffsSpecialNames.cs" />
     <Compile Include="Models\Matches\PlayOffStage.cs" />
+    <Compile Include="Models\Matches\StructuresWithIcons.cs" />
+    <Compile Include="Models\Matches\Team.cs" />
     <Compile Include="Models\Matches\TeamsInPlayOffStage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

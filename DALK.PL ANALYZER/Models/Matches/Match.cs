@@ -9,7 +9,11 @@ namespace DALK.PL_ANALYZER.Models.Matches
     {
         public League League { get; set; }
 
-        public byte Round { get; set; }
+        public IStage Stage { get; set; }
+
+        public DateTime DateTime { get; set; }
+
+
 
     }
 }

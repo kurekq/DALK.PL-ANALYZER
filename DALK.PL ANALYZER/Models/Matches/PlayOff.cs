@@ -38,7 +38,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
                 case PlayOffsSpecialNames.QUARTER_FINAL:
                     return "Ćwierćfinał";
                 default:
-                    throw new ArgumentException();
+                    throw new NotImplementedException(); ();
             }
         }
 
