@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DALK.PL_ANALYZER.Models.DB;
+using DALK.PL_ANALYZER.Models.Matches;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +13,7 @@ namespace DALK.PL_ANALYZER.Controllers
         // GET: Matches
         public ViewResult Index()
         {
+            List<Match> matches = new FakeDB().GetMatches().ToList<Match>();
             return View();
         }
     }

@@ -8,6 +8,8 @@ namespace DALK.PL_ANALYZER.Models.Matches
     public class Match
     {
         public League League { get; set; }
+        public Season Season { get; set; }
+        public Group Group { get; set; }
 
         public IStage Stage { get; set; }
 
@@ -27,7 +29,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
             }
         }
 
-        public Player MVP { get; set; }
+        public MVP MVP { get; set; }
         public string MatchDescription { get; set; }
     }
 }

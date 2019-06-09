@@ -8,11 +8,11 @@ namespace DALK.PL_ANALYZER.Models.Matches
     public class Group
     {
         public League League { get; set; }
-        private string name;
+        public string Name { get; set; }
 
         public override string ToString()
         {
-            return "Grupa " + name;
+            return "Grupa " + Name;
         }
 
         public override int GetHashCode()
