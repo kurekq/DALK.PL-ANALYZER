@@ -76,7 +76,7 @@ namespace DALK.PL_ANALYZER.Models.DB
                 DateTime = new DateTime(2019, 5, 12, 17, 0, 0),
                 League = ourLeague,
                 Group = ourGroup,
-                MatchDescription = "Przeciwnicy ograli nas pressingiem w drugiej połowie, ",
+                MatchDescription = "Przeciwnicy ograli nas pressingiem w drugiej połowie.",
                 MVP = new MVP() { Player = Mrozo, PerformanceDesciption = "16 punktów, 9 zbiórek" },
                 Season = ourSeason,
                 Stage = stages[3]
@@ -147,7 +147,7 @@ namespace DALK.PL_ANALYZER.Models.DB
             yield return new Team("Sami Swoi", "http://cdn.nba.net/assets/logos/teams/secondary/web/UTA.svg");
             yield return new Team("B-Ball Styl Dzierżoniów", "http://cdn.nba.net/assets/logos/teams/secondary/web/MIA.svg");
             yield return new Team("Gwardia Wrocław", "http://cdn.nba.net/assets/logos/teams/secondary/web/GSW.svg");
-            yield return new Team("Whyducki", "http://cdn.nba.net/assets/logos/teams/secondary/web/GSW.svg");
+            yield return new Team("Whyducki", "http://cdn.nba.net/assets/logos/teams/secondary/web/BOS.svg");
             yield return new Team("KSP Gospoda", "http://cdn.nba.net/assets/logos/teams/secondary/web/ORL.svg");
         }
 
