@@ -131,6 +131,13 @@ body {
     border-top: 1px solid rgb(232,233,234);
     border-bottom: 1px solid rgb(232,233,234);
     text-align: center;
+    position: relative;
+}
+
+.centered_div {
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%);
 }
 
 .match__description {
@@ -200,4 +207,3 @@ body {
         margin: 0 auto;
     }
 }
-
