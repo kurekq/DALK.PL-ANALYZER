@@ -1,3 +1,4 @@
 packages
 .vs
-DALK.PL ANALYZER\.vs
+DALK.PL_ANALYZER/.vs
+DALK.PL_ANALYZER/bin
