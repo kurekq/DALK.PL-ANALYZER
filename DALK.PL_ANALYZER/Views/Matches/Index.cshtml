@@ -3,10 +3,17 @@
 @{
     ViewBag.Title = "Meczyki";
 }
-
-
-
-    <div class="layer matches">
+ 
+    @{
+        string allMatchesClass = "layer";
+        if (Model.Count == 1)
+        {
+            allMatchesClass += " singleMatch";
+        } else {
+            allMatchesClass += " matches";
+        }
+    }
+    <div class="@allMatchesClass">
         @foreach (DALK.PL_ANALYZER.Models.Matches.Match m in Model)
         {
             DALK.PL_ANALYZER.Models.Matches.PlayedMatch playedMatch = m as DALK.PL_ANALYZER.Models.Matches.PlayedMatch;
@@ -66,7 +73,7 @@
             }
         </div>
 
-            <script type="text/javascript">
-                window.onload = verticalAlignAllElements;
-            </script>
+        <script type="text/javascript">
+            window.onload = verticalAlignAllElements;
+        </script>
 

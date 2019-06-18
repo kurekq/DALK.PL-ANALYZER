@@ -36,7 +36,7 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                 Season = ourSeason,
                 Stage = stages[0]
             };
-
+            /*
             yield return new PlayedMatch()
             {
                 Home = teams[0],
@@ -135,7 +135,7 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                 MatchDescription = "Drużyna beniaminka Waketrip (6-1) zmierzy się z jedną z lepszych drużyn ligowych (7-0).",
                 Season = ourSeason,
                 Stage = stages[7]
-            };
+            }; */
         }
 
         public IEnumerable<League> GetLeagues()
