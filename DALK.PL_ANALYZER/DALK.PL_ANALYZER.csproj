@@ -133,6 +133,7 @@
     <Compile Include="Models\Matches\Match.cs" />
     <Compile Include="Models\Matches\IStage.cs" />
     <Compile Include="Models\Matches\MVP.cs" />
+    <Compile Include="Models\Matches\PlayedMatch.cs" />
     <Compile Include="Models\Matches\Player.cs" />
     <Compile Include="Models\Matches\PlayOff.cs" />
     <Compile Include="Models\Matches\PlayOffsSpecialNames.cs" />
@@ -184,7 +185,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\DB\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

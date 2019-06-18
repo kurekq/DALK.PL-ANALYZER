@@ -22,7 +22,7 @@ namespace DALK.PL_ANALYZER.DB.FAKE
             Player Kaczor = GetPlayers().ToList<Player>()[2];
             Player Obol = GetPlayers().ToList<Player>()[5];
 
-            yield return new Match()
+            yield return new PlayedMatch()
             {
                 Home = teams[0],
                 Away = teams[1],
@@ -37,7 +37,7 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                 Stage = stages[0]
             };
 
-            yield return new Match()
+            yield return new PlayedMatch()
             {
                 Home = teams[0],
                 Away = teams[2],
@@ -52,7 +52,7 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                 Stage = stages[1]
             };
 
-            yield return new Match()
+            yield return new PlayedMatch()
             {
                 Home = teams[0],
                 Away = teams[3],
@@ -67,7 +67,7 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                 Stage = stages[2]
             };
 
-            yield return new Match()
+            yield return new PlayedMatch()
             {
                 Home = teams[0],
                 Away = teams[4],
@@ -82,7 +82,7 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                 Stage = stages[3]
             };
 
-            yield return new Match()
+            yield return new PlayedMatch()
             {
                 Home = teams[0],
                 Away = teams[5],
@@ -97,7 +97,7 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                 Stage = stages[4]
             };
 
-            yield return new Match()
+            yield return new PlayedMatch()
             {
                 Home = teams[0],
                 Away = teams[6],
@@ -110,6 +110,31 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                 MVP = new MVP() { Player = Kurek, PerformanceDesciption = "5 punktów (2/3), 18 zbiórek, 2 asysty, 2 bloki" },
                 Season = ourSeason,
                 Stage = stages[5]
+            };
+
+            yield return new PlayedMatch()
+            {
+                Home = teams[0],
+                Away = teams[7],
+                HomePoints = 51,
+                AwayPoints = 69,
+                DateTime = new DateTime(2019, 6, 15, 10, 00, 0),
+                League = ourLeague,
+                MatchDescription = "Nasi przeciwnicy byli po prostu lepsi demolując nas w drugiej kwarcie 22-4.",
+                MVP = new MVP() { Player = Kurek, PerformanceDesciption = "Double-double (10 punktów (63%), 12 zbiórek)" },
+                Season = ourSeason,
+                Stage = stages[6]
+            };
+
+            yield return new Match()
+            {
+                Home = teams[0],
+                Away = teams[8],
+                DateTime = new DateTime(2019, 6, 15, 10, 00, 0),
+                League = ourLeague,
+                MatchDescription = "Drużyna beniaminka Waketrip (6-1) zmierzy się z jedną z lepszych drużyn ligowych (7-0).",
+                Season = ourSeason,
+                Stage = stages[7]
             };
         }
 
@@ -128,7 +153,7 @@ namespace DALK.PL_ANALYZER.DB.FAKE
             yield return new GroupStage(4, 6);
             yield return new GroupStage(5, 6);
             yield return new GroupStage(6, 6);
-            yield return new PlayOffStage(2);
+            yield return new PlayOffStage(4);
             yield return new PlayOffStage(3);
             yield return new PlayOffStage(5);
             yield return new PlayOffStage(0);
@@ -149,6 +174,8 @@ namespace DALK.PL_ANALYZER.DB.FAKE
             yield return new Team("Gwardia Wrocław", "http://cdn.nba.net/assets/logos/teams/secondary/web/GSW.svg");
             yield return new Team("Whyducki", "http://cdn.nba.net/assets/logos/teams/secondary/web/BOS.svg");
             yield return new Team("KSP Gospoda", "http://cdn.nba.net/assets/logos/teams/secondary/web/ORL.svg");
+            yield return new Team("Rosenthal", "http://cdn.nba.net/assets/logos/teams/secondary/web/TOR.svg");
+            yield return new Team("Łobuzersi", "http://cdn.nba.net/assets/logos/teams/secondary/web/OKC.svg");
         }
 
         public IEnumerable<Player> GetPlayers()

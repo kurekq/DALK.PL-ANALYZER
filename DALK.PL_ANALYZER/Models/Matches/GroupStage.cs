@@ -18,7 +18,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
 
         public string GetStageName()
         {
-            return round.ToString() + "/" + maxRound.ToString();
+            return "Kolejka " + round.ToString() + "/" + maxRound.ToString();
         }
     }
 }

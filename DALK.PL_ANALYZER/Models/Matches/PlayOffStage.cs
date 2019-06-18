@@ -14,7 +14,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
         }
         public string GetStageName()
         {
-            return playOff.GetName();
+            return "Playoffy - " + playOff.GetName();
         }
     }
 }

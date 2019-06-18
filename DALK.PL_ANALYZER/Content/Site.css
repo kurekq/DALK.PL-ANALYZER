@@ -38,7 +38,7 @@ body {
     padding: 10px 40px;
 }
 
-.match {
+.match, .match__notPlayed {
     border: 1px solid rgb(204,208,211);
     background-color: white;
     margin-bottom: 20px;
@@ -180,7 +180,7 @@ body {
         justify-content: space-around;
     }
 
-    .match {
+    .match, .match__notPlayed {
         flex: 49% 0 1;
     }
 
@@ -196,7 +196,7 @@ body {
 }
 
 @media (min-width: 1020px) {
-    .match {
+    .match, .match__notPlayed {
         flex: 33% 0 1;
     }
 }

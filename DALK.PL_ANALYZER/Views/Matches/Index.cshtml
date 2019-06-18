@@ -6,38 +6,67 @@
 
 
 
-<div class="layer matches">
-    @foreach (DALK.PL_ANALYZER.Models.Matches.Match m in Model)
-    {
-        <div class="match">
-            <div class="match__heading">
-                <div class="match__gametitle">Kolejka @m.Stage.GetStageName(), @m.Group.ToString()</div>
-                <div class="match__level">@m.League @m.Season, @m.DateTime.ToString("yyyy-MM-dd HH:mm:ss")</div>
-            </div>
-            <div class="match__result">
-                <div class="match__team match__winner">
-                    <img class="match__icon" src="@m.Winner.IconUrl">
-                    <div class="match__teamname">@m.Winner.ToString()</div>
-                    <div class="match__score">@m.WinnerPoints</div>
+    <div class="layer matches">
+        @foreach (DALK.PL_ANALYZER.Models.Matches.Match m in Model)
+        {
+            DALK.PL_ANALYZER.Models.Matches.PlayedMatch playedMatch = m as DALK.PL_ANALYZER.Models.Matches.PlayedMatch;
+            string matchClass = "match";
+            if (playedMatch == null)
+            { 
+                matchClass += "__notPlayed";
+            } 
+            <div class="@matchClass">
+                <div class="match__heading">
+                    <div class="match__gametitle">@m.Stage.GetStageName() @{ if (m.Group != null) { m.Group.ToString(); } }</div>
+                    <div class="match__level">@m.League @m.Season, @m.DateTime.ToString("yyyy-MM-dd HH:mm:ss")</div>
                 </div>
-                <div class="match__team match__looser">
-                    <img class="match__icon" src="@m.Looser.IconUrl">
-                    <div class="match__teamname">@m.Looser.ToString()</div>
-                    <div class="match__score">@m.LooserPoints</div>
-                </div>
-            </div>
-            <div class="match__description"><div class="centered_div">@m.MatchDescription</div></div>
-            <div class="match__mvp"><div class="centered_div">MVP - @m.MVP.ToString()</div></div>
-            <div class="match__navigation">
-                <a href="#" class="match__button">ZOBACZ</a>
-                <a href="#" class="match__button">SZCZEGÓŁY</a>
-                <a href="#" class="match__button">ANALIZUJ</a>
-            </div>
-        </div>
-    }
-</div>
+                @{
+                    if (playedMatch != null)
+                    {
+                        <div class="match__result">
+                            <div class="match__team match__winner">
+                                <img class="match__icon" src="@playedMatch.Winner.IconUrl">
+                                <div class="match__teamname">@playedMatch.Winner.ToString()</div>
+                                <div class="match__score">@playedMatch.WinnerPoints</div>
+                            </div>
+                            <div class="match__team match__looser">
+                                <img class="match__icon" src="@playedMatch.Looser.IconUrl">
+                                <div class="match__teamname">@playedMatch.Looser.ToString()</div>
+                                <div class="match__score">@playedMatch.LooserPoints</div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="match__result">
+                            <div class="match__team match__winner">
+                                <img class="match__icon" src="@m.Home.IconUrl">
+                                <div class="match__teamname">@m.Home.ToString()</div>
+                            </div>
+                            <div class="match__team match__winner">
+                                <img class="match__icon" src="@m.Away.IconUrl">
+                                <div class="match__teamname">@m.Away.ToString()</div>
+                            </div>
+                        </div>
+                    }
+                    <div class="match__description"><div class="centered_div">@m.MatchDescription</div></div>
+                    if (playedMatch != null)
+                    {
+                        <div class="match__mvp"><div class="centered_div">MVP - @playedMatch.MVP.ToString()</div></div>
+                    }
+                }
+                <div class="match__navigation">
 
-<script type="text/javascript">
-    window.onload = setHeightForMvpAndDesc;    
-</script>
+                    <a href="#" class="match__button">ZOBACZ</a>
+                    <a href="#" class="match__button">SZCZEGÓŁY</a>
+                    <a href="#" class="match__button">ANALIZUJ</a>
+
+                </div>
+            </div>
+            }
+        </div>
+
+            <script type="text/javascript">
+                window.onload = verticalAlignAllElements;
+            </script>
 
