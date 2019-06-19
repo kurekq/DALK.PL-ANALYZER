@@ -9,7 +9,6 @@ namespace DALK.PL_ANALYZER.Models.Matches
     {
         public int HomePoints { get; set; }
         public int AwayPoints { get; set; }
-
         public int WinnerPoints
         {
             get
@@ -24,7 +23,6 @@ namespace DALK.PL_ANALYZER.Models.Matches
                 return HomePoints > AwayPoints ? Home : Away;
             }
         }
-
         public int LooserPoints
         {
             get
@@ -39,7 +37,6 @@ namespace DALK.PL_ANALYZER.Models.Matches
                 return HomePoints > AwayPoints ? Away : Home;
             }
         }
-
         public MVP MVP { get; set; }
     }
 }

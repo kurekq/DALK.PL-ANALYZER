@@ -13,7 +13,6 @@ namespace DALK.PL_ANALYZER.Models.Matches
         {
             this.howFarFromFinal = howFarFromFinal;
         }
-
         public string GetName()
         {
             if (howFarFromFinal <= MAX_HOW_FAR_FOR_SPECIAL_NAME)
@@ -26,7 +25,6 @@ namespace DALK.PL_ANALYZER.Models.Matches
                 return GetNonSpecialName();
             }
         }
-
         private string GetSpecialName(PlayOffsSpecialNames specialName)
         {
             switch (specialName)
@@ -41,10 +39,9 @@ namespace DALK.PL_ANALYZER.Models.Matches
                     throw new NotImplementedException(); 
             }
         }
-
         private string GetNonSpecialName()
         {
-            DuelsInPlayOffStage d = new DuelsInPlayOffStage(howFarFromFinal);
+            DuelsInPlayOffStageCounter d = new DuelsInPlayOffStageCounter(howFarFromFinal);
             int duelsInStage = d.HowManyDuels();
             return "1/" + duelsInStage;
         }

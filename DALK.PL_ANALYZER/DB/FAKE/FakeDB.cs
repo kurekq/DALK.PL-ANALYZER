@@ -11,7 +11,6 @@ namespace DALK.PL_ANALYZER.DB.FAKE
         public IEnumerable<Match> GetMatches()
         {
             List<Team> teams = GetTeams().ToList<Team>();
-            //Group ourGroup = 
             League ourLeague = GetLeagues().ToList<League>()[0];
             Season ourSeason = GetSeasons().ToList<Season>()[0];
             Group ourGroup = GetGroups().ToList<Group>()[0];
@@ -36,7 +35,7 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                 Season = ourSeason,
                 Stage = stages[0]
             };
-            /*
+            
             yield return new PlayedMatch()
             {
                 Home = teams[0],
@@ -135,7 +134,7 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                 MatchDescription = "Drużyna beniaminka Waketrip (6-1) zmierzy się z jedną z lepszych drużyn ligowych (7-0).",
                 Season = ourSeason,
                 Stage = stages[7]
-            }; */
+            }; 
         }
 
         public IEnumerable<League> GetLeagues()
@@ -167,28 +166,27 @@ namespace DALK.PL_ANALYZER.DB.FAKE
 
         public IEnumerable<Team> GetTeams()
         {
-            yield return new Team("WakeTrip", "http://cdn.nba.net/assets/logos/teams/secondary/web/LAL.svg");
-            yield return new Team("FireCruda Basketball Team", "http://cdn.nba.net/assets/logos/teams/secondary/web/POR.svg");
-            yield return new Team("Sami Swoi", "http://cdn.nba.net/assets/logos/teams/secondary/web/UTA.svg");
-            yield return new Team("B-Ball Styl Dzierżoniów", "http://cdn.nba.net/assets/logos/teams/secondary/web/MIA.svg");
-            yield return new Team("Gwardia Wrocław", "http://cdn.nba.net/assets/logos/teams/secondary/web/GSW.svg");
-            yield return new Team("Whyducki", "http://cdn.nba.net/assets/logos/teams/secondary/web/BOS.svg");
-            yield return new Team("KSP Gospoda", "http://cdn.nba.net/assets/logos/teams/secondary/web/ORL.svg");
-            yield return new Team("Rosenthal", "http://cdn.nba.net/assets/logos/teams/secondary/web/TOR.svg");
-            yield return new Team("Łobuzersi", "http://cdn.nba.net/assets/logos/teams/secondary/web/OKC.svg");
+            yield return new Team() { Name = "WakeTrip", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/LAL.svg" };
+            yield return new Team() { Name = "FireCruda Basketball Team", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/POR.svg" };
+            yield return new Team() { Name = "Sami Swoi", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/UTA.svg" };
+            yield return new Team() { Name = "B-Ball Styl Dzierżoniów", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/MIA.svg" };
+            yield return new Team() { Name = "Gwardia Wrocław", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/MIL.svg" };
+            yield return new Team() { Name = "Whyducki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/BOS.svg" };
+            yield return new Team() { Name = "KSP Gospoda", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/ORL.svg" };
+            yield return new Team() { Name = "Rosenthal", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/TOR.svg" };
+            yield return new Team() { Name = "Łobuzersi", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/OKC.svg" };
         }
 
         public IEnumerable<Player> GetPlayers()
         {
             List<Team> teams = GetTeams().ToList<Team>();
-            yield return new Player("Mateusz", "Mrozek", teams[0]);
-            yield return new Player("Paweł", "Kuriata", teams[0]);
-            yield return new Player("Szymon", "Kaczyński", teams[0]);
-            yield return new Player("Kajetan", "Panas", teams[0]);
-            yield return new Player("Łukasz", "Dawidowicz", teams[0]);
-            yield return new Player("Marcin", "Obolewicz", teams[0]);
+            yield return new Player() { FirstName = "Mateusz", Surname = "Mrozek", Team = teams[0] };
+            yield return new Player() { FirstName = "Paweł", Surname = "Kuriata", Team = teams[0] };
+            yield return new Player() { FirstName = "Szymon", Surname = "Kaczyński", Team = teams[0] };
+            yield return new Player() { FirstName = "Kajetan", Surname = "Panas", Team = teams[0] };
+            yield return new Player() { FirstName = "Łukasz", Surname = "Dawidowicz", Team = teams[0] };
+            yield return new Player() { FirstName = "Marcin", Surname = "Obolewicz", Team = teams[0] };
         }
-
         public IEnumerable<Group> GetGroups()
         {
             yield return new Group() { League = GetLeagues().ToList<League>()[0], Name = "C" };

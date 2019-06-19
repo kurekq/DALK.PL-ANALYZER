@@ -24,7 +24,7 @@
             } 
             <div class="@matchClass">
                 <div class="match__heading">
-                    <div class="match__gametitle">@m.Stage.GetStageName() @{ if (m.Group != null) { m.Group.ToString(); } }</div>
+                    <div class="match__gametitle">@m.GetGameTitle()</div>
                     <div class="match__level">@m.League @m.Season, @m.DateTime.ToString("yyyy-MM-dd HH:mm:ss")</div>
                 </div>
                 @{

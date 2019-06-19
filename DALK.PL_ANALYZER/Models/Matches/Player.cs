@@ -7,40 +7,9 @@ namespace DALK.PL_ANALYZER.Models.Matches
 {
     public class Player
     {
-        private string _firstName;
-        public string FirstName
-        {
-            get
-            {
-                return _firstName;
-            }
-        }
-
-        private string _surname;
-        public string Surname
-        {
-            get
-            {
-                return _surname;
-            }
-        }
-
-        private Team _team;
-        public Team Team
-        {
-            get
-            {
-                return _team;
-            }
-        }
-
-        public Player(string firstName, string surName, Team team)
-        {
-            this._firstName = firstName;
-            this._surname = surName;
-            this._team = team;
-        }
-
+        public string FirstName { get; set; }
+        public string Surname { get; set; }
+        public Team Team { get; set; }
         public override string ToString()
         {
             return this.FirstName + " " + this.Surname;
