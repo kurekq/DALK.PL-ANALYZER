@@ -146,12 +146,12 @@ namespace DALK.PL_ANALYZER.DB.FAKE
 
         public IEnumerable<IStage> GetStages()
         {
-            yield return new GroupStage(1, 6);
-            yield return new GroupStage(2, 6);
-            yield return new GroupStage(3, 6);
-            yield return new GroupStage(4, 6);
-            yield return new GroupStage(5, 6);
-            yield return new GroupStage(6, 6);
+            yield return new GroupStage() { Round = 1, MaxRound = 6 };
+            yield return new GroupStage() { Round = 2, MaxRound = 6 };
+            yield return new GroupStage() { Round = 3, MaxRound = 6 };
+            yield return new GroupStage() { Round = 4, MaxRound = 6 };
+            yield return new GroupStage() { Round = 5, MaxRound = 6 };
+            yield return new GroupStage() { Round = 6, MaxRound = 6 };
             yield return new PlayOffStage(4);
             yield return new PlayOffStage(3);
             yield return new PlayOffStage(5);
