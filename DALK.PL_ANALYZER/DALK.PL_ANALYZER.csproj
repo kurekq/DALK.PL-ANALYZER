@@ -426,8 +426,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Matches\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -439,14 +437,14 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Home\_LeftSideBar.cshtml" />
-    <Content Include="Views\Home\_TopBar.cshtml" />
-    <Content Include="Views\Home\_TopBarDark.cshtml" />
-    <Content Include="Views\Home\_RightSideBar.cshtml" />
-    <Content Include="Views\Home\_LeftSideBarLight.cshtml" />
-    <Content Include="Views\Home\_HorizontalNav.cshtml" />
-    <Content Include="Views\Home\_Footer.cshtml" />
-    <Content Include="Views\Home\_DetachedLeftSideBar.cshtml" />
+    <Content Include="Views\Shared\_LeftSideBar.cshtml" />
+    <Content Include="Views\Shared\_TopBar.cshtml" />
+    <Content Include="Views\Shared\_TopBarDark.cshtml" />
+    <Content Include="Views\Shared\_RightSideBar.cshtml" />
+    <Content Include="Views\Shared\_LeftSideBarLight.cshtml" />
+    <Content Include="Views\Shared\_HorizontalNav.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_DetachedLeftSideBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

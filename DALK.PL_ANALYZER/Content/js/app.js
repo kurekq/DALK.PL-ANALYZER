@@ -25520,11 +25520,11 @@ function ($) {
         this.horizontalTopbarPH = $('#horizontal-topbar-placeholder');
 
         this._partials = {
-            VERTICAL_SIDEBAR: '/Home/_LeftSideBar',
-            VERTICAL_TOPBAR: '/Home/_TopBar',
-            DETAHCED_TOPBAR: '/Home/_TopBarDark',
-            DETAHCED_SIDEBAR: '/Home/_DetachedLeftSideBar',
-            HORIZONTAL_TOPBAR: '/Home/_HorizontalNav',
+            VERTICAL_SIDEBAR: '/Shared/_LeftSideBar',
+            VERTICAL_TOPBAR: '/Shared/_TopBar',
+            DETAHCED_TOPBAR: '/Shared/_TopBarDark',
+            DETAHCED_SIDEBAR: '/Shared/_DetachedLeftSideBar',
+            HORIZONTAL_TOPBAR: '/Shared/_HorizontalNav',
         };
 
         this.currentlyActivatedLayout = LAYOUT_VERTICAL;

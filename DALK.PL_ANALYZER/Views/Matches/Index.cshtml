@@ -1,15 +1,23 @@
 ﻿@model List<DALK.PL_ANALYZER.Models.Matches.Match>
 
-@{
-    ViewBag.Title = "Meczyki";
-}
- 
+<div class="navbar-custom">
+    <ul class="list-unstyled topbar-right-menu float-right mb-0">
+        <li class="notification-list topbar-dropdown d-lg-block"></li>
+    </ul>
+    <button class="button-menu-mobile open-left disable-btn"><i class="mdi mdi-menu" id="button-menu-mobile-toggle"></i></button>
+    <div class="app-search">
+        <h4>Wyniki meczów</h4>
+    </div>
+</div>
+<div class="container-fluid">
     @{
         string allMatchesClass = "layer";
         if (Model.Count == 1)
         {
             allMatchesClass += " singleMatch";
-        } else {
+        }
+        else
+        {
             allMatchesClass += " matches";
         }
     }
@@ -19,9 +27,9 @@
             DALK.PL_ANALYZER.Models.Matches.PlayedMatch playedMatch = m as DALK.PL_ANALYZER.Models.Matches.PlayedMatch;
             string matchClass = "match";
             if (playedMatch == null)
-            { 
+            {
                 matchClass += "__notPlayed";
-            } 
+            }
             <div class="@matchClass">
                 <div class="match__heading">
                     <div class="match__gametitle">@m.GetGameTitle()</div>
@@ -70,10 +78,14 @@
 
                 </div>
             </div>
-            }
-        </div>
+        }
+    </div>
 
-        <script type="text/javascript">
-            window.onload = verticalAlignAllElements;
-        </script>
+    <script type="text/javascript">
+        window.onload = verticalAlignAllElements;
+    </script>
+
+</div>
+
+
 
