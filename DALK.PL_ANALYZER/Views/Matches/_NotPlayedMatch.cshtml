@@ -1,19 +1,19 @@
-﻿@model DALK.PL_ANALYZER.Models.Matches.Match
+﻿@model DALK.PL_ANALYZER.Models.Matches.MatchesModelView matchModelView;
 
     <div class="match">
         <div class="match__heading">
-            <div class="match__gametitle">@Model.GetGameTitle()</div>
-            <div class="match__level">@Model.League @Model.Season, @Model.DateTime.ToString("yyyy-MM-dd HH:mm:ss")</div>
+            <div class="match__gametitle">@Model.GameTitle</div>
+            <div class="match__level">@Model.League @Model.Season, @Model.DateTime</div>
         </div>
 
         <div class="match__result">
             <div class="match__team match__winner">
-                <img class="match__icon" src="@Model.Home.IconUrl">
-                <div class="match__teamname">@Model.Home.ToString()</div>
+                <img class="match__icon" src="@Model.HomeIconUrl">
+                <div class="match__teamname">@Model.Home</div>
             </div>
             <div class="match__team match__winner">
-                <img class="match__icon" src="@Model.Away.IconUrl">
-                <div class="match__teamname">@Model.Away.ToString()</div>
+                <img class="match__icon" src="@Model.AwayIconUrl">
+                <div class="match__teamname">@Model.Away</div>
             </div>
         </div>
         <div class="match__description"><div class="centered_div">@Model.MatchDescription</div></div>

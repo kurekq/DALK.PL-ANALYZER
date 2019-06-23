@@ -1,32 +1,32 @@
-﻿@model DALK.PL_ANALYZER.Models.Matches.PlayedMatch
+﻿@model DALK.PL_ANALYZER.Models.Matches.MatchModelView matchModelView;
 
-    <div class="match__notPlayed">
-        <div class="match__heading">
-            <div class="match__gametitle">@Model.GetGameTitle()</div>
-            <div class="match__level">@Model.League @Model.Season, @Model.DateTime.ToString("yyyy-MM-dd HH:mm:ss")</div>
+<div class="match__notPlayed">
+    <div class="match__heading">
+        <div class="match__gametitle">@Model.GameTitle</div>
+        <div class="match__level">@Model.League @Model.Season, @Model.DateTime</div>
+    </div>
+
+    <div class="match__result">
+        <div class="match__team match__winner">
+            <img class="match__icon" src="@Model.WinnerIconUrl">
+            <div class="match__teamname">@Model.Winner</div>
+            <div class="match__score">@Model.WinnerPoints</div>
         </div>
-
-        <div class="match__result">
-            <div class="match__team match__winner">
-                <img class="match__icon" src="@Model.Winner.IconUrl">
-                <div class="match__teamname">@Model.Winner.ToString()</div>
-                <div class="match__score">@Model.WinnerPoints</div>
-            </div>
-            <div class="match__team match__looser">
-                <img class="match__icon" src="@Model.Looser.IconUrl">
-                <div class="match__teamname">@Model.Looser.ToString()</div>
-                <div class="match__score">@Model.LooserPoints</div>
-            </div>
-        </div>
-
-        <div class="match__description"><div class="centered_div">@Model.MatchDescription</div></div>
-        <div class="match__mvp"><div class="centered_div">MVP - @Model.MVP.ToString()</div></div>
-
-        <div class="match__navigation">
-
-            <a href="#" class="match__button">ZOBACZ</a>
-            <a href="#" class="match__button">SZCZEGÓŁY</a>
-            <a href="#" class="match__button">ANALIZUJ</a>
-
+        <div class="match__team match__looser">
+            <img class="match__icon" src="@Model.LooserIconUrl">
+            <div class="match__teamname">@Model.Looser</div>
+            <div class="match__score">@Model.LooserPoints</div>
         </div>
     </div>
+
+    <div class="match__description"><div class="centered_div">@Model.MatchDescription</div></div>
+    <div class="match__mvp"><div class="centered_div">MVP - @Model.MVP</div></div>
+
+    <div class="match__navigation">
+
+        <a href="#" class="match__button">ZOBACZ</a>
+        <a href="#" class="match__button">SZCZEGÓŁY</a>
+        <a href="#" class="match__button">ANALIZUJ</a>
+
+    </div>
+</div>

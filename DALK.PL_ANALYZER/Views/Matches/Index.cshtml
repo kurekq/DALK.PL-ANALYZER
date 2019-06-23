@@ -1,5 +1,5 @@
-﻿@using PlayedMatch = DALK.PL_ANALYZER.Models.Matches.PlayedMatch; @using Match = DALK.PL_ANALYZER.Models.Matches.Match;
-@model List<Match>
+﻿@using Match = DALK.PL_ANALYZER.Models.Matches.MatchModelView; @using Matches = DALK.PL_ANALYZER.Models.Matches.MatchesModelView;
+@model Matches allMatches;
 
 <div class="navbar-custom">
     <ul class="list-unstyled topbar-right-menu float-right mb-0">
@@ -11,21 +11,10 @@
     </div>
 </div>
 <div class="container-fluid">
-    @{
-        string allMatchesClass = "layer";
-        if (Model.Count == 1)
+    <div class="@Model.MatchesClassName">
+        @foreach (Match m in Model.Matches)
         {
-            allMatchesClass += " singleMatch";
-        }
-        else
-        {
-            allMatchesClass += " matches";
-        }
-    }
-    <div class="@allMatchesClass">
-        @foreach (Match m in Model)
-        {
-            if (m is PlayedMatch)
+            if (m.IsPlayedMatch)
             {
                 @Html.Partial("_PlayedMatch", m);
             }
@@ -39,7 +28,6 @@
     <script type="text/javascript">
         window.onload = verticalAlignAllElements;
     </script>
-
 </div>
 
 
