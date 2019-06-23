@@ -17,21 +17,5 @@ namespace DALK.PL_ANALYZER.Models.Matches
         public Team Away { get; set; }
         public string MatchDescription { get; set; }
 
-        public string GetGameTitle()
-        {
-            if (Stage is GroupStage)
-            {
-                return Group.ToString() + ", " + Stage.GetStageName();
-            }
-            else if (Stage is PlayOffStage)
-            {
-                return Stage.GetStageName();
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
-        }
-
     }
 }

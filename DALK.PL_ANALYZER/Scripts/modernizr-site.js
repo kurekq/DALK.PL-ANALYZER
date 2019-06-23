@@ -19,15 +19,16 @@ function verticalAlignAllElements()
 }
 
 function setHeightForMvpAndDesc() {
-    setMaxHeightForAllElementsInClass(".match__mvp");
-    setMaxHeightForAllElementsInClass(".match__description");
+     
+    setMaxHeightForAllElementsInClass(".js-matchMVP");
+    setMaxHeightForAllElementsInClass(".js-matchDesc");
 }
 
 function setMarginInNotPlayedMatchNavigation() {
-    var allNotPlayedMatch = document.getElementsByClassName("match__notPlayed");
+    var allNotPlayedMatch = document.getElementsByClassName("js-NotPlayedMatch");
     Array.from(allNotPlayedMatch).forEach(function (notPlayedMatch) {
 
-        var navigations = notPlayedMatch.getElementsByClassName("match__navigation");
+        var navigations = notPlayedMatch.getElementsByClassName("js-matchNav");
         if (navigations != undefined) {
             var navigation = navigations[0];
             navigation.style.marginTop = (getMVPMaxHeight() + 4) + "px";
@@ -39,7 +40,7 @@ function setMarginInNotPlayedMatchNavigation() {
 function getMVPMaxHeight()
 {
     var maxCallback = (max, cur) => Math.max(max, cur);
-    var allElements = document.querySelectorAll(".match__mvp");
+    var allElements = document.querySelectorAll(".js-matchMVP");
     var hMax = 0;
     if (allElements.length > 0) {
         var elementsHeights = Array.from(allElements, m => m.offsetHeight);

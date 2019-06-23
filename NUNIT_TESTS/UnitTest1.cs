@@ -44,9 +44,9 @@ namespace Tests
         public void GroupMatchTitleTest(string groupName, byte roundOf, byte maxRounds, string expectedTitle)
         {
             Group g = new Group() { Name = groupName };
-            GroupStage gs = new GroupStage(roundOf, maxRounds);
-            Match m = new Match() { Group = g, Stage = gs};
-            Assert.AreEqual(expectedTitle, m.GetGameTitle());
+            GroupStage gs = new GroupStage() { Round = roundOf, MaxRound = maxRounds };
+            MatchModelView m = new MatchModelView(new Match() { Group = g, Stage = gs });
+            Assert.AreEqual(expectedTitle, m.GameTitle);
         }
         [TestCase(2)]
         [TestCase(0)]
@@ -57,9 +57,9 @@ namespace Tests
         public void PlayoffMatchTitleTest(byte howFarFromFinal)
         {
             PlayOffStage gs = new PlayOffStage(howFarFromFinal);
-            Match m = new Match() { Stage = gs };
+            MatchModelView m = new MatchModelView(new Match() { Stage = gs });
             //I tested GetStageName in other Metod, so i assume, that gs.GetStageName is correct
-            Assert.AreEqual(gs.GetStageName(), m.GetGameTitle());
+            Assert.AreEqual(gs.GetStageName(), m.GameTitle);
         }
     }
 }

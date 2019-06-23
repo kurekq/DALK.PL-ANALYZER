@@ -1,6 +1,6 @@
-﻿@model DALK.PL_ANALYZER.Models.Matches.MatchModelView matchModelView;
+﻿@model DALK.PL_ANALYZER.Models.Matches.MatchModelView
 
-<div class="match__notPlayed">
+<div class="match__notPlayed js-PlayedMatch">
     <div class="match__heading">
         <div class="match__gametitle">@Model.GameTitle</div>
         <div class="match__level">@Model.League @Model.Season, @Model.DateTime</div>
@@ -19,10 +19,10 @@
         </div>
     </div>
 
-    <div class="match__description"><div class="centered_div">@Model.MatchDescription</div></div>
-    <div class="match__mvp"><div class="centered_div">MVP - @Model.MVP</div></div>
+    <div class="match__description js-matchDesc"><div class="centered_div">@Model.MatchDescription</div></div>
+    <div class="match__mvp js-matchMVP"><div class="centered_div">MVP - @Model.MVP</div></div>
 
-    <div class="match__navigation">
+    <div class="match__navigation js-matchNav">
 
         <a href="#" class="match__button">ZOBACZ</a>
         <a href="#" class="match__button">SZCZEGÓŁY</a>
