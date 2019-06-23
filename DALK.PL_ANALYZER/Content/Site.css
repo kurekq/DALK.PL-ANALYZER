@@ -169,9 +169,13 @@ body {
     border-right: 1px solid rgb(232,233,234);
 }
 
-    .match__button:last-child {
-        border-right: none;
-    }
+.match__button:last-child {
+    border-right: none;
+}
+
+.matches__filters {
+    padding: 10px 40px;
+}
 
 @media (min-width: 480px) {
     .matches {
