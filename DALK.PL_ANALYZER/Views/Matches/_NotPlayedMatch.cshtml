@@ -1,0 +1,27 @@
+﻿@model DALK.PL_ANALYZER.Models.Matches.Match
+
+    <div class="match">
+        <div class="match__heading">
+            <div class="match__gametitle">@Model.GetGameTitle()</div>
+            <div class="match__level">@Model.League @Model.Season, @Model.DateTime.ToString("yyyy-MM-dd HH:mm:ss")</div>
+        </div>
+
+        <div class="match__result">
+            <div class="match__team match__winner">
+                <img class="match__icon" src="@Model.Home.IconUrl">
+                <div class="match__teamname">@Model.Home.ToString()</div>
+            </div>
+            <div class="match__team match__winner">
+                <img class="match__icon" src="@Model.Away.IconUrl">
+                <div class="match__teamname">@Model.Away.ToString()</div>
+            </div>
+        </div>
+        <div class="match__description"><div class="centered_div">@Model.MatchDescription</div></div>
+        <div class="match__navigation">
+
+            <a href="#" class="match__button">ZOBACZ</a>
+            <a href="#" class="match__button">SZCZEGÓŁY</a>
+            <a href="#" class="match__button">ANALIZUJ</a>
+
+        </div>
+    </div>

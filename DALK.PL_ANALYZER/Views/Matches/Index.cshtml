@@ -1,4 +1,5 @@
-﻿@model List<DALK.PL_ANALYZER.Models.Matches.Match>
+﻿@using PlayedMatch = DALK.PL_ANALYZER.Models.Matches.PlayedMatch; @using Match = DALK.PL_ANALYZER.Models.Matches.Match;
+@model List<Match>
 
 <div class="navbar-custom">
     <ul class="list-unstyled topbar-right-menu float-right mb-0">
@@ -22,62 +23,16 @@
         }
     }
     <div class="@allMatchesClass">
-        @foreach (DALK.PL_ANALYZER.Models.Matches.Match m in Model)
+        @foreach (Match m in Model)
         {
-            DALK.PL_ANALYZER.Models.Matches.PlayedMatch playedMatch = m as DALK.PL_ANALYZER.Models.Matches.PlayedMatch;
-            string matchClass = "match";
-            if (playedMatch == null)
+            if (m is PlayedMatch)
             {
-                matchClass += "__notPlayed";
+                @Html.Partial("_PlayedMatch", m);
             }
-            <div class="@matchClass">
-                <div class="match__heading">
-                    <div class="match__gametitle">@m.GetGameTitle()</div>
-                    <div class="match__level">@m.League @m.Season, @m.DateTime.ToString("yyyy-MM-dd HH:mm:ss")</div>
-                </div>
-                @{
-                    if (playedMatch != null)
-                    {
-                        <div class="match__result">
-                            <div class="match__team match__winner">
-                                <img class="match__icon" src="@playedMatch.Winner.IconUrl">
-                                <div class="match__teamname">@playedMatch.Winner.ToString()</div>
-                                <div class="match__score">@playedMatch.WinnerPoints</div>
-                            </div>
-                            <div class="match__team match__looser">
-                                <img class="match__icon" src="@playedMatch.Looser.IconUrl">
-                                <div class="match__teamname">@playedMatch.Looser.ToString()</div>
-                                <div class="match__score">@playedMatch.LooserPoints</div>
-                            </div>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="match__result">
-                            <div class="match__team match__winner">
-                                <img class="match__icon" src="@m.Home.IconUrl">
-                                <div class="match__teamname">@m.Home.ToString()</div>
-                            </div>
-                            <div class="match__team match__winner">
-                                <img class="match__icon" src="@m.Away.IconUrl">
-                                <div class="match__teamname">@m.Away.ToString()</div>
-                            </div>
-                        </div>
-                    }
-                    <div class="match__description"><div class="centered_div">@m.MatchDescription</div></div>
-                    if (playedMatch != null)
-                    {
-                        <div class="match__mvp"><div class="centered_div">MVP - @playedMatch.MVP.ToString()</div></div>
-                    }
-                }
-                <div class="match__navigation">
-
-                    <a href="#" class="match__button">ZOBACZ</a>
-                    <a href="#" class="match__button">SZCZEGÓŁY</a>
-                    <a href="#" class="match__button">ANALIZUJ</a>
-
-                </div>
-            </div>
+            else
+            {
+                @Html.Partial("_NotPlayedMatch", m);
+            }
         }
     </div>
 
