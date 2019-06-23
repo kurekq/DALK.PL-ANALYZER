@@ -13,15 +13,22 @@
 </div>
 <div class="container-fluid">
     <div class="@Model.MatchesClassName">
-        @foreach (Match m in Model.Matches)
+        @if (Model.Matches.Count == 0)
         {
-            if (m.IsPlayedMatch)
+            <h3>Brak meczów dla podanych kryteriów.</h3>
+        }
+        else
+        {
+            foreach (Match m in Model.Matches)
             {
-                @Html.Partial("_PlayedMatch", m);
-            }
-            else
-            {
-                @Html.Partial("_NotPlayedMatch", m);
+                if (m.IsPlayedMatch)
+                {
+                    @Html.Partial("_PlayedMatch", m);
+                }
+                else
+                {
+                    @Html.Partial("_NotPlayedMatch", m);
+                }
             }
         }
     </div>
