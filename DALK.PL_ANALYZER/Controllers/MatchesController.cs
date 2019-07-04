@@ -17,5 +17,11 @@ namespace DALK.PL_ANALYZER.Controllers
 
             return View(new MatchesModelView(matches));
         }
+
+        [HttpPost]
+        public ViewResult Index(Test t)
+        {
+            return Index();
+        }
     }
 }

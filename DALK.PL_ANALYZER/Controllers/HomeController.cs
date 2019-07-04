@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DALK.PL_ANALYZER.Models.Matches;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -65,6 +66,45 @@ namespace DALK.PL_ANALYZER.Controllers
         public PartialViewResult _TopBar()
         {
             return PartialView();
+        }
+
+        public ViewResult Test()
+        {
+            Person t = new Person() { Name = "test1!", Phone = "test2..." };
+            return View(t);
+        }
+
+        /*
+         * 
+         *     
+      function send() {
+        var person = {
+            name:"Pawel",
+            address:"add",
+            phone:"333-333-444"
+        };
+
+        $('#target').html('sending..');
+
+        $.ajax({
+            url: '/Home/Test',
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                window.alert('ok');
+            },
+            data: JSON.stringify(person)
+        });
+    }
+         * 
+         * 
+         */
+
+        [HttpPost]
+        public ViewResult Test(Person person)
+        {
+            return View(person);
         }
     }
 }

@@ -13,14 +13,14 @@
 </div>
 <div class="container-fluid">
     <div class="layer matches__filters">
+
         <div class="dropdown btn-group mt-3" style="margin: 5px">
-            <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Filtr 1
-            </button>
+            <button class="btn btn-light dropdown-toggle" id="filtr1_test" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filtr 1</button>
             <div class="dropdown-menu dropdown-menu-animated" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item" href="#" onclick="document.getElementById('filtr1_test').innerText='Filtr 1'">Filtr 1</a>
+                <a class="dropdown-item" href="#" onclick="document.getElementById('filtr1_test').innerText='Opcja1'">Opcja1</a>
+                <a class="dropdown-item" href="#" onclick="document.getElementById('filtr1_test').innerText='Opcja2'">Opcja2</a>
+                <a class="dropdown-item" href="#" onclick="document.getElementById('filtr1_test').innerText='Opcja3'">Opcja3</a>
             </div>
         </div>
 
