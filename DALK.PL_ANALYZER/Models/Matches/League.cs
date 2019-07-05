@@ -7,18 +7,19 @@ namespace DALK.PL_ANALYZER.Models.Matches
 {
     public class League
     {
-        private string name { get; set; }
-        public League(string name)
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public League (int id)
         {
-            this.name = name;
+            Id = id;
         }
         public override string ToString()
         {
-            return name;
+            return Name;
         }
         public override int GetHashCode()
         {
-            return name.GetHashCode();
+            return Name.GetHashCode();
         }
         public override bool Equals(object obj)
         {

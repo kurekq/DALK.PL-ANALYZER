@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace DALK.PL_ANALYZER.Models.Matches
 {
@@ -21,21 +22,49 @@ namespace DALK.PL_ANALYZER.Models.Matches
             MatchesClassName = Matches.Count == 1 ? "layer singleMatch" : "layer matches";
         }
 
-        public List<SelectListItem> Sexes
+        /*
+            Sezon
+            Liga
+            Grupa
+            Zespół
+            Sezon zasadniczy/Playoff
+         */
+
+        public List<SelectListItem> Seasons
+        {
+            get;
+            set;
+        }
+
+        public List<SelectListItem> Leagues
+        {
+            get;
+            set;
+        }
+
+        public List<SelectListItem> Groups
+        {
+            get;
+            set;
+        }
+
+        public List<SelectListItem> Stages
         {
             get
             {
                 return new List<SelectListItem>()
                 {
-                    new SelectListItem(){ Text = "Opcja numer 1", Value = "1" },
-                    new SelectListItem(){ Text = "Opcja numer 2", Value = "2" },
-                    new SelectListItem(){ Text = "Opcja numer 3", Value = "3" }
+                    new SelectListItem(){ Text = "Wybierz fazę rozgrywek", Value = null },
+                    new SelectListItem(){ Text = "Playoffs", Value = "PlayOff" },
+                    new SelectListItem(){ Text = "GroupStage", Value = "GroupStage" }
+                    
                 };
             }
-            set
-            {
-                int a = 1;
-            }
+        }
+
+        public string GetJson()
+        {          
+            return new JavaScriptSerializer().Serialize(this);
         }
     }
 }

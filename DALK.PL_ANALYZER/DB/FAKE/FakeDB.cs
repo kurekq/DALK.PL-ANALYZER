@@ -143,9 +143,9 @@ namespace DALK.PL_ANALYZER.DB.FAKE
 
         public IEnumerable<League> GetLeagues()
         {
-            yield return new League("2 Liga");
-            yield return new League("1 Liga");
-            yield return new League("Ekstraliga");
+            yield return new League(1) { Name = "2 Liga" };
+            yield return new League(2) { Name = "1 Liga" };
+            yield return new League(3) { Name = "Ekstraliga" } ;
         }
 
         public IEnumerable<IStage> GetStages()
@@ -164,21 +164,21 @@ namespace DALK.PL_ANALYZER.DB.FAKE
 
         public IEnumerable<Season> GetSeasons()
         {
-            yield return new Season() { FirstYear = 2019 };
-            yield return new Season() { FirstYear = 2018, SecondYear = 2019 };
+            yield return new Season(1) { FirstYear = 2019 };
+            yield return new Season(2) { FirstYear = 2018, SecondYear = 2019 };
         }
 
         public IEnumerable<Team> GetTeams()
         {
-            yield return new Team() { Name = "WakeTrip", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/LAL.svg" };
-            yield return new Team() { Name = "FireCruda Basketball Team", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/POR.svg" };
-            yield return new Team() { Name = "Sami Swoi", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/UTA.svg" };
-            yield return new Team() { Name = "B-Ball Styl Dzierżoniów", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/MIA.svg" };
-            yield return new Team() { Name = "Gwardia Wrocław", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/MIL.svg" };
-            yield return new Team() { Name = "Whyducki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/BOS.svg" };
-            yield return new Team() { Name = "KSP Gospoda", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/ORL.svg" };
-            yield return new Team() { Name = "Rosenthal", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/TOR.svg" };
-            yield return new Team() { Name = "Łobuzersi", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/OKC.svg" };
+            yield return new Team(1) { Name = "WakeTrip", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/LAL.svg" };
+            yield return new Team(2) { Name = "FireCruda Basketball Team", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/POR.svg" };
+            yield return new Team(3) { Name = "Sami Swoi", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/UTA.svg" };
+            yield return new Team(4) { Name = "B-Ball Styl Dzierżoniów", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/MIA.svg" };
+            yield return new Team(5) { Name = "Gwardia Wrocław", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/MIL.svg" };
+            yield return new Team(6) { Name = "Whyducki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/BOS.svg" };
+            yield return new Team(7) { Name = "KSP Gospoda", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/ORL.svg" };
+            yield return new Team(8) { Name = "Rosenthal", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/TOR.svg" };
+            yield return new Team(9) { Name = "Łobuzersi", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/OKC.svg" };
         }
 
         public IEnumerable<Player> GetPlayers()
@@ -193,7 +193,7 @@ namespace DALK.PL_ANALYZER.DB.FAKE
         }
         public IEnumerable<Group> GetGroups()
         {
-            yield return new Group() { League = GetLeagues().ToList<League>()[0], Name = "C" };
+            yield return new Group(1) { League = GetLeagues().ToList<League>()[0], Name = "C" };
 
         }
     }

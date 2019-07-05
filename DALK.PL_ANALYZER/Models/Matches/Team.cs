@@ -7,8 +7,14 @@ namespace DALK.PL_ANALYZER.Models.Matches
 {
     public class Team
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string URL { get; set; }
+
+        public Team(int id)
+        {
+            Id = id;
+        }
         public string IconUrl
         {
             get

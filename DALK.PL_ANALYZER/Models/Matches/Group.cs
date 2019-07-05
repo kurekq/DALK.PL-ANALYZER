@@ -7,8 +7,14 @@ namespace DALK.PL_ANALYZER.Models.Matches
 {
     public class Group
     {
+        public int Id { get; set; }
         public League League { get; set; }
         public string Name { get; set; }
+
+        public Group (int id)
+        {
+            Id = id;
+        }
         public override string ToString()
         {
             return "Grupa " + Name;
