@@ -29,7 +29,6 @@ namespace DALK.PL_ANALYZER.Models.Matches
             Zespół
             Sezon zasadniczy/Playoff
          */
-
         public List<SelectListItem> Seasons
         {
             get;
@@ -43,6 +42,12 @@ namespace DALK.PL_ANALYZER.Models.Matches
         }
 
         public List<SelectListItem> Groups
+        {
+            get;
+            set;
+        }
+
+        public List<SelectListItem> Teams
         {
             get;
             set;
