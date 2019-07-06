@@ -22,13 +22,6 @@ namespace DALK.PL_ANALYZER.Models.Matches
             MatchesClassName = Matches.Count == 1 ? "layer singleMatch" : "layer matches";
         }
 
-        /*
-            Sezon
-            Liga
-            Grupa
-            Zespół
-            Sezon zasadniczy/Playoff
-         */
         public List<SelectListItem> Seasons
         {
             get;

@@ -77,3 +77,50 @@ function getMVPMaxHeight()
 }
 
 
+function updateMatchesFilters()
+{
+    var hiddenFieldWithJson = document.getElementById('HiddenFieldWithJson');
+    var jsonObj = JSON.parse(hiddenFieldWithJson.value);
+
+    var seasonFilter = document.getElementById('filtr1_test').innerText.trim();
+    jsonObj.Seasons.forEach(function (el) {
+
+        el.Selected = el.Text === seasonFilter;
+
+    });
+
+    var leagueFilter = document.getElementById('filtr2_test').innerText.trim();
+    jsonObj.Leagues.forEach(function (el) {
+
+        el.Selected = el.Text === leagueFilter;
+    });
+
+    var groupFilter = document.getElementById('filtr3_test').innerText.trim();
+    jsonObj.Groups.forEach(function (el) {
+
+        el.Selected = el.Text === groupFilter;
+
+    });
+
+    var teamFilter = document.getElementById('filtr4_test').innerText.trim();
+    jsonObj.Teams.forEach(function (el) {
+
+        el.Selected = el.Text === teamFilter;
+
+    });
+
+    var stageFilter = document.getElementById('filtr5_test').innerText.trim();
+    jsonObj.Stages.forEach(function (el) {
+
+        el.Selected = el.Text === stageFilter;
+
+    });
+
+    hiddenFieldWithJson.value = JSON.stringify(jsonObj);
+
+}
+
+function setInnerHtml(id, innerHtml)
+{
+    document.getElementById(id).innerHTML = innerHtml;
+}

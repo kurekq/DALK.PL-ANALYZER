@@ -43,10 +43,10 @@ namespace DALK.PL_ANALYZER.Controllers
             matchesMV.Teams.Add(new SelectListItem() { Text = "Wybierz zespół", Value = null, Selected = true });
             foreach (Team t in db.GetTeams())
             {
-                matchesMV.Groups.Add(new SelectListItem() { Text = t.Name, Value = t.Id.ToString() });
+                matchesMV.Teams.Add(new SelectListItem() { Text = t.Name, Value = t.Id.ToString() });
             }
 
-            return View();
+            return View(matchesMV);
         }
 
         [HttpPost]
