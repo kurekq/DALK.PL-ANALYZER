@@ -92,7 +92,7 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                     DateTime = new DateTime(2019, 5, 26, 15, 45, 0),
                     League = ourLeague,
                     Group = ourGroup,
-                    MatchDescription = "Ustawiiśmy się 3 zawodnikami \"na dole\" i przeciwnicy rzucili nam 10 trójek.",
+                    MatchDescription = "Ustawiiśmy się 3 zawodnikami na dole i przeciwnicy rzucili nam 10 trójek.",
                     MVP = new MVP() { Player = Obol, PerformanceDesciption = "6 punktów (3/5), 12 zbiórek" },
                     Season = ourSeason,
                     Stage = stages[4]

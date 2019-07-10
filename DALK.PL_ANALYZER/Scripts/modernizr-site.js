@@ -117,10 +117,30 @@ function updateMatchesFilters()
     });
 
     hiddenFieldWithJson.value = JSON.stringify(jsonObj);
-
+    sendMatches();
 }
 
 function setInnerHtml(id, innerHtml)
 {
     document.getElementById(id).innerHTML = innerHtml;
+}
+
+function sendMatches() {
+    var hiddenFieldWithJson = document.getElementById('HiddenFieldWithJson');
+    var matchesMV = hiddenFieldWithJson.value;
+    $.ajax({
+        url: '/Matches/FilteredIndex',
+        type: 'post',
+        dataType: 'text',
+        contentType: 'application/json',
+        success: function (data) {
+            console.log('ok');
+            $(".content").html(data);
+            verticalAlignAllElements();
+        },
+        error: function (xhr, status, error) {
+            console.log('no ok');
+        },
+        data: matchesMV
+    });
 }

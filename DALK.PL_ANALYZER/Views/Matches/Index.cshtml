@@ -15,7 +15,18 @@
     <div class="layer matches__filters">
 
         <div class="dropdown btn-group mt-3" style="margin: 5px">
-            <button class="btn btn-light dropdown-toggle" id="filtr1_test" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-basketball"></i> @Model.Seasons[0].Text</button>
+            <button class="btn btn-light dropdown-toggle" id="filtr1_test" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="mdi mdi-basketball"></i>
+
+                @foreach (SelectListItem i in Model.Seasons)
+                {
+                    if (i.Selected)
+                    {
+                        @i.Text
+                    }
+                }
+
+            </button>
             <div class="dropdown-menu dropdown-menu-animated" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
                 @foreach (SelectListItem i in Model.Seasons)
                 {
@@ -32,7 +43,18 @@
         </div>
 
         <div class="dropdown btn-group mt-3" style="margin: 5px">
-            <button class="btn btn-light dropdown-toggle" id="filtr2_test" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-basketball"></i> @Model.Leagues[0].Text</button>
+            <button class="btn btn-light dropdown-toggle" id="filtr2_test" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="mdi mdi-basketball"></i>
+
+                @foreach (SelectListItem i in Model.Leagues)
+                {
+                    if (i.Selected)
+                    {
+                        @i.Text
+                    }
+                }
+
+            </button>
             <div class="dropdown-menu dropdown-menu-animated" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
                 @foreach (SelectListItem i in Model.Leagues)
                 {
@@ -49,7 +71,17 @@
         </div>
 
         <div class="dropdown btn-group mt-3" style="margin: 5px">
-            <button class="btn btn-light dropdown-toggle" id="filtr3_test" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-basketball"></i> @Model.Groups[0].Text</button>
+            <button class="btn btn-light dropdown-toggle" id="filtr3_test" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="mdi mdi-basketball"></i>
+                @foreach (SelectListItem i in Model.Groups)
+                {
+                    if (i.Selected)
+                    {
+                        @i.Text
+                    }
+                }
+
+            </button>
             <div class="dropdown-menu dropdown-menu-animated" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
                 @foreach (SelectListItem i in Model.Groups)
                 {
@@ -66,7 +98,16 @@
         </div>
 
         <div class="dropdown btn-group mt-3" style="margin: 5px">
-            <button class="btn btn-light dropdown-toggle" id="filtr4_test" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-basketball"></i> @Model.Teams[0].Text</button>
+            <button class="btn btn-light dropdown-toggle" id="filtr4_test" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="mdi mdi-basketball"></i>
+                @foreach (SelectListItem i in Model.Teams)
+                {
+                    if (i.Selected)
+                    {
+                        @i.Text
+                    }
+                }
+            </button>
             <div class="dropdown-menu dropdown-menu-animated" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
                 @foreach (SelectListItem i in Model.Teams)
                 {
@@ -83,7 +124,16 @@
         </div>
 
         <div class="dropdown btn-group mt-3" style="margin: 5px">
-            <button class="btn btn-light dropdown-toggle" id="filtr5_test" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-basketball"></i> @Model.Stages[0].Text</button>
+            <button class="btn btn-light dropdown-toggle" id="filtr5_test" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="mdi mdi-basketball"></i>
+                @foreach (SelectListItem i in Model.Stages)
+                {
+                    if (i.Selected)
+                    {
+                        @i.Text
+                    } 
+                }
+            </button>
             <div class="dropdown-menu dropdown-menu-animated" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
                 @foreach (SelectListItem i in Model.Stages)
                 {
@@ -107,7 +157,7 @@
         }
         else
         {
-            foreach (Match m in Model.Matches)
+            foreach (Match m in Model.GetFiltredMatches())
             {
                 if (m.IsPlayedMatch)
                 {
