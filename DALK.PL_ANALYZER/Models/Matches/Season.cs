@@ -11,6 +11,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
         public int FirstYear { get; set; }
         public int SecondYear { get; set; }
         public bool IsSummerSeason { get; set; }
+
         public Season(int id)
         {
             Id = id;

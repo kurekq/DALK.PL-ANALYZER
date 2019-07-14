@@ -11,10 +11,10 @@ namespace DALK.PL_ANALYZER.DB.FAKE
         public IEnumerable<Match> GetMatches()
         {
             
-            List<Team> teams = GetTeams().ToList<Team>();
-            League ourLeague = GetLeagues().ToList<League>()[0];
-            Season ourSeason = GetSeasons().ToList<Season>()[0];
-            Group ourGroup = GetGroups().ToList<Group>()[0];
+            List<TeamFilterData> teams = GetTeams().ToList<TeamFilterData>();
+            LeagueFilterData ourLeague = GetLeagues().ToList<LeagueFilterData>()[0];
+            SeasonFilterData ourSeason = GetSeasons().ToList<SeasonFilterData>()[0];
+            GroupFilterData ourGroup = GetGroups().ToList<GroupFilterData>()[0];
             List<IStage> stages = GetStages().ToList<IStage>();
 
             Player Mrozo = GetPlayers().ToList<Player>()[0];
@@ -141,11 +141,11 @@ namespace DALK.PL_ANALYZER.DB.FAKE
 
         }
 
-        public IEnumerable<League> GetLeagues()
+        public IEnumerable<LeagueFilterData> GetLeagues()
         {
-            yield return new League(1) { Name = "2 Liga" };
-            yield return new League(2) { Name = "1 Liga" };
-            yield return new League(3) { Name = "Ekstraliga" } ;
+            yield return new LeagueFilterData(1) { Name = "2 Liga" };
+            yield return new LeagueFilterData(2) { Name = "1 Liga" };
+            yield return new LeagueFilterData(3) { Name = "Ekstraliga" } ;
         }
 
         public IEnumerable<IStage> GetStages()
@@ -162,23 +162,23 @@ namespace DALK.PL_ANALYZER.DB.FAKE
             yield return new PlayOffStage(0);
         }
 
-        public IEnumerable<Season> GetSeasons()
+        public IEnumerable<SeasonFilterData> GetSeasons()
         {
-            yield return new Season(1) { FirstYear = 2019 };
-            yield return new Season(2) { FirstYear = 2018, SecondYear = 2019 };
+            yield return new SeasonFilterData(1) { FirstYear = 2019 };
+            yield return new SeasonFilterData(2) { FirstYear = 2018, SecondYear = 2019 };
         }
 
-        public IEnumerable<Team> GetTeams()
+        public IEnumerable<TeamFilterData> GetTeams()
         {
-            yield return new Team(1) { Name = "WakeTrip", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/LAL.svg" };
-            yield return new Team(2) { Name = "FireCruda Basketball Team", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/POR.svg" };
-            yield return new Team(3) { Name = "Sami Swoi", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/UTA.svg" };
-            yield return new Team(4) { Name = "B-Ball Styl Dzierżoniów", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/MIA.svg" };
-            yield return new Team(5) { Name = "Gwardia Wrocław", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/MIL.svg" };
-            yield return new Team(6) { Name = "Whyducki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/BOS.svg" };
-            yield return new Team(7) { Name = "KSP Gospoda", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/ORL.svg" };
-            yield return new Team(8) { Name = "Rosenthal", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/TOR.svg" };
-            yield return new Team(9) { Name = "Łobuzersi", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/OKC.svg" };
+            yield return new TeamFilterData(1) { Name = "WakeTrip", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/LAL.svg" };
+            yield return new TeamFilterData(2) { Name = "FireCruda Basketball Team", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/POR.svg" };
+            yield return new TeamFilterData(3) { Name = "Sami Swoi", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/UTA.svg" };
+            yield return new TeamFilterData(4) { Name = "B-Ball Styl Dzierżoniów", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/MIA.svg" };
+            yield return new TeamFilterData(5) { Name = "Gwardia Wrocław", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/MIL.svg" };
+            yield return new TeamFilterData(6) { Name = "Whyducki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/BOS.svg" };
+            yield return new TeamFilterData(7) { Name = "KSP Gospoda", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/ORL.svg" };
+            yield return new TeamFilterData(8) { Name = "Rosenthal", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/TOR.svg" };
+            yield return new TeamFilterData(9) { Name = "Łobuzersi", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/OKC.svg" };
         }
 
         public IEnumerable<Player> GetPlayers()
@@ -191,9 +191,9 @@ namespace DALK.PL_ANALYZER.DB.FAKE
             yield return new Player() { FirstName = "Łukasz", Surname = "Dawidowicz", Team = teams[0] };
             yield return new Player() { FirstName = "Marcin", Surname = "Obolewicz", Team = teams[0] };
         }
-        public IEnumerable<Group> GetGroups()
+        public IEnumerable<GroupFilterData> GetGroups()
         {
-            yield return new Group(1) { League = GetLeagues().ToList<League>()[0], Name = "C" };
+            yield return new GroupFilterData(1) { League = GetLeagues().ToList<LeagueFilterData>()[0], Name = "C" };
 
         }
     }

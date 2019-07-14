@@ -28,56 +28,51 @@ namespace DALK.PL_ANALYZER.Models.Matches
         public IEnumerable<MatchModelView> GetFiltredMatches()
         {
             int seasonId = 0;
-            int.TryParse(Seasons.Single(x => x.Selected == true).Value, out seasonId);
-
             int groupId = 0;
-            int.TryParse(Groups.Single(x => x.Selected == true).Value, out groupId);
-
             int leagueId = 0;
-            int.TryParse(Leagues.Single(x => x.Selected == true).Value, out leagueId);
-
             int teamId = 0;
-            int.TryParse(Teams.Single(x => x.Selected == true).Value, out teamId);
+            string stage = null;
 
-            string stage = Stages.Single(x => x.Selected == true).Value;
+            foreach (IFilterable f in AllFiters)
+            {
+                Type filterType = f.GetItems().First(x => x.GetItemType() != typeof(EmptyFilterDataItem)).GetItemType();
+                string value = f.GetSelectedItem().GetValue();
 
-            IEnumerable<MatchModelView> ie = Matches.Where(x =>
+                if (filterType == typeof(SeasonFilterData))
+                {
+                    int.TryParse(value, out seasonId);
+                }
+                else if (filterType == typeof(GroupFilterData))
+                {
+                    int.TryParse(value, out groupId);
+                }
+                else if (filterType == typeof(LeagueFilterData))
+                {
+                    int.TryParse(value, out leagueId);
+                }
+                else if (filterType == typeof(TeamFilterData))
+                {
+                    int.TryParse(value, out teamId);
+                }
+                else if (filterType == typeof(ConstantFilterData))
+                {
+                    stage = value;
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
+            return Matches.Where(x =>
              (x.SeasonId == seasonId || seasonId == 0) &&
              (x.GroupId == groupId || groupId == 0) &&
              (x.LeagueId == leagueId || leagueId == 0) &&
              (x.FirstTeamId == teamId || x.SecondTeamId == teamId || teamId == 0) &&
              (x.Stage == stage || stage == null));
-
-            List < MatchModelView > list = ie.ToList<MatchModelView>();
-
-            return ie;
         }
 
-        public List<SelectListItem> Seasons
-        {
-            get;
-            set;
-        }
-
-        public List<SelectListItem> Leagues
-        {
-            get;
-            set;
-        }
-
-        public List<SelectListItem> Groups
-        {
-            get;
-            set;
-        }
-
-        public List<SelectListItem> Teams
-        {
-            get;
-            set;
-        }
-
-        public List<SelectListItem> Stages
+        public IEnumerable<GridFilter> AllFiters
         {
             get;
             set;
@@ -85,7 +80,8 @@ namespace DALK.PL_ANALYZER.Models.Matches
 
         public string GetJson()
         {          
-            return new JavaScriptSerializer().Serialize(this);
+            string s = new JavaScriptSerializer().Serialize(this);
+            return s;
         }
     }
 }

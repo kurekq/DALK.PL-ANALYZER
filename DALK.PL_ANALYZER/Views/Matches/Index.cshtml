@@ -1,5 +1,7 @@
-﻿@using Match = DALK.PL_ANALYZER.Models.Matches.MatchModelView 
+﻿@using Match = DALK.PL_ANALYZER.Models.Matches.MatchModelView
 @using Matches = DALK.PL_ANALYZER.Models.Matches.MatchesModelView
+@using IFilterableItem = DALK.PL_ANALYZER.Models.Matches.IFilterableItem
+@using IFilterable = DALK.PL_ANALYZER.Models.Matches.IFilterable
 @model Matches
 
 <div class="navbar-custom">
@@ -14,144 +16,162 @@
 <div class="container-fluid">
     <div class="layer matches__filters">
 
+        @foreach (IFilterable f in Model.AllFiters)
+        {
         <div class="dropdown btn-group mt-3" style="margin: 5px">
-            <button class="btn btn-light dropdown-toggle" id="filtr1_test" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="mdi mdi-basketball"></i>
-
-                @foreach (SelectListItem i in Model.Seasons)
-                {
-                    if (i.Selected)
-                    {
-                        @i.Text
-                    }
+            <button class="btn btn-light dropdown-toggle" id="@f.GetCSSId()" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @{
+                    @f.GetDefaultItem().GetHtmlText()
                 }
-
             </button>
+
             <div class="dropdown-menu dropdown-menu-animated" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
-                @foreach (SelectListItem i in Model.Seasons)
+                @foreach (IFilterableItem i in f.GetItems())
                 {
-                    string text = "";
-                    if (i.Value == null)
-                    {
-                        text += "<i class=\"mdi mdi-basketball\"></i> ";
-                    }
-                    text += i.Text;
-                    var textHtml = new HtmlString(text);
-                    <a class="dropdown-item" href="#" onclick="setInnerHtml('filtr1_test', '@text'); updateMatchesFilters();">@textHtml</a>
+                    <a class="dropdown-item" href="#" onclick="setInnerHtml('@f.GetCSSId()', @string.Concat("\"",i.GetHtmlText(), "\")"); updateMatchesFilters();">@i.GetHtmlText()</a>
                 }
             </div>
         </div>
+        }
 
-        <div class="dropdown btn-group mt-3" style="margin: 5px">
-            <button class="btn btn-light dropdown-toggle" id="filtr2_test" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="mdi mdi-basketball"></i>
+    </div>
 
-                @foreach (SelectListItem i in Model.Leagues)
-                {
-                    if (i.Selected)
-                    {
-                        @i.Text
-                    }
-                }
+    <!-- <div class="dropdown btn-group mt-3" style="margin: 5px">
+        <button class="btn btn-light dropdown-toggle" id="filtr1_test" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="mdi mdi-basketball"></i>
 
-            </button>
-            <div class="dropdown-menu dropdown-menu-animated" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
-                @foreach (SelectListItem i in Model.Leagues)
+            foreach (SelectListItem i in Model.Seasons)
+            {
+                if (i.Selected)
                 {
-                    string text = "";
-                    if (i.Value == null)
-                    {
-                        text += "<i class=\"mdi mdi-basketball\"></i> ";
-                    }
-                    text += i.Text;
-                    var textHtml = new HtmlString(text);
-                    <a class="dropdown-item" href="#" onclick="setInnerHtml('filtr2_test', '@text'); updateMatchesFilters();">@textHtml</a>
+                    i.Text
                 }
-            </div>
-        </div>
+            }
 
-        <div class="dropdown btn-group mt-3" style="margin: 5px">
-            <button class="btn btn-light dropdown-toggle" id="filtr3_test" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="mdi mdi-basketball"></i>
-                @foreach (SelectListItem i in Model.Groups)
+        </button>
+        <div class="dropdown-menu dropdown-menu-animated" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+            foreach (SelectListItem i in Model.Seasons)
+            {
+                string text = "";
+                if (i.Value == null)
                 {
-                    if (i.Selected)
-                    {
-                        @i.Text
-                    }
+                    text += "<i class=\"mdi mdi-basketball\"></i> ";
                 }
-
-            </button>
-            <div class="dropdown-menu dropdown-menu-animated" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
-                @foreach (SelectListItem i in Model.Groups)
-                {
-                    string text = "";
-                    if (i.Value == null)
-                    {
-                        text += "<i class=\"mdi mdi-basketball\"></i> ";
-                    }
-                    text += i.Text;
-                    var textHtml = new HtmlString(text);
-                    <a class="dropdown-item" href="#" onclick="setInnerHtml('filtr3_test', '@text'); updateMatchesFilters();">@textHtml</a>
-                }
-            </div>
-        </div>
-
-        <div class="dropdown btn-group mt-3" style="margin: 5px">
-            <button class="btn btn-light dropdown-toggle" id="filtr4_test" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="mdi mdi-basketball"></i>
-                @foreach (SelectListItem i in Model.Teams)
-                {
-                    if (i.Selected)
-                    {
-                        @i.Text
-                    }
-                }
-            </button>
-            <div class="dropdown-menu dropdown-menu-animated" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
-                @foreach (SelectListItem i in Model.Teams)
-                {
-                    string text = "";
-                    if (i.Value == null)
-                    {
-                        text += "<i class=\"mdi mdi-basketball\"></i> ";
-                    }
-                    text += i.Text;
-                    var textHtml = new HtmlString(text);
-                    <a class="dropdown-item" href="#" onclick="setInnerHtml('filtr4_test', '@text'); updateMatchesFilters();">@textHtml</a>
-                }
-            </div>
-        </div>
-
-        <div class="dropdown btn-group mt-3" style="margin: 5px">
-            <button class="btn btn-light dropdown-toggle" id="filtr5_test" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="mdi mdi-basketball"></i>
-                @foreach (SelectListItem i in Model.Stages)
-                {
-                    if (i.Selected)
-                    {
-                        @i.Text
-                    } 
-                }
-            </button>
-            <div class="dropdown-menu dropdown-menu-animated" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
-                @foreach (SelectListItem i in Model.Stages)
-                {
-                    string text = "";
-                    if (i.Value == null)
-                    {
-                        text += "<i class=\"mdi mdi-basketball\"></i> ";
-                    }
-                    text += i.Text;
-                    var textHtml = new HtmlString(text);
-                    <a class="dropdown-item" href="#" onclick="setInnerHtml('filtr5_test', '@text'); updateMatchesFilters();">@textHtml</a>
-                }
-            </div>
+                text += i.Text;
+                var textHtml = new HtmlString(text);
+                <a class="dropdown-item" href="#" onclick="setInnerHtml('filtr1_test', 'text'); updateMatchesFilters();">textHtml</a>
+            }
         </div>
     </div>
 
+    <div class="dropdown btn-group mt-3" style="margin: 5px">
+        <button class="btn btn-light dropdown-toggle" id="filtr2_test" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="mdi mdi-basketball"></i>
+
+            foreach (SelectListItem i in Model.Leagues)
+            {
+                if (i.Selected)
+                {
+                    i.Text
+                }
+            }
+
+        </button>
+        <div class="dropdown-menu dropdown-menu-animated" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+            foreach (SelectListItem i in Model.Leagues)
+            {
+                string text = "";
+                if (i.Value == null)
+                {
+                    text += "<i class=\"mdi mdi-basketball\"></i> ";
+                }
+                text += i.Text;
+                var textHtml = new HtmlString(text);
+                <a class="dropdown-item" href="#" onclick="setInnerHtml('filtr2_test', 'text'); updateMatchesFilters();">textHtml</a>
+            }
+        </div>
+    </div>
+
+    <div class="dropdown btn-group mt-3" style="margin: 5px">
+        <button class="btn btn-light dropdown-toggle" id="filtr3_test" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="mdi mdi-basketball"></i>
+            foreach (SelectListItem i in Model.Groups)
+            {
+                if (i.Selected)
+                {
+                    i.Text
+                }
+            }
+
+        </button>
+        <div class="dropdown-menu dropdown-menu-animated" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+            foreach (SelectListItem i in Model.Groups)
+            {
+                string text = "";
+                if (i.Value == null)
+                {
+                    text += "<i class=\"mdi mdi-basketball\"></i> ";
+                }
+                text += i.Text;
+                var textHtml = new HtmlString(text); 
+                <a class="dropdown-item" href="#" onclick="setInnerHtml('filtr3_test', 'text'); updateMatchesFilters();">textHtml</a>
+            }
+        </div>
+    </div>
+
+    <div class="dropdown btn-group mt-3" style="margin: 5px">
+        <button class="btn btn-light dropdown-toggle" id="filtr4_test" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="mdi mdi-basketball"></i>
+            foreach (SelectListItem i in Model.Teams)
+            {
+                if (i.Selected)
+                {
+                    i.Text
+                }
+            }
+        </button>
+        <div class="dropdown-menu dropdown-menu-animated" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+            foreach (SelectListItem i in Model.Teams)
+            {
+                string text = "";
+                if (i.Value == null)
+                {
+                    text += "<i class=\"mdi mdi-basketball\"></i> ";
+                }
+                text += i.Text;
+                var textHtml = new HtmlString(text);
+                <a class="dropdown-item" href="#" onclick="setInnerHtml('filtr4_test', 'text'); updateMatchesFilters();">textHtml</a>
+            }
+        </div>
+
+    <div class="dropdown btn-group mt-3" style="margin: 5px">
+        <button class="btn btn-light dropdown-toggle" id="filtr5_test" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="mdi mdi-basketball"></i>
+            foreach (SelectListItem i in Model.Stages)
+            {
+                if (i.Selected)
+                {
+                    i.Text
+                }
+            }
+        </button>
+        <div class="dropdown-menu dropdown-menu-animated" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+            foreach (SelectListItem i in Model.Stages)
+            {
+                string text = "";
+                if (i.Value == null)
+                {
+                    text += "<i class=\"mdi mdi-basketball\"></i> ";
+                }
+                text += i.Text;
+                var textHtml = new HtmlString(text);
+                <a class="dropdown-item" href="#" onclick="setInnerHtml('filtr5_test', 'text'); updateMatchesFilters();">textHtml</a>
+            }
+        </div>
+    </div>-->
+
     <div class="@Model.MatchesClassName">
-        @if (Model.Matches.Count == 0)
+        @if (Model.GetFiltredMatches().ToList().Count == 0)
         {
             <h3>Brak wyników dla podanych kryteriów.</h3>
         }
