@@ -8,13 +8,10 @@ namespace DALK.PL_ANALYZER.Models
 {
     public class ItemInFilterData : IFilterData
     {
-        public string Text { get; }
-        public string Value { get; }
-        public string Icon { get; }
-        public bool Selected
-        {
-            get; set;
-        }
+        public string Text { get; set; }
+        public string Value { get; set; }
+        public string Icon { get; set; }
+        public bool Selected { get; set; }
 
         public ItemInFilterData() { }
         public ItemInFilterData(IFilterData fD)

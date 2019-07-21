@@ -90,7 +90,7 @@ function updateMatchesFilters()
         });
 
     });
-
+    jsonObj.JsonOfThis = JSON.stringify(jsonObj);
     hiddenFieldWithJson.value = JSON.stringify(jsonObj);
     sendMatches();
 }
@@ -103,6 +103,7 @@ function setInnerHtml(id, innerHtml)
 function sendMatches() {
     var hiddenFieldWithJson = document.getElementById('HiddenFieldWithJson');
     var matchesMV = hiddenFieldWithJson.value;
+    var jsonAnswer = JSON.stringify({ Json: matchesMV });
     $.ajax({
         url: '/Matches/FilteredIndex',
         type: 'post',
@@ -115,6 +116,6 @@ function sendMatches() {
         error: function (xhr, status, error) {
             console.log('no ok');
         },
-        data: matchesMV
+        data: jsonAnswer
     });
 }

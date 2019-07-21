@@ -1,0 +1,20 @@
+﻿@using IFilterableItem = DALK.PL_ANALYZER.Models.Matches.IFilterableItem
+@using IFilterable = DALK.PL_ANALYZER.Models.Matches.IFilterable
+@model IEnumerable<IFilterable>
+
+@foreach (IFilterable f in Model)
+{
+    <div class="dropdown btn-group mt-3" style="margin: 5px">
+        <button class="btn btn-light dropdown-toggle" id="@f.GetCSSId()" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @{
+                @f.GetSelectedItem().GetHtmlText()
+            }
+        </button>
+        <div class="dropdown-menu dropdown-menu-animated" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+            @foreach (IFilterableItem i in f.GetItems())
+            {
+                <a class="dropdown-item" href="#" onclick="setInnerHtml('@f.GetCSSId()', @string.Concat("\"",i.GetHtmlText(), "\")"); updateMatchesFilters();">@i.GetHtmlText()</a>
+            }
+        </div>
+    </div>
+}

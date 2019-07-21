@@ -15,6 +15,6 @@ namespace DALK.PL_ANALYZER.Models.Matches
         string GetValue();
         void Select();
         void Unselect();
-        Type GetItemType();
+        string GetItemTypeName();
     }
 }

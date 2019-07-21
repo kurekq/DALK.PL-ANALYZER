@@ -20,7 +20,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
             Matches = new List<MatchModelView>();
             foreach (Match m in matches)
             {
-                Matches.Add(new MatchModelView(m));
+                Matches.Add(new MatchModelView(m)); 
             }
             MatchesClassName = Matches.Count == 1 ? "layer singleMatch" : "layer matches";
         }
@@ -32,36 +32,36 @@ namespace DALK.PL_ANALYZER.Models.Matches
             int leagueId = 0;
             int teamId = 0;
             string stage = null;
-
+            
             foreach (IFilterable f in AllFiters)
             {
-                Type filterType = f.GetItems().First(x => x.GetItemType() != typeof(EmptyFilterDataItem)).GetItemType();
+                string filterType = f.GetItems().First(x => x.GetItemTypeName() != typeof(EmptyFilterDataItem).ToString()).GetItemTypeName();
                 string value = f.GetSelectedItem().GetValue();
 
-                if (filterType == typeof(SeasonFilterData))
+                if (filterType == typeof(SeasonFilterData).ToString())
                 {
                     int.TryParse(value, out seasonId);
                 }
-                else if (filterType == typeof(GroupFilterData))
+                else if (filterType == typeof(GroupFilterData).ToString())
                 {
                     int.TryParse(value, out groupId);
                 }
-                else if (filterType == typeof(LeagueFilterData))
+                else if (filterType == typeof(LeagueFilterData).ToString())
                 {
                     int.TryParse(value, out leagueId);
                 }
-                else if (filterType == typeof(TeamFilterData))
+                else if (filterType == typeof(TeamFilterData).ToString())
                 {
                     int.TryParse(value, out teamId);
                 }
-                else if (filterType == typeof(ConstantFilterData))
+                else if (filterType == typeof(ConstantFilterData).ToString())
                 {
                     stage = value;
                 }
                 else
                 {
                     throw new NotImplementedException();
-                }
+                } 
             }
 
             return Matches.Where(x =>
@@ -72,7 +72,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
              (x.Stage == stage || stage == null));
         }
 
-        public IEnumerable<GridFilter> AllFiters
+        public List<GridFilter> AllFiters
         {
             get;
             set;

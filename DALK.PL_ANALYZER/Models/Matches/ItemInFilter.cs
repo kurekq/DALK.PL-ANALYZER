@@ -8,13 +8,13 @@ namespace DALK.PL_ANALYZER.Models.Matches
     public class ItemInFilter : IFilterableItem
     {
         public ItemInFilterData filterData;
-        public Type itemType;
+        public string itemType;
 
         public ItemInFilter() { }
         public ItemInFilter(IFilterData fD)
         {
             filterData = new ItemInFilterData(fD);
-            itemType = fD.GetType();
+            itemType = fD.GetType().ToString();
         }
 
         public void Select()
@@ -44,7 +44,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
 
         public string GetValue()
         {
-            return filterData.Text;
+            return filterData.Value;
         }
 
         public bool IsSelected()
@@ -52,9 +52,28 @@ namespace DALK.PL_ANALYZER.Models.Matches
             return filterData.Selected;
         }
 
-        public Type GetItemType()
+        public string GetItemTypeName()
         {
             return itemType;
+        }
+
+        public override bool Equals(object obj)
+        {
+            ItemInFilter fd = obj as ItemInFilter;             
+            if (fd != null)
+            {
+                return fd.filterData.Text == this.filterData.Text &&
+                    fd.filterData.Value == this.filterData.Value;
+            }
+            else
+            {
+                return base.Equals(obj);
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }

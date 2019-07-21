@@ -7,7 +7,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
 {
     public class GridFilter : IFilterable
     {
-        public IEnumerable<ItemInFilter> items;
+        public List<ItemInFilter> items;
         public ItemInFilter defaultItem;
         public string name;
         public string CSSId;
@@ -39,7 +39,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
 
         public IEnumerable<IFilterableItem> GetItems()
         {
-            return new List<ItemInFilter>(items).OrderByDescending(x => x.IsSelected());
+            return new List<ItemInFilter>(items).OrderBy(x => x.GetText()).OrderByDescending(x => x.Equals(defaultItem));
         }
 
         public IFilterableItem GetSelectedItem()
