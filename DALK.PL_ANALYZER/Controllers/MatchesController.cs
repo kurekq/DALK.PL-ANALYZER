@@ -1,4 +1,5 @@
 ﻿using DALK.PL_ANALYZER.DB.FAKE;
+using DALK.PL_ANALYZER.Models.Filters;
 using DALK.PL_ANALYZER.Models.Matches;
 using Newtonsoft.Json;
 using System;

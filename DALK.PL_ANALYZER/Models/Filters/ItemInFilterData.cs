@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace DALK.PL_ANALYZER.Models
+namespace DALK.PL_ANALYZER.Models.Filters
 {
     public class ItemInFilterData : IFilterData
     {
@@ -21,7 +21,5 @@ namespace DALK.PL_ANALYZER.Models
             this.Icon = fD.Icon;
             this.Selected = fD.Selected;
         }
-
-
     }
 }

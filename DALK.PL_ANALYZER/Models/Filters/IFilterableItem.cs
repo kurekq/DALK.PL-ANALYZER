@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace DALK.PL_ANALYZER.Models.Matches
+namespace DALK.PL_ANALYZER.Models.Filters
 {
     public interface IFilterableItem
     {

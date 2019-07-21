@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DALK.PL_ANALYZER.Models.Matches
+namespace DALK.PL_ANALYZER.Models.Filters
 {
     public interface IFilterData
     {

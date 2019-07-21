@@ -140,18 +140,18 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="DB\FAKE\FakeDB.cs" />
-    <Compile Include="Models\ItemInFilterData.cs" />
+    <Compile Include="Models\Filters\ItemInFilterData.cs" />
     <Compile Include="Models\Matches\ConstantFilterData.cs" />
     <Compile Include="Models\Matches\DefaultIcons.cs" />
-    <Compile Include="Models\Matches\EmptyFilterDataItem.cs" />
-    <Compile Include="Models\Matches\GridFilter.cs" />
+    <Compile Include="Models\Filters\EmptyFilterDataItem.cs" />
+    <Compile Include="Models\Filters\GridFilter.cs" />
     <Compile Include="Models\Matches\Group.cs" />
     <Compile Include="Models\Matches\GroupFilterData.cs" />
     <Compile Include="Models\Matches\GroupStage.cs" />
-    <Compile Include="Models\Matches\IFilterable.cs" />
-    <Compile Include="Models\Matches\IFilterableItem.cs" />
-    <Compile Include="Models\Matches\IFilterData.cs" />
-    <Compile Include="Models\Matches\ItemInFilter.cs" />
+    <Compile Include="Models\Filters\IFilterable.cs" />
+    <Compile Include="Models\Filters\IFilterableItem.cs" />
+    <Compile Include="Models\Filters\IFilterData.cs" />
+    <Compile Include="Models\Filters\ItemInFilter.cs" />
     <Compile Include="Models\Matches\JsonJavascriptAnswer.cs" />
     <Compile Include="Models\Matches\League.cs" />
     <Compile Include="Models\Matches\LeagueFilterData.cs" />
@@ -172,7 +172,6 @@
     <Compile Include="Models\Matches\Team.cs" />
     <Compile Include="Models\Matches\TeamFilterData.cs" />
     <Compile Include="Models\Matches\TeamsInPlayOffStage.cs" />
-    <Compile Include="Models\Matches\Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

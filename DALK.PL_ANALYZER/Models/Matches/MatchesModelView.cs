@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using DALK.PL_ANALYZER.Models.Filters;
+using DALK.PL_ANALYZER.Models.Matches;
 
 namespace DALK.PL_ANALYZER.Models.Matches
 {
