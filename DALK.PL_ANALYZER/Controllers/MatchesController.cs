@@ -1,6 +1,7 @@
 ﻿using DALK.PL_ANALYZER.DB.FAKE;
 using DALK.PL_ANALYZER.Models.Filters;
 using DALK.PL_ANALYZER.Models.Matches;
+using DALK.PL_ANALYZER.Models.Shared;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,6 @@ namespace DALK.PL_ANALYZER.Controllers
         [HttpGet]
         public ViewResult Index()
         {
-            const string DEFAULT_FILTER_ICON = "mdi mdi-basketball";
             MatchesModelView matchesMV = new MatchesModelView();
 
             if (matchesMV.Matches == null)
@@ -27,22 +27,22 @@ namespace DALK.PL_ANALYZER.Controllers
                 matchesMV = new MatchesModelView(matches);
 
                 List<IFilterData> allLeagues = db.GetLeagues().ToList<IFilterData>();
-                EmptyFilterDataItem leagueDefault = new EmptyFilterDataItem("Każda liga", DEFAULT_FILTER_ICON);
+                EmptyFilterDataItem leagueDefault = new EmptyFilterDataItem("Każda liga", Configs.DEFAULT_FILTER_ICON);
                 allLeagues.Add(leagueDefault);
 
                 List<IFilterData> allSeasons = db.GetSeasons().ToList<IFilterData>();
-                EmptyFilterDataItem seasonDefault = new EmptyFilterDataItem("Każdy sezon", DEFAULT_FILTER_ICON);
+                EmptyFilterDataItem seasonDefault = new EmptyFilterDataItem("Każdy sezon", Configs.DEFAULT_FILTER_ICON);
                 allSeasons.Add(seasonDefault);
 
                 List<IFilterData> allGroups = db.GetGroups().ToList<IFilterData>();
-                EmptyFilterDataItem groupDefault = new EmptyFilterDataItem("Każda grupa", DEFAULT_FILTER_ICON);
+                EmptyFilterDataItem groupDefault = new EmptyFilterDataItem("Każda grupa", Configs.DEFAULT_FILTER_ICON);
                 allGroups.Add(groupDefault);
 
                 List<IFilterData> allTeams = db.GetTeams().ToList<IFilterData>();
-                EmptyFilterDataItem teamDefault = new EmptyFilterDataItem("Każdy zespół", DEFAULT_FILTER_ICON);
+                EmptyFilterDataItem teamDefault = new EmptyFilterDataItem("Każdy zespół", Configs.DEFAULT_FILTER_ICON);
                 allTeams.Add(teamDefault);
 
-                EmptyFilterDataItem stageDefault = new EmptyFilterDataItem("Każda faza rozgrywek", DEFAULT_FILTER_ICON);
+                EmptyFilterDataItem stageDefault = new EmptyFilterDataItem("Każda faza rozgrywek", Configs.DEFAULT_FILTER_ICON);
                 IEnumerable<IFilterData> stageFilters = new List<IFilterData>()
                 {
                     stageDefault,

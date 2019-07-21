@@ -152,7 +152,8 @@
     <Compile Include="Models\Filters\IFilterableItem.cs" />
     <Compile Include="Models\Filters\IFilterData.cs" />
     <Compile Include="Models\Filters\ItemInFilter.cs" />
-    <Compile Include="Models\Matches\JsonJavascriptAnswer.cs" />
+    <Compile Include="Models\Shared\Configs.cs" />
+    <Compile Include="Models\Shared\JsonJavascriptAnswer.cs" />
     <Compile Include="Models\Matches\League.cs" />
     <Compile Include="Models\Matches\LeagueFilterData.cs" />
     <Compile Include="Models\Matches\Match.cs" />
