@@ -43,7 +43,7 @@ namespace Tests
         [TestCase("E", 2, 4, "Grupa E, Kolejka 2/4")]
         public void GroupMatchTitleTest(string groupName, byte roundOf, byte maxRounds, string expectedTitle)
         {
-            Group g = new Group() { Name = groupName };
+            GroupSeason g = new GroupSeason() { Name = groupName };
             GroupStage gs = new GroupStage() { Round = roundOf, MaxRound = maxRounds };
             MatchModelView m = new MatchModelView(new Match() { Group = g, Stage = gs });
             Assert.AreEqual(expectedTitle, m.GameTitle);

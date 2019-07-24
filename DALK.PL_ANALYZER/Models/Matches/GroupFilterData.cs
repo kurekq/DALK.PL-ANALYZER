@@ -7,7 +7,7 @@ using DALK.PL_ANALYZER.Models.Matches;
 
 namespace DALK.PL_ANALYZER.Models.Matches
 {
-    public class GroupFilterData : Group, IFilterData
+    public class GroupFilterData : GroupSeason, IFilterData
     {
         public string Text
         {

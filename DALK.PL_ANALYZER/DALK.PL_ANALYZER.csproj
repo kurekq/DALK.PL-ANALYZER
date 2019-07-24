@@ -145,13 +145,15 @@
     <Compile Include="Models\Matches\DefaultIcons.cs" />
     <Compile Include="Models\Filters\EmptyFilterDataItem.cs" />
     <Compile Include="Models\Filters\GridFilter.cs" />
-    <Compile Include="Models\Matches\Group.cs" />
+    <Compile Include="Models\Matches\GroupSeason.cs" />
     <Compile Include="Models\Matches\GroupFilterData.cs" />
     <Compile Include="Models\Matches\GroupStage.cs" />
     <Compile Include="Models\Filters\IFilterable.cs" />
     <Compile Include="Models\Filters\IFilterableItem.cs" />
     <Compile Include="Models\Filters\IFilterData.cs" />
     <Compile Include="Models\Filters\ItemInFilter.cs" />
+    <Compile Include="Models\Matches\LeagueSeason.cs" />
+    <Compile Include="Models\Matches\TeamSeason.cs" />
     <Compile Include="Models\Shared\Configs.cs" />
     <Compile Include="Models\Shared\JsonJavascriptAnswer.cs" />
     <Compile Include="Models\Matches\League.cs" />

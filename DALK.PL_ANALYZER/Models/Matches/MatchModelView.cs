@@ -40,23 +40,23 @@ namespace DALK.PL_ANALYZER.Models.Matches
         public MatchModelView(Match m)
         {
             IsPlayedMatch = m is PlayedMatch;
-            League = m.League.ToString();
-            LeagueId = m.League.Id;
-            Season = m.Season.ToString();
-            SeasonId = m.Season.Id;              
+            League = m.Home.GroupSeason.LeagueSeason.League.ToString();
+            LeagueId = m.Home.GroupSeason.LeagueSeason.League.Id;
+            Season = m.Home.GroupSeason.LeagueSeason.Season.ToString();
+            SeasonId = m.Home.GroupSeason.LeagueSeason.Season.Id;
             DateTime = m.DateTime.ToString("yyyy-MM-dd HH:mm:ss");
-            HomeIconUrl = m.Home.IconUrl;
-            AwayIconUrl = m.Away.IconUrl;
+            HomeIconUrl = m.Home.Team.IconUrl;
+            AwayIconUrl = m.Away.Team.IconUrl;
             FirstTeamId = m.Home.Id;
             SecondTeamId = m.Away.Id;
-            Home = m.Home.ToString();
-            Away = m.Away.ToString();
+            Home = m.Home.Team.ToString();
+            Away = m.Away.Team.ToString();
             MatchDescription = m.MatchDescription;
 
             if (m.Stage is GroupStage)
             {
-                GameTitle = m.Group.ToString() + ", " + m.Stage.GetStageName();
-                GroupId = m.Group.Id;
+                GameTitle = m.Home.GroupSeason.ToString() + ", " + m.Stage.GetStageName();
+                GroupId = m.Home.GroupSeason.Id;
                 Stage = "GroupStage";
             }
             else if (m.Stage is PlayOffStage)
@@ -72,10 +72,10 @@ namespace DALK.PL_ANALYZER.Models.Matches
                 AwayPoints = pm.AwayPoints;
                 WinnerPoints = pm.WinnerPoints;
                 Winner = pm.Winner.ToString();
-                WinnerIconUrl = pm.Winner.IconUrl;
+                WinnerIconUrl = pm.Winner.Team.IconUrl;
                 LooserPoints = pm.LooserPoints;
                 Looser = pm.Looser.ToString();
-                LooserIconUrl = pm.Looser.IconUrl;
+                LooserIconUrl = pm.Looser.Team.IconUrl;
                 MVP = pm.MVP.ToString();
             }
         }

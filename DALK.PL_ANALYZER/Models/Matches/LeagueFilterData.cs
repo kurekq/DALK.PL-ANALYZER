@@ -7,20 +7,20 @@ using DALK.PL_ANALYZER.Models.Matches;
 
 namespace DALK.PL_ANALYZER.Models.Matches
 {
-    public class LeagueFilterData : League, IFilterData
+    public class LeagueFilterData : LeagueSeason, IFilterData
     {
         public string Text
         {
             get
             {
-                return Name;
+                return League.Name;
             }
         }
         public string Value
         {
             get
             {
-                return Id.ToString();
+                return League.Id.ToString();
             }
         }
         public string Icon
@@ -31,7 +31,6 @@ namespace DALK.PL_ANALYZER.Models.Matches
             }
         }
         public bool Selected { get; set; }
-
         public LeagueFilterData(int id) : base(id) { }
     }
 }

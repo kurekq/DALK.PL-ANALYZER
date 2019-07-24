@@ -5,13 +5,13 @@ using System.Web;
 
 namespace DALK.PL_ANALYZER.Models.Matches
 {
-    public class Group
+    public class GroupSeason
     {
         public int Id { get; set; }
-        public League League { get; set; }
+        public LeagueSeason LeagueSeason { get; set; }
         public string Name { get; set; }
 
-        public Group (int id)
+        public GroupSeason (int id)
         {
             Id = id;
         }
@@ -21,11 +21,11 @@ namespace DALK.PL_ANALYZER.Models.Matches
         }
         public override int GetHashCode()
         {
-            return (this.League.ToString()  + " " + ToString()).GetHashCode();
+            return (this.LeagueSeason.ToString()  + " " + ToString()).GetHashCode();
         }
         public override bool Equals(object obj)
         {
-            if (obj is Group)
+            if (obj is GroupSeason)
                 return GetHashCode() == obj.GetHashCode();
             else
                 return false;
