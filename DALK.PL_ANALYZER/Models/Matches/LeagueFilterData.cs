@@ -7,20 +7,20 @@ using DALK.PL_ANALYZER.Models.Matches;
 
 namespace DALK.PL_ANALYZER.Models.Matches
 {
-    public class LeagueFilterData : LeagueSeason, IFilterData
+    public class LeagueFilterData : League, IFilterData
     {
         public string Text
         {
             get
             {
-                return League.Name;
+                return Name;
             }
         }
         public string Value
         {
             get
             {
-                return League.Id.ToString();
+                return Id.ToString();
             }
         }
         public string Icon

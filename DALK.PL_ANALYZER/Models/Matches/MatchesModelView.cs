@@ -78,12 +78,12 @@ namespace DALK.PL_ANALYZER.Models.Matches
         {
             get;
             set;
-        }
+        } 
 
         public string GetJson()
         {          
-            string s = new JavaScriptSerializer().Serialize(this);
-            return s;
+            string data = new JavaScriptSerializer().Serialize(this);
+            return "?";
         }
     }
 }

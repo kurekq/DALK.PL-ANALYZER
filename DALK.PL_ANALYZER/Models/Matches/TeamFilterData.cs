@@ -7,13 +7,13 @@ using DALK.PL_ANALYZER.Models.Matches;
 
 namespace DALK.PL_ANALYZER.Models.Matches
 {
-    public class TeamFilterData : TeamSeason, IFilterData
+    public class TeamFilterData : Team, IFilterData
     {
         public string Text
         {
             get
             {
-                return Team.Name;
+                return Name;
             }
         }
         public string Value
@@ -35,7 +35,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
         public TeamFilterData(int id) : base(id) { }
         public override string ToString()
         {
-            return Team.ToString();
+            return base.ToString();
         }
     }
 

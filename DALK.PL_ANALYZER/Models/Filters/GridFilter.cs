@@ -19,6 +19,8 @@ namespace DALK.PL_ANALYZER.Models.Filters
             var items = new List<ItemInFilter>();
             foreach (IFilterData f in fD)
             {
+                if (f.Equals(defaultFilterItem))
+                    f.Selected = true;
                 items.Add(new ItemInFilter(f));
             }
             this.items = items;

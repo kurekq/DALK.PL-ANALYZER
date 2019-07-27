@@ -105,12 +105,12 @@ function sendMatches() {
     var matchesMV = hiddenFieldWithJson.value;
     var jsonAnswer = JSON.stringify({ Json: matchesMV });
     $.ajax({
-        url: '/Matches/FilteredIndex',
-        type: 'post',
-        dataType: 'text',
+        url: '/Matches/Index',
+        type: 'get',
         contentType: 'application/json',
         success: function (data) {
-            $(".content").html(data);
+            console.log('ok');
+            //$(".content").html(data);
             verticalAlignAllElements();
         },
         error: function (xhr, status, error) {

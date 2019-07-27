@@ -10,19 +10,16 @@ namespace DALK.PL_ANALYZER.DB.FAKE
     public class FakeDB
     {
         public IEnumerable<Match> GetMatches()
-        {
-            
-            List<TeamFilterData> teams = GetTeams().ToList<TeamFilterData>();
-            LeagueFilterData ourLeague = GetLeagues().ToList<LeagueFilterData>()[0];
-            SeasonFilterData ourSeason = GetSeasons().ToList<SeasonFilterData>()[0];
+        {           
+            List<TeamSeason> teams = GetListOfTeamSeason().Take(9).ToList<TeamSeason>();
+            LeagueFilterData ourLeague = GetPureLeagues().ToList<LeagueFilterData>()[0];
+            SeasonFilterData ourSeason = GetSeasons().GetSeasons().ToList<SeasonFilterData>()[0];
             GroupFilterData ourGroup = GetGroups().ToList<GroupFilterData>()[0];
             List<IStage> stages = GetStages().ToList<IStage>();
-
             Player Mrozo = GetPlayers().ToList<Player>()[0];
             Player Kurek = GetPlayers().ToList<Player>()[1];
             Player Kaczor = GetPlayers().ToList<Player>()[2];
             Player Obol = GetPlayers().ToList<Player>()[5];
-
             yield return new PlayedMatch()
             {
                 Home = teams[0],
@@ -34,7 +31,6 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                 MVP = new MVP() { Player = Kurek, PerformanceDesciption = "9 zbiórek, 10 punktów" },
                 Stage = stages[0]
             };
-
             yield return new PlayedMatch()
             {
                 Home = teams[0],
@@ -46,7 +42,6 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                 MVP = new MVP() { Player = Mrozo, PerformanceDesciption = "26 punktów, 5/9 trójek" },
                 Stage = stages[1]
             };
-
             yield return new PlayedMatch()
             {
                 Home = teams[0],
@@ -58,7 +53,6 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                 MVP = new MVP() { Player = Kaczor, PerformanceDesciption = "Double-duble, 17 punktów, 10 zbiórek" },
                 Stage = stages[2]
             };
-
             yield return new PlayedMatch()
             {
                 Home = teams[0],
@@ -70,7 +64,6 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                 MVP = new MVP() { Player = Mrozo, PerformanceDesciption = "16 punktów, 9 zbiórek" },
                 Stage = stages[3]
             };
-
             yield return new PlayedMatch()
             {
                 Home = teams[0],
@@ -82,7 +75,6 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                 MVP = new MVP() { Player = Obol, PerformanceDesciption = "6 punktów (3/5), 12 zbiórek" },
                 Stage = stages[4]
             };
-
             yield return new PlayedMatch()
             {
                 Home = teams[0],
@@ -94,7 +86,6 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                 MVP = new MVP() { Player = Kurek, PerformanceDesciption = "5 punktów (2/3), 18 zbiórek, 2 asysty, 2 bloki" },
                 Stage = stages[5]
             };
-
             yield return new PlayedMatch()
             {
                 Home = teams[0],
@@ -106,16 +97,15 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                 MVP = new MVP() { Player = Kurek, PerformanceDesciption = "Double-double (10 punktów (63%), 12 zbiórek)" },
                 Stage = stages[6]
             };
-
-
-            foreach (TeamFilterData home in GetTeams())
+            /*
+            foreach (TeamSeason home in GetListOfTeamSeason())
             {
-                TeamFilterData HomeRandom = home;
+                TeamFilterData HomeRandom = home.Team;
 
-                List<TeamFilterData> AwayRandoms = GetTeams().Where(x => x.GroupSeason.Id == home.GroupSeason.Id && x.Id != home.Id).Take(5).ToList<TeamFilterData>();
-                foreach (TeamFilterData away in AwayRandoms)
+                List<TeamSeason> AwayRandoms = GetListOfTeamSeason().Where(x => x.GroupSeason.Id == home.GroupSeason.Id && x.Id != home.Id).Take(5).ToList<TeamSeason>();
+                foreach (TeamSeason away in AwayRandoms)
                 {
-                    TeamFilterData AwayRandom = away;
+                    TeamFilterData AwayRandom = away.Team;
                     int randomYear = new Random().Next(2018, 2019 + 1);
                     int randomMonth = new Random().Next(1, 12 + 1);
                     int randomDay = new Random().Next(1, 30 + 1);
@@ -137,8 +127,8 @@ namespace DALK.PL_ANALYZER.DB.FAKE
 
                     yield return new PlayedMatch()
                     {
-                        Home = HomeRandom,
-                        Away = AwayRandom,
+                        Home = home,
+                        Away = away,
                         HomePoints = randomHomePoints,
                         AwayPoints = randomAwayPoints,
                         DateTime = randomDate,
@@ -146,48 +136,44 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                         Stage = StageRandom,
                         MVP = PlayerRandom,
                     };
-                }
-            }
+                } 
+            }*/
         }
-
-        public IEnumerable<LeagueFilterData> GetLeagues()
+        public IEnumerable<LeagueSeason> GetListOfLeagueSeason()
         {
-            League League2 = GetPureLeagues().ToList<League>()[0];
-            League League1 = GetPureLeagues().ToList<League>()[1];
-            League ExtraLeague = GetPureLeagues().ToList<League>()[2];
+            LeagueFilterData League2 = GetPureLeagues().ToList<LeagueFilterData>()[0];
+            LeagueFilterData League1 = GetPureLeagues().ToList<LeagueFilterData>()[1];
+            LeagueFilterData ExtraLeague = GetPureLeagues().ToList<LeagueFilterData>()[2];
 
-            Season season2019 = GetSeasons().ToList<Season>()[0];
-            Season season2018_2019 = GetSeasons().ToList<Season>()[1];
-
-            yield return new LeagueFilterData(1)
+            Season season2019 = GetSeasons().GetSeasons().ToList<Season>()[0];
+            Season season2018_2019 = GetSeasons().GetSeasons().ToList<Season>()[1];
+            yield return new LeagueSeason(1)
             {
                 League = League2, 
                 Season = season2019
             };
-            yield return new LeagueFilterData(1)
+            yield return new LeagueSeason(1)
             {
                 League = League2,
                 Season = season2018_2019
             };
-            yield return new LeagueFilterData(1)
+            yield return new LeagueSeason(1)
             {
                 League = League1,
                 Season = season2019
             };
-            yield return new LeagueFilterData(1)
+            yield return new LeagueSeason(1)
             {
                 League = ExtraLeague,
                 Season = season2019
             };
         }
-
-        public IEnumerable<League> GetPureLeagues()
+        public IEnumerable<LeagueFilterData> GetPureLeagues()
         {
-            yield return new League(1) { Name = "2 Liga" };
-            yield return new League(2) { Name = "1 Liga" };
-            yield return new League(3) { Name = "Ekstraliga" };
+            yield return new LeagueFilterData(1) { Name = "2 Liga" };
+            yield return new LeagueFilterData(2) { Name = "1 Liga" };
+            yield return new LeagueFilterData(3) { Name = "Ekstraliga" };
         }
-
         public IEnumerable<IStage> GetStages()
         {
             yield return new GroupStage() { Round = 1, MaxRound = 6 };
@@ -201,328 +187,327 @@ namespace DALK.PL_ANALYZER.DB.FAKE
             yield return new PlayOffStage(5);
             yield return new PlayOffStage(0);
         }
-
-        public IEnumerable<SeasonFilterData> GetSeasons()
+        public Seasons GetSeasons()
         {
-            yield return new SeasonFilterData(1) { FirstYear = 2019 };
-            yield return new SeasonFilterData(2) { FirstYear = 2018, SecondYear = 2019 };
+            List<SeasonFilterData> season = new List<SeasonFilterData>();
+            season.Add(new SeasonFilterData(1) { FirstYear = 2019, FromDate = new DateTime(2019, 3, 1), ToDate = new DateTime(2019, 6, 30) });
+            season.Add(new SeasonFilterData(2) { FirstYear = 2018, SecondYear = 2019, FromDate = new DateTime(2018, 9, 1), ToDate = new DateTime(2019, 1, 31) });
+            return new Seasons(season);
         }
-
-        public IEnumerable<TeamFilterData> GetTeams()
+        public IEnumerable<TeamSeason> GetListOfTeamSeason()
         {
             //LEAGUE 2, SEASON2019
             //GROUP C
-            yield return new TeamFilterData(1)
+            yield return new TeamSeason(1)
             {
-                Team = new Team(1) { Name = "WakeTrip", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/LAL.svg" },
+                Team = new TeamFilterData(1) { Name = "WakeTrip", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/LAL.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[2]
             };
-            yield return new TeamFilterData(2)
+            yield return new TeamSeason(2)
             {
-                Team = new Team(2) { Name = "FireCruda Basketball Team", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/POR.svg" },
+                Team = new TeamFilterData(2) { Name = "FireCruda Basketball Team", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/POR.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[2]
             };
-            yield return new TeamFilterData(3)
+            yield return new TeamSeason(3)
             {
-                Team = new Team(3) { Name = "Sami Swoi", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/UTA.svg" },
+                Team = new TeamFilterData(3) { Name = "Sami Swoi", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/UTA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[2]
             };
-            yield return new TeamFilterData(5)
+            yield return new TeamSeason(5)
             {
-                Team = new Team(4) { Name = "B-Ball Styl Dzierżoniów", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/MIA.svg" },
+                Team = new TeamFilterData(4) { Name = "B-Ball Styl Dzierżoniów", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/MIA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[2]
             };
-            yield return new TeamFilterData(6)
+            yield return new TeamSeason(6)
             {
-                Team = new Team(5) { Name = "Gwardia Wrocław", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/MIL.svg" },
+                Team = new TeamFilterData(5) { Name = "Gwardia Wrocław", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/MIL.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[2]
             };
-            yield return new TeamFilterData(7)
+            yield return new TeamSeason(7)
             {
-                Team = new Team(6) { Name = "Whyducki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/BOS.svg" },
+                Team = new TeamFilterData(6) { Name = "Whyducki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/BOS.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[2]
             };
-            yield return new TeamFilterData(8)
+            yield return new TeamSeason(8)
             {
-                Team = new Team(7) { Name = "KSP Gospoda", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/ORL.svg" },
+                Team = new TeamFilterData(7) { Name = "KSP Gospoda", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/ORL.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[2]
             };
-            yield return new TeamFilterData(10)
+            yield return new TeamSeason(10)
             {
-                Team = new Team(8) { Name = "Rosenthal", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/TOR.svg" },
+                Team = new TeamFilterData(8) { Name = "Rosenthal", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/TOR.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[2]
             };
-            yield return new TeamFilterData(11)
+            yield return new TeamSeason(11)
             {
-                Team = new Team(9) { Name = "Łobuzersi", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/OKC.svg" },
+                Team = new TeamFilterData(9) { Name = "Łobuzersi", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/OKC.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[2]
             };
-            //GROUP A
-            yield return new TeamFilterData(12)
+            //GRUPA A
+            yield return new TeamSeason(12)
             {
-                Team = new Team(10) { Name = "Giganci", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(10) { Name = "Giganci", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[0]
             };
-            yield return new TeamFilterData(13)
+            yield return new TeamSeason(13)
             {
-                Team = new Team(11) { Name = "Avengers", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(11) { Name = "Avengers", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[0]
             };
-            yield return new TeamFilterData(14)
+            yield return new TeamSeason(14)
             {
-                Team = new Team(12) { Name = "Parafianie", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(12) { Name = "Parafianie", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[0]
             };
-            yield return new TeamFilterData(15)
+            yield return new TeamSeason(15)
             {
-                Team = new Team(13) { Name = "Bracia z Zakonu", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(13) { Name = "Bracia z Zakonu", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[0]
             };
             //GROUP B
-            yield return new TeamFilterData(16)
+            yield return new TeamSeason(16)
             {
-                Team = new Team(14) { Name = "Małpy", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(14) { Name = "Małpy", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[1]
             };
-            yield return new TeamFilterData(17)
+            yield return new TeamSeason(17)
             {
-                Team = new Team(15) { Name = "Byki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(15) { Name = "Byki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[1]
             };
-            yield return new TeamFilterData(18)
+            yield return new TeamSeason(18)
             {
-                Team = new Team(16) { Name = "Mocarze", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(16) { Name = "Mocarze", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[1]
             };
-            yield return new TeamFilterData(25)
+            yield return new TeamSeason(25)
             {
-                Team = new Team(17) { Name = "Zwierzaki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(17) { Name = "Zwierzaki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[1]
             };
             //GROUP D
-            yield return new TeamFilterData(19)
+            yield return new TeamSeason(19)
             {
-                Team = new Team(18) { Name = "Myszki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
-                GroupSeason = GetGroups().ToList<GroupFilterData>()[3]
-            };           
-            yield return new TeamFilterData(20)
-            {
-                Team = new Team(19) { Name = "Tylko rzuty za trzy", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(18) { Name = "Myszki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[3]
             };
-            yield return new TeamFilterData(21)
+            yield return new TeamSeason(20)
             {
-                Team = new Team(20) { Name = "Przetrwali Czarnobyl", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(19) { Name = "Tylko rzuty za trzy", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[3]
             };
-            yield return new TeamFilterData(22)
+            yield return new TeamSeason(21)
             {
-                Team = new Team(21) { Name = "West Side", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(20) { Name = "Przetrwali Czarnobyl", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                GroupSeason = GetGroups().ToList<GroupFilterData>()[3]
+            };
+            yield return new TeamSeason(22)
+            {
+                Team = new TeamFilterData(21) { Name = "West Side", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[3]
             };
             //LEAGUE 2, SEASON2018_2019
             //GROUP C
-            yield return new TeamFilterData(23)
+            yield return new TeamSeason(23)
             {
-                Team = new Team(1) { Name = "WakeTrip", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/LAL.svg" },
+                Team = new TeamFilterData(1) { Name = "WakeTrip", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/LAL.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[6]
             };
-            yield return new TeamFilterData(24)
+            yield return new TeamSeason(24)
             {
-                Team = new Team(2) { Name = "FireCruda Basketball Team", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/POR.svg" },
+                Team = new TeamFilterData(2) { Name = "FireCruda Basketball Team", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/POR.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[6]
             };
-            yield return new TeamFilterData(25)
+            yield return new TeamSeason(25)
             {
-                Team = new Team(3) { Name = "Sami Swoi", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/UTA.svg" },
+                Team = new TeamFilterData(3) { Name = "Sami Swoi", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/UTA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[6]
             };
-            yield return new TeamFilterData(26)
+            yield return new TeamSeason(26)
             {
-                Team = new Team(4) { Name = "B-Ball Styl Dzierżoniów", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/MIA.svg" },
+                Team = new TeamFilterData(4) { Name = "B-Ball Styl Dzierżoniów", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/MIA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[6]
             };
-            yield return new TeamFilterData(27)
+            yield return new TeamSeason(27)
             {
-                Team = new Team(5) { Name = "Gwardia Wrocław", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/MIL.svg" },
+                Team = new TeamFilterData(5) { Name = "Gwardia Wrocław", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/MIL.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[6]
             };
-            yield return new TeamFilterData(29)
+            yield return new TeamSeason(29)
             {
-                Team = new Team(7) { Name = "KSP Gospoda", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/ORL.svg" },
+                Team = new TeamFilterData(7) { Name = "KSP Gospoda", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/ORL.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[6]
             };
-            yield return new TeamFilterData(32)
+            yield return new TeamSeason(32)
             {
-                Team = new Team(10) { Name = "Giganci", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(10) { Name = "Giganci", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[6]
             };
-            yield return new TeamFilterData(33)
+            yield return new TeamSeason(33)
             {
-                Team = new Team(11) { Name = "Avengers", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(11) { Name = "Avengers", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[6]
             };
 
-            yield return new TeamFilterData(40)
+            yield return new TeamSeason(40)
             {
-                Team = new Team(18) { Name = "Myszki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(18) { Name = "Myszki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[6]
             };
             //GROUP A
-            yield return new TeamFilterData(30)
+            yield return new TeamSeason(30)
             {
-                Team = new Team(8) { Name = "Rosenthal", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/TOR.svg" },
+                Team = new TeamFilterData(8) { Name = "Rosenthal", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/TOR.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[4]
             };
-            yield return new TeamFilterData(31)
+            yield return new TeamSeason(31)
             {
-                Team = new Team(9) { Name = "Łobuzersi", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/OKC.svg" },
+                Team = new TeamFilterData(9) { Name = "Łobuzersi", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/OKC.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[4]
             };
-            yield return new TeamFilterData(34)
+            yield return new TeamSeason(34)
             {
-                Team = new Team(12) { Name = "Parafianie", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(12) { Name = "Parafianie", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[4]
             };
-            yield return new TeamFilterData(35)
+            yield return new TeamSeason(35)
             {
-                Team = new Team(13) { Name = "Bracia z Zakonu", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(13) { Name = "Bracia z Zakonu", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[4]
             };
             //GROUP B
-            yield return new TeamFilterData(42)
+            yield return new TeamSeason(42)
             {
-                Team = new Team(21) { Name = "West Side", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(21) { Name = "West Side", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[5]
             };
-            yield return new TeamFilterData(37)
+            yield return new TeamSeason(37)
             {
-                Team = new Team(15) { Name = "Byki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(15) { Name = "Byki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[5]
             };
-            yield return new TeamFilterData(38)
+            yield return new TeamSeason(38)
             {
-                Team = new Team(16) { Name = "Mocarze", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(16) { Name = "Mocarze", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[5]
             };
-            yield return new TeamFilterData(39)
+            yield return new TeamSeason(39)
             {
-                Team = new Team(17) { Name = "Zwierzaki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(17) { Name = "Zwierzaki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[5]
             };
             //GROUP D
-            yield return new TeamFilterData(36)
+            yield return new TeamSeason(36)
             {
-                Team = new Team(14) { Name = "Małpy", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(14) { Name = "Małpy", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[7]
             };
-            yield return new TeamFilterData(28)
+            yield return new TeamSeason(28)
             {
-                Team = new Team(6) { Name = "Whyducki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/BOS.svg" },
+                Team = new TeamFilterData(6) { Name = "Whyducki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/BOS.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[7]
             };
-            yield return new TeamFilterData(40)
+            yield return new TeamSeason(40)
             {
-                Team = new Team(19) { Name = "Tylko rzuty za trzy", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(19) { Name = "Tylko rzuty za trzy", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[7]
             };
-            yield return new TeamFilterData(41)
+            yield return new TeamSeason(41)
             {
-                Team = new Team(20) { Name = "Przetrwali Czarnobyl", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(20) { Name = "Przetrwali Czarnobyl", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[7]
             };
             //LEAGUE 1, SEASON2019
             //GROUP A
-            yield return new TeamFilterData(45)
+            yield return new TeamSeason(45)
             {
-                Team = new Team(55) { Name = "Jagiellonia Białystok", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(55) { Name = "Jagiellonia Białystok", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[8]
             };
-            yield return new TeamFilterData(46)
+            yield return new TeamSeason(46)
             {
-                Team = new Team(56) { Name = "Wigry Suwałki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(56) { Name = "Wigry Suwałki", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[8]
             };
-            yield return new TeamFilterData(47)
+            yield return new TeamSeason(47)
             {
-                Team = new Team(57) { Name = "Żartownisie", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(57) { Name = "Żartownisie", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[8]
             };
-            yield return new TeamFilterData(48)
+            yield return new TeamSeason(48)
             {
-                Team = new Team(58) { Name = "Jastrzębie", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(58) { Name = "Jastrzębie", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[8]
             };
             //GROUP B
-            yield return new TeamFilterData(49)
+            yield return new TeamSeason(49)
             {
-                Team = new Team(77) { Name = "Wisła Kraków", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(77) { Name = "Wisła Kraków", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[9]
             };
-            yield return new TeamFilterData(50)
+            yield return new TeamSeason(50)
             {
-                Team = new Team(78) { Name = "Warchoły", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/BOS.svg" },
+                Team = new TeamFilterData(78) { Name = "Warchoły", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/BOS.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[9]
             };
-            yield return new TeamFilterData(51)
+            yield return new TeamSeason(51)
             {
-                Team = new Team(79) { Name = "Wentlacja team", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(79) { Name = "Wentlacja team", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[9]
             };
-            yield return new TeamFilterData(52)
+            yield return new TeamSeason(52)
             {
-                Team = new Team(80) { Name = "Wielmożni Państwo", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(80) { Name = "Wielmożni Państwo", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[9]
             };
 
             //EXTRA LEAGUE, SEASON2019
             //GROUP A
-            yield return new TeamFilterData(53)
+            yield return new TeamSeason(53)
             {
-                Team = new Team(81) { Name = "Wisła Płock", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(81) { Name = "Wisła Płock", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[10]
             };
-            yield return new TeamFilterData(54)
+            yield return new TeamSeason(54)
             {
-                Team = new Team(85) { Name = "Los Dos Santos", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(85) { Name = "Los Dos Santos", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[10]
             };
-            yield return new TeamFilterData(55)
+            yield return new TeamSeason(55)
             {
-                Team = new Team(96) { Name = "UFC basketball's", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(96) { Name = "UFC basketball's", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[10]
             };
-            yield return new TeamFilterData(58)
+            yield return new TeamSeason(58)
             {
-                Team = new Team(86) { Name = "Winni się tłumaczą", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(86) { Name = "Winni się tłumaczą", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[10]
             };
             //GROUP B
-            yield return new TeamFilterData(59)
+            yield return new TeamSeason(59)
             {
-                Team = new Team(94) { Name = "Pozdrowienia dla więzienia", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(94) { Name = "Pozdrowienia dla więzienia", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[11]
             };
-            yield return new TeamFilterData(60)
+            yield return new TeamSeason(60)
             {
-                Team = new Team(87) { Name = "Czytelnicy", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/BOS.svg" },
+                Team = new TeamFilterData(87) { Name = "Czytelnicy", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/BOS.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[11]
             };
-            yield return new TeamFilterData(61)
+            yield return new TeamSeason(61)
             {
-                Team = new Team(88) { Name = "Masz problem", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(88) { Name = "Masz problem", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[11]
             };
-            yield return new TeamFilterData(63)
+            yield return new TeamSeason(63)
             {
-                Team = new Team(89) { Name = "Informatycy", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
+                Team = new TeamFilterData(89) { Name = "Informatycy", URL = "http://cdn.nba.net/assets/logos/teams/secondary/web/NBA.svg" },
                 GroupSeason = GetGroups().ToList<GroupFilterData>()[11]
             };
         }
-
         public IEnumerable<Player> GetPlayers()
         {
-            List<TeamFilterData> teams = GetTeams().ToList<TeamFilterData>();
+            List<TeamSeason> teams = GetListOfTeamSeason().ToList<TeamSeason>();
             yield return new Player() { FirstName = "Mateusz", Surname = "Mrozek", Team = teams[0].Team };
             yield return new Player() { FirstName = "Paweł", Surname = "Kuriata", Team = teams[0].Team };
             yield return new Player() { FirstName = "Szymon", Surname = "Kaczyński", Team = teams[0].Team };
@@ -538,10 +523,10 @@ namespace DALK.PL_ANALYZER.DB.FAKE
         }
         public IEnumerable<GroupFilterData> GetGroups()
         {
-            LeagueSeason League2Season2019 = GetLeagues().ToList<LeagueFilterData>()[0];
-            LeagueSeason League2Season2018_2019 = GetLeagues().ToList<LeagueFilterData>()[1];
-            LeagueSeason League1Season2019 = GetLeagues().ToList<LeagueFilterData>()[2];
-            LeagueSeason ExtraLeagueSeason2019 = GetLeagues().ToList<LeagueFilterData>()[3];
+            LeagueSeason League2Season2019 = GetListOfLeagueSeason().ToList<LeagueSeason>()[0];
+            LeagueSeason League2Season2018_2019 = GetListOfLeagueSeason().ToList<LeagueSeason>()[1];
+            LeagueSeason League1Season2019 = GetListOfLeagueSeason().ToList<LeagueSeason>()[2];
+            LeagueSeason ExtraLeagueSeason2019 = GetListOfLeagueSeason().ToList<LeagueSeason>()[3];
 
 
             yield return new GroupFilterData(1) { LeagueSeason = League2Season2019, Name = "A" };
@@ -559,6 +544,14 @@ namespace DALK.PL_ANALYZER.DB.FAKE
 
             yield return new GroupFilterData(11) { LeagueSeason = ExtraLeagueSeason2019, Name = "A" };
             yield return new GroupFilterData(12) { LeagueSeason = ExtraLeagueSeason2019, Name = "B" };
+        }
+        public LeaguesSeason GetLeaguesSeason()
+        {
+            return new LeaguesSeason(GetListOfLeagueSeason());
+        }
+        public TeamsSeason GetTeamsSeason()
+        {
+            return new TeamsSeason(GetListOfTeamSeason());
         }
     }
 }

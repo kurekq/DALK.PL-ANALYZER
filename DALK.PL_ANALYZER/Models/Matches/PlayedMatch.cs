@@ -16,7 +16,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
                 return Math.Max(HomePoints, AwayPoints);
             }
         }
-        public TeamFilterData Winner
+        public TeamSeason Winner
         {
             get
             {
@@ -30,7 +30,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
                 return Math.Min(HomePoints, AwayPoints);
             }
         }
-        public TeamFilterData Looser
+        public TeamSeason Looser
         {
             get
             {

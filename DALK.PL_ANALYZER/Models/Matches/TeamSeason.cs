@@ -9,10 +9,15 @@ namespace DALK.PL_ANALYZER.Models.Matches
     {
         public int Id { get; set; }
         public GroupSeason GroupSeason { get; set; }
-        public Team Team { get; set; }
+        public TeamFilterData Team { get; set; }
         public TeamSeason(int id)
         {
             Id = id;
+        }
+
+        public override string ToString()
+        {
+            return Team.ToString();
         }
     }
 }

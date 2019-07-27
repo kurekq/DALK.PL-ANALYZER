@@ -10,8 +10,8 @@ namespace DALK.PL_ANALYZER.Models.Matches
         public int Id { get; set; }
         public IStage Stage { get; set; }
         public DateTime DateTime { get; set; }
-        public TeamFilterData Home { get; set; }       
-        public TeamFilterData Away { get; set; }
+        public TeamSeason Home { get; set; }       
+        public TeamSeason Away { get; set; }
         public string MatchDescription { get; set; }
 
     }

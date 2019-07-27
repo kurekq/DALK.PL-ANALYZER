@@ -30,6 +30,18 @@ namespace DALK.PL_ANALYZER.Models.Matches
                 }
             }
         }
+        public override bool Equals(object obj)
+        {
+            if (obj is Team)
+            {
+                return this.Id == ((Team)obj).Id;
+            }
+            else
+            {
+                return base.Equals(obj);
+            }
+            
+        }
         public override string ToString()
         {
             return Name;

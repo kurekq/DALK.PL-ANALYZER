@@ -16,17 +16,14 @@ namespace DALK.PL_ANALYZER.Models.Filters
             filterData = new ItemInFilterData(fD);
             itemType = fD.GetType().ToString();
         }
-
         public void Select()
         {
             filterData.Selected = true;
         }
-
         public void Unselect()
         {
             filterData.Selected = false;
         }
-
         public HtmlString GetHtmlText()
         {
             string text = "";
@@ -36,27 +33,22 @@ namespace DALK.PL_ANALYZER.Models.Filters
                 text = "<i class='" + filterData.Icon + "'></i> " + filterData.Text;
             return new HtmlString(text);
         }
-
         public string GetText()
         {
             return filterData.Text;
         }
-
         public string GetValue()
         {
             return filterData.Value;
         }
-
         public bool IsSelected()
         {
             return filterData.Selected;
         }
-
         public string GetItemTypeName()
         {
             return itemType;
         }
-
         public override bool Equals(object obj)
         {
             ItemInFilter fd = obj as ItemInFilter;             
@@ -70,7 +62,6 @@ namespace DALK.PL_ANALYZER.Models.Filters
                 return base.Equals(obj);
             }
         }
-
         public override int GetHashCode()
         {
             return base.GetHashCode();
