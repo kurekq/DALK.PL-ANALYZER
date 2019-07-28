@@ -53,16 +53,20 @@ namespace DALK.PL_ANALYZER.Models.Matches
             Away = m.Away.Team.ToString();
             MatchDescription = m.MatchDescription;
 
-            if (m.Stage is GroupStage)
+            if (m.Stage.StageName == "GroupStage")
             {
-                GameTitle = m.Home.GroupSeason.ToString() + ", " + m.Stage.GetStageName();
+                GameTitle = m.Home.GroupSeason.ToString() + ", " + m.Stage.GetDisplayStageName();
                 GroupId = m.Home.GroupSeason.Id;
-                Stage = "GroupStage";
+                Stage = m.Stage.StageName;
             }
-            else if (m.Stage is PlayOffStage)
+            else if (m.Stage.StageName == "PlayOff")
             {
-                GameTitle = m.Stage.GetStageName();
-                Stage = "PlayOff";
+                GameTitle = m.Stage.GetDisplayStageName();
+                Stage = m.Stage.StageName;
+            }
+            else
+            {
+                throw new NotImplementedException();
             }
 
             if (IsPlayedMatch)

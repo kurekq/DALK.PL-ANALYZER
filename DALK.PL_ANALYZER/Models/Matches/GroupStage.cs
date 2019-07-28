@@ -9,9 +9,14 @@ namespace DALK.PL_ANALYZER.Models.Matches
     {
         public byte Round { get; set; }
         public byte MaxRound { get; set; }
+        public GroupStage()
+        {
+            DisplayStageName = "Kolejka " + Round.ToString() + "/" + MaxRound.ToString();
+            StageName = "GroupStage";
+        }
         public override string GetStageName()
         {
-            return "Kolejka " + Round.ToString() + "/" + MaxRound.ToString();
+            return DisplayStageName;
         }
     }
 }

@@ -141,11 +141,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="DB\FAKE\FakeDB.cs" />
+    <Compile Include="Models\Filters\GridFilters.cs" />
+    <Compile Include="Models\Filters\IFilterableList.cs" />
     <Compile Include="Models\Filters\ItemInFilterData.cs" />
     <Compile Include="Models\Matches\ConstantFilterData.cs" />
     <Compile Include="Models\Matches\DefaultIcons.cs" />
     <Compile Include="Models\Filters\EmptyFilterDataItem.cs" />
     <Compile Include="Models\Filters\GridFilter.cs" />
+    <Compile Include="Models\Filters\FilterValue.cs" />
     <Compile Include="Models\Matches\GroupSeason.cs" />
     <Compile Include="Models\Matches\GroupFilterData.cs" />
     <Compile Include="Models\Matches\GroupsSeason.cs" />
@@ -156,6 +159,8 @@
     <Compile Include="Models\Filters\ItemInFilter.cs" />
     <Compile Include="Models\Matches\LeagueSeason.cs" />
     <Compile Include="Models\Matches\LeaguesSeason.cs" />
+    <Compile Include="Models\Matches\MatchesFiltersValues.cs" />
+    <Compile Include="Models\Matches\MatchesModelViewFactory.cs" />
     <Compile Include="Models\Matches\Seasons.cs" />
     <Compile Include="Models\Matches\TeamSeason.cs" />
     <Compile Include="Models\Matches\TeamsSeason.cs" />

@@ -13,17 +13,17 @@
 </div>
 <div class="container-fluid">
     <div class="layer matches__filters">
-        @Html.Partial("_Filters", Model.AllFiters)
+        @Html.Partial("_Filters", Model.GridFilters.GetFiters())
     </div>
 
     <div class="@Model.MatchesClassName">
-        @if (Model.GetFiltredMatches().ToList().Count == 0)
+        @if (Model.Matches.Count == 0)
         {
             <h3>Brak wyników dla podanych kryteriów.</h3>
         }
         else
         {
-            foreach (Match m in Model.GetFiltredMatches())
+            foreach (Match m in Model.Matches)
             {
                 if (m.IsPlayedMatch)
                 {

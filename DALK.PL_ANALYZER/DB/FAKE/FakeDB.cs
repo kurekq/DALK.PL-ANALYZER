@@ -1,4 +1,5 @@
 ﻿using DALK.PL_ANALYZER.DB.JSONs;
+using DALK.PL_ANALYZER.Models;
 using DALK.PL_ANALYZER.Models.Filters;
 using DALK.PL_ANALYZER.Models.Matches;
 using System;
@@ -29,10 +30,13 @@ namespace DALK.PL_ANALYZER.DB.FAKE
             return GetDataFromFile(FileDataPaths.NotPlayedMatchesPath);
         }
 
-        public IEnumerable<Match> GetMatches()
+        public IEnumerable<Match> GetMatches(int? seasonId = null, int? seasonLeagueId = null, int? teamLeagueId = null, int? groupSeasonId = null, string stage = null)
         {
             List<Match> notPlayedMatches = new JavaScriptSerializer().Deserialize<List<Match>>(GetNotPlayedMatchesJson());
             List<PlayedMatch> playedMatches = new JavaScriptSerializer().Deserialize<List<PlayedMatch>>(GetPlayedMatchesJson());
+
+            List<Match> notPlayed = GetNotPlayedMatches().ToList<Match>();
+            string json = new JavaScriptSerializer().Serialize(notPlayed);
 
             return notPlayedMatches.Concat(playedMatches);
         }

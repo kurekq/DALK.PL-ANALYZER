@@ -12,8 +12,7 @@ namespace DALK.PL_ANALYZER.Models.Filters
         public string name;
         public string CSSId;
 
-        public GridFilter() { }
-        
+        public GridFilter() { }     
         public GridFilter(IEnumerable<IFilterData> fD, IFilterData defaultFilterItem, string name)
         {
             var items = new List<ItemInFilter>();
@@ -28,22 +27,18 @@ namespace DALK.PL_ANALYZER.Models.Filters
             this.defaultItem = new ItemInFilter(defaultFilterItem);
             CSSId = "js_filter_" + name;
         }
-
         public string GetCSSId()
         {
             return CSSId;
         }
-
         public IFilterableItem GetDefaultItem()
         {
             return defaultItem;
         }
-
         public IEnumerable<IFilterableItem> GetItems()
         {
             return new List<ItemInFilter>(items).OrderBy(x => x.GetText()).OrderByDescending(x => x.Equals(defaultItem));
         }
-
         public IFilterableItem GetSelectedItem()
         {
             foreach (ItemInFilter i in items)
@@ -53,19 +48,19 @@ namespace DALK.PL_ANALYZER.Models.Filters
             }
             throw new Exception();
         }
-
         public void SetAsSelected(IFilterableItem i)
         {
             UnselectSelected();
             items.First(x => x == i).Select();
         }
-
         public void SetAsSelected(string byValue)
         {
-            UnselectSelected();
-            items.First(x => x.GetValue() == byValue).Select();
+            if (!string.IsNullOrEmpty(byValue))
+            {
+                UnselectSelected();
+                items.First(x => x.GetValue() == byValue).Select();
+            }
         }
-
         private void UnselectSelected()
         {
             IFilterableItem actualSelected = GetSelectedItem();
