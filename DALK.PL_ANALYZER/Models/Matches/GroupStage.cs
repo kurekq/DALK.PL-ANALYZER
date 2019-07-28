@@ -7,16 +7,10 @@ namespace DALK.PL_ANALYZER.Models.Matches
 {
     public class GroupStage : Stage
     {
-        public byte Round { get; set; }
-        public byte MaxRound { get; set; }
-        public GroupStage()
+        public GroupStage(byte Round, byte MaxRound)
         {
             DisplayStageName = "Kolejka " + Round.ToString() + "/" + MaxRound.ToString();
             StageName = "GroupStage";
-        }
-        public override string GetStageName()
-        {
-            return DisplayStageName;
         }
     }
 }

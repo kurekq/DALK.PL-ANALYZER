@@ -12,7 +12,7 @@ namespace DALK.PL_ANALYZER.Models
         public string StageName;
         public virtual string GetDisplayStageName()
         {
-            return StageName;
+            return DisplayStageName;
         }
         public virtual string GetStageName()
         {
