@@ -13,10 +13,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
     {
         public List<MatchModelView> Matches { get; set; }
         public string MatchesClassName { get; set; }
-        public MatchesModelView()
-        {
-
-        }
+        public MatchesModelView() { }
         public MatchesModelView(List<Match> matches)
         {
             Matches = new List<MatchModelView>();

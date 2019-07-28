@@ -85,7 +85,7 @@ namespace DALK.PL_ANALYZER.Controllers
 
             this.jsonAnswer = new JsonJavascriptAnswer() { Json = new JavaScriptSerializer().Serialize(matchesMV) };
 
-            string json = db.GetMatchesJson();
+            string json = db.GetPlayedMatchesJson();
             var elapsedMs = watch.ElapsedMilliseconds;
             int i = 0;
         }

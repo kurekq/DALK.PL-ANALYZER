@@ -1,4 +1,5 @@
-﻿using DALK.PL_ANALYZER.Models.Filters;
+﻿using DALK.PL_ANALYZER.DB.JSONs;
+using DALK.PL_ANALYZER.Models.Filters;
 using DALK.PL_ANALYZER.Models.Matches;
 using System;
 using System.Collections.Generic;
@@ -11,19 +12,51 @@ namespace DALK.PL_ANALYZER.DB.FAKE
 {
     public class FakeDB
     {
-        public string GetMatchesJson()
-        {
-            string textFile = @"C:\Users\p.kuriata\Documents\DALK.PL_ANALYZER\DALK.PL_ANALYZER\DB\FAKE\Matches.JSON";
-            string matchesJson;
-            if (File.Exists(textFile))
+        public string GetDataFromFile(string filePath)
+        {;
+            if (File.Exists(filePath))
             {
-                return File.ReadAllText(textFile, System.Text.Encoding.Default);
+                return File.ReadAllText(filePath, System.Text.Encoding.Default);
             }
             throw new FileNotFoundException();
         }
+        public string GetPlayedMatchesJson()
+        {
+            return GetDataFromFile(FileDataPaths.PlayedMatchesPath);
+        }
+        public string GetNotPlayedMatchesJson()
+        {
+            return GetDataFromFile(FileDataPaths.NotPlayedMatchesPath);
+        }
+
         public IEnumerable<Match> GetMatches()
         {
-            return new JavaScriptSerializer().Deserialize<List<Match>>(GetMatchesJson());
+            List<Match> notPlayedMatches = new JavaScriptSerializer().Deserialize<List<Match>>(GetNotPlayedMatchesJson());
+            List<PlayedMatch> playedMatches = new JavaScriptSerializer().Deserialize<List<PlayedMatch>>(GetPlayedMatchesJson());
+
+            return notPlayedMatches.Concat(playedMatches);
+        }
+
+        public IEnumerable<Match> GetNotPlayedMatches()
+        {
+            yield return new Match()
+            {
+                Home = GetListOfTeamSeason().ToList<TeamSeason>()[0],
+                Away = GetListOfTeamSeason().ToList<TeamSeason>()[10],
+                DateTime = new DateTime(2019, 6, 25),
+                Id = 111,
+                MatchDescription = "Mecz o wszystko, który dopiero zostanie rozegrany!",
+                Stage = new PlayOffStage(1)
+            };
+            yield return new Match()
+            {
+                Home = GetListOfTeamSeason().ToList<TeamSeason>()[3],
+                Away = GetListOfTeamSeason().ToList<TeamSeason>()[7],
+                DateTime = new DateTime(2019, 6, 25),
+                Id = 115,
+                MatchDescription = "Ten mecz jeszcze nie jest rozegrany, ależ tam będą emocje, ależ tam będą nerwy!",
+                Stage = new PlayOffStage(0)
+            };
         }
         public IEnumerable<LeagueSeason> GetListOfLeagueSeason()
         {
