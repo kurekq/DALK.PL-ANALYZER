@@ -8,7 +8,10 @@ namespace DALK.PL_ANALYZER.Models.Matches
     public class TeamsSeason
     {
         private IEnumerable<TeamSeason> teamSeasons;
-
+        public TeamsSeason()
+        {
+            teamSeasons = new List<TeamSeason>();
+        }
         public TeamsSeason(IEnumerable<TeamSeason> ts = null)
         {
             if (ts == null)

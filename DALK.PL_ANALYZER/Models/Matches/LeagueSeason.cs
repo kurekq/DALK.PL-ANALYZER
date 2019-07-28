@@ -10,6 +10,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
         public int Id { get; set; }
         public LeagueFilterData League { get; set; }
         public Season Season { get; set; }
+        public LeagueSeason() { }
         public LeagueSeason(int id)
         {
             Id = id;

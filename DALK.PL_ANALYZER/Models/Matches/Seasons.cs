@@ -8,16 +8,13 @@ namespace DALK.PL_ANALYZER.Models.Matches
     public class Seasons
     {
         private IEnumerable<SeasonFilterData> seasons;
-        public Seasons(IEnumerable<SeasonFilterData> seasons = null)
+        public Seasons()
         {
-            if (seasons == null)
-            {
-                this.seasons = new List<SeasonFilterData>();
-            }
-            else
-            {
-                this.seasons = seasons;
-            }
+            this.seasons = new List<SeasonFilterData>();
+        }
+        public Seasons(IEnumerable<SeasonFilterData> seasons)
+        {
+            this.seasons = seasons;
         }
         public void Add(Season season)
         {

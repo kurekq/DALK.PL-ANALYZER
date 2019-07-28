@@ -79,20 +79,33 @@ function getMVPMaxHeight()
 
 function updateMatchesFilters()
 {
-    var hiddenFieldWithJson = document.getElementById('HiddenFieldWithJson');
-    var jsonObj = JSON.parse(hiddenFieldWithJson.value);
+    start();
+    $.ajax({
+        url: '/Matches/GetMatchesJson',
+        type: 'GET',
+        contentType: 'application/json',
+        success: function (data) {
+            end('updateMatchesFilters');
+            changeJsonAndSend(data);          
+        },
+        error: function (xhr, status, error) {
+            console.log('no ok');
+        }
+    });
 
+}
+
+function changeJsonAndSend(jsonObj)
+{
     jsonObj.AllFiters.forEach(function (filterEl) {
-        
+
         var selectedFilterName = document.getElementById(filterEl.CSSId).innerText.trim();
-        filterEl.items.forEach(function (filterItem) {            
+        filterEl.items.forEach(function (filterItem) {
             filterItem.filterData.Selected = filterItem.filterData.Text === selectedFilterName;
         });
 
     });
-    jsonObj.JsonOfThis = JSON.stringify(jsonObj);
-    hiddenFieldWithJson.value = JSON.stringify(jsonObj);
-    sendMatches();
+    sendMatches(JSON.stringify(jsonObj));
 }
 
 function setInnerHtml(id, innerHtml)
@@ -100,18 +113,21 @@ function setInnerHtml(id, innerHtml)
     document.getElementById(id).innerHTML = innerHtml;
 }
 
-function sendMatches() {
-    var hiddenFieldWithJson = document.getElementById('HiddenFieldWithJson');
-    var matchesMV = hiddenFieldWithJson.value;
+function sendMatches(stringifiedJsonObj) {
+    start();
+    var matchesMV = stringifiedJsonObj;
     var jsonAnswer = JSON.stringify({ Json: matchesMV });
     $.ajax({
-        url: '/Matches/Index',
-        type: 'get',
+        url: '/Matches/FilteredIndex',
+        type: 'post',
+        dataType: 'text',
         contentType: 'application/json',
         success: function (data) {
-            console.log('ok');
-            //$(".content").html(data);
+            end('sendMatches');
+            start();
+            $(".content").html(data);
             verticalAlignAllElements();
+            end('setContent');
         },
         error: function (xhr, status, error) {
             console.log('no ok');
@@ -119,3 +135,15 @@ function sendMatches() {
         data: jsonAnswer
     });
 }
+    var startTime, endTime;
+
+    function start() {
+        startTime = new Date();
+    };
+
+    function end(what) {
+        endTime = new Date();
+        var timeDiff = endTime - startTime; //in ms
+
+        console.log(what + ': ' + timeDiff);
+    }

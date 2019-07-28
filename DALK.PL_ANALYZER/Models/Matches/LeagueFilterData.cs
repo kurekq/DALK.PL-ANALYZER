@@ -31,6 +31,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
             }
         }
         public bool Selected { get; set; }
+        public LeagueFilterData() { }
         public LeagueFilterData(int id) : base(id) { }
     }
 }

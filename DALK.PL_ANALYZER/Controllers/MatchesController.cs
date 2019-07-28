@@ -20,9 +20,13 @@ namespace DALK.PL_ANALYZER.Controllers
 
         public MatchesController()
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+
             db = new FakeDB();
             List<Match> matches = db.GetMatches().ToList<Match>();
             matchesMV = new MatchesModelView(matches);
+
+            watch.Stop();
 
             LeaguesSeason leaguesSeason = db.GetLeaguesSeason();
             TeamsSeason teamSeason = db.GetTeamsSeason();
@@ -80,14 +84,15 @@ namespace DALK.PL_ANALYZER.Controllers
             matchesMV.AllFiters = allFilters;
 
             this.jsonAnswer = new JsonJavascriptAnswer() { Json = new JavaScriptSerializer().Serialize(matchesMV) };
-        }
 
+            string json = db.GetMatchesJson();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            int i = 0;
+        }
         // GET: Matches
         [HttpGet]
         public ViewResult Index(MatchesModelView jsonAnswer = null)
         {
-            //MatchesModelView matchesMV = new MatchesModelView();  
-
             return View(matchesMV);
         }
         [HttpGet]
@@ -95,7 +100,6 @@ namespace DALK.PL_ANALYZER.Controllers
         {
             return Json(matchesMV, JsonRequestBehavior.AllowGet);
         }
-
         [HttpPost]
         public ActionResult FilteredIndex(JsonJavascriptAnswer jsonAnswer)
         {

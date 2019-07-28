@@ -13,6 +13,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
         public bool IsSummerSeason { get; set; }
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
+        public Season() { }
         public Season(int id)
         {
             Id = id;

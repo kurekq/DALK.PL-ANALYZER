@@ -8,6 +8,10 @@ namespace DALK.PL_ANALYZER.Models.Matches
     public class LeaguesSeason
     {
         private IEnumerable<LeagueSeason> leagueSeasons;
+        public LeaguesSeason()
+        {
+            leagueSeasons = new List<LeagueSeason>();
+        }
         public LeaguesSeason(IEnumerable<LeagueSeason> ls = null)
         {
             if (ls == null)

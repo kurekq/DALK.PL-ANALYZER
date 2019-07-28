@@ -2,142 +2,28 @@
 using DALK.PL_ANALYZER.Models.Matches;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace DALK.PL_ANALYZER.DB.FAKE
 {
     public class FakeDB
     {
+        public string GetMatchesJson()
+        {
+            string textFile = @"C:\Users\p.kuriata\Documents\DALK.PL_ANALYZER\DALK.PL_ANALYZER\DB\FAKE\Matches.JSON";
+            string matchesJson;
+            if (File.Exists(textFile))
+            {
+                return File.ReadAllText(textFile, System.Text.Encoding.Default);
+            }
+            throw new FileNotFoundException();
+        }
         public IEnumerable<Match> GetMatches()
-        {           
-            List<TeamSeason> teams = GetListOfTeamSeason().Take(9).ToList<TeamSeason>();
-            LeagueFilterData ourLeague = GetPureLeagues().ToList<LeagueFilterData>()[0];
-            SeasonFilterData ourSeason = GetSeasons().GetSeasons().ToList<SeasonFilterData>()[0];
-            GroupFilterData ourGroup = GetGroups().ToList<GroupFilterData>()[0];
-            List<IStage> stages = GetStages().ToList<IStage>();
-            Player Mrozo = GetPlayers().ToList<Player>()[0];
-            Player Kurek = GetPlayers().ToList<Player>()[1];
-            Player Kaczor = GetPlayers().ToList<Player>()[2];
-            Player Obol = GetPlayers().ToList<Player>()[5];
-            yield return new PlayedMatch()
-            {
-                Home = teams[0],
-                Away = teams[1],
-                HomePoints = 44,
-                AwayPoints = 75,
-                DateTime = new DateTime(2019, 3, 3, 17, 0, 0),
-                MatchDescription = "Najgorszy mecz w lidze przegrany bardzo wyraźnie.",
-                MVP = new MVP() { Player = Kurek, PerformanceDesciption = "9 zbiórek, 10 punktów" },
-                Stage = stages[0]
-            };
-            yield return new PlayedMatch()
-            {
-                Home = teams[0],
-                Away = teams[2],
-                HomePoints = 60,
-                AwayPoints = 68,
-                DateTime = new DateTime(2019, 3, 24, 15, 45, 0),
-                MatchDescription = "Wygrywaliśmy mecz przez 3.5 kwarty z najlepszą drużyną ligi.",
-                MVP = new MVP() { Player = Mrozo, PerformanceDesciption = "26 punktów, 5/9 trójek" },
-                Stage = stages[1]
-            };
-            yield return new PlayedMatch()
-            {
-                Home = teams[0],
-                Away = teams[3],
-                HomePoints = 70,
-                AwayPoints = 26,
-                DateTime = new DateTime(2019, 4, 28, 18, 15, 0),
-                MatchDescription = "Totalnie zmiażdżyliśmy przeciwników.",
-                MVP = new MVP() { Player = Kaczor, PerformanceDesciption = "Double-duble, 17 punktów, 10 zbiórek" },
-                Stage = stages[2]
-            };
-            yield return new PlayedMatch()
-            {
-                Home = teams[0],
-                Away = teams[4],
-                HomePoints = 43,
-                AwayPoints = 50,
-                DateTime = new DateTime(2019, 5, 12, 17, 0, 0),
-                MatchDescription = "Przeciwnicy ograli nas pressingiem w drugiej połowie.",
-                MVP = new MVP() { Player = Mrozo, PerformanceDesciption = "16 punktów, 9 zbiórek" },
-                Stage = stages[3]
-            };
-            yield return new PlayedMatch()
-            {
-                Home = teams[0],
-                Away = teams[5],
-                HomePoints = 54,
-                AwayPoints = 59,
-                DateTime = new DateTime(2019, 5, 26, 15, 45, 0),
-                MatchDescription = "Ustawiiśmy się 3 zawodnikami na dole i przeciwnicy rzucili nam 10 trójek.",
-                MVP = new MVP() { Player = Obol, PerformanceDesciption = "6 punktów (3/5), 12 zbiórek" },
-                Stage = stages[4]
-            };
-            yield return new PlayedMatch()
-            {
-                Home = teams[0],
-                Away = teams[6],
-                HomePoints = 53,
-                AwayPoints = 54,
-                DateTime = new DateTime(2019, 6, 2, 14, 25, 0),
-                MatchDescription = "Mecz przegrany 1 punktem w dogrywce, Kudłaty i Mrozo zepsuli buzzer-beatery. 50 sekund przed końcem meczu wygrywaliśmy 4 punktami. Przeciwnicy grali w piatkę.",
-                MVP = new MVP() { Player = Kurek, PerformanceDesciption = "5 punktów (2/3), 18 zbiórek, 2 asysty, 2 bloki" },
-                Stage = stages[5]
-            };
-            yield return new PlayedMatch()
-            {
-                Home = teams[0],
-                Away = teams[7],
-                HomePoints = 51,
-                AwayPoints = 69,
-                DateTime = new DateTime(2019, 6, 15, 10, 00, 0),
-                MatchDescription = "Nasi przeciwnicy byli po prostu lepsi demolując nas w drugiej kwarcie 22-4.",
-                MVP = new MVP() { Player = Kurek, PerformanceDesciption = "Double-double (10 punktów (63%), 12 zbiórek)" },
-                Stage = stages[6]
-            };
-            /*
-            foreach (TeamSeason home in GetListOfTeamSeason())
-            {
-                TeamFilterData HomeRandom = home.Team;
-
-                List<TeamSeason> AwayRandoms = GetListOfTeamSeason().Where(x => x.GroupSeason.Id == home.GroupSeason.Id && x.Id != home.Id).Take(5).ToList<TeamSeason>();
-                foreach (TeamSeason away in AwayRandoms)
-                {
-                    TeamFilterData AwayRandom = away.Team;
-                    int randomYear = new Random().Next(2018, 2019 + 1);
-                    int randomMonth = new Random().Next(1, 12 + 1);
-                    int randomDay = new Random().Next(1, 30 + 1);
-                    int randomHour = new Random().Next(10, 18 + 1);
-                    DateTime randomDate = new DateTime(randomYear, randomMonth, randomDay, randomHour, 0, 0);
-
-                    int stageRandomIndex = new Random().Next(0, GetStages().Take(6).ToList<IStage>().Count);
-                    IStage StageRandom = GetStages().ToList<IStage>()[stageRandomIndex];
-
-                    int mvpRandomIndex = new Random().Next(0, GetPlayers().ToList<Player>().Count);
-                    MVP PlayerRandom = new MVP() { Player = GetPlayers().ToList<Player>()[mvpRandomIndex], PerformanceDesciption = "Opis występu... opis występu... " };
-
-                    int randomHomePoints = new Random().Next(50, 151);
-                    int randomAwayPoints = 0;
-                    do
-                    {
-                        randomAwayPoints = new Random().Next(50, 151);
-                    } while (randomAwayPoints == randomHomePoints);
-
-                    yield return new PlayedMatch()
-                    {
-                        Home = home,
-                        Away = away,
-                        HomePoints = randomHomePoints,
-                        AwayPoints = randomAwayPoints,
-                        DateTime = randomDate,
-                        MatchDescription = "Tego nie będziemy randomizować...",
-                        Stage = StageRandom,
-                        MVP = PlayerRandom,
-                    };
-                } 
-            }*/
+        {
+            return new JavaScriptSerializer().Deserialize<List<Match>>(GetMatchesJson());
         }
         public IEnumerable<LeagueSeason> GetListOfLeagueSeason()
         {
