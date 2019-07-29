@@ -13,7 +13,7 @@
         <div class="dropdown-menu dropdown-menu-animated" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
             @foreach (IFilterableItem i in f.GetItems())
             {
-                <a class="dropdown-item" href="#" onclick="setInnerHtml('@f.GetCSSId()', @string.Concat("\"",i.GetHtmlText(), "\")"); updateMatchesFilters();">@i.GetHtmlText()</a>
+                <a class="dropdown-item" href="#" onclick="setInnerHtml('@f.GetCSSId()', @string.Concat("\"",i.GetHtmlText(), "\")"); updateMatchesFilters('@f.GetParameterName()','@i.GetValue()');">@i.GetHtmlText()</a>
             }
         </div>
     </div>

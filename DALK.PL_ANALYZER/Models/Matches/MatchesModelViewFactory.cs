@@ -13,13 +13,9 @@ namespace DALK.PL_ANALYZER.Models.Matches
     {
         private FakeDB db;
         public MatchesModelView matchesMV;
-        public MatchesModelViewFactory(int? seasonId = null, int? seasonLeagueId = null, int? teamLeagueId = null, int? groupSeasonId = null, string stage = null)
+        public MatchesModelViewFactory(int? matchSeasonsId = null, int? matchLeaguesId = null, int? matchTeamsId = null, int? matchGroupId = null, string matchStagesId = null)
         {
             db = new FakeDB();
-            List<Match> matches = db.GetMatches(seasonId, seasonLeagueId, teamLeagueId, groupSeasonId, stage).ToList<Match>();
-            matchesMV = new MatchesModelView(matches);
-
-            var s = matches[10].Stage.GetStageName();
 
             LeaguesSeason leaguesSeason = db.GetLeaguesSeason();
             TeamsSeason teamSeason = db.GetTeamsSeason();
@@ -61,11 +57,31 @@ namespace DALK.PL_ANALYZER.Models.Matches
                         Value = "GroupStage"
                     }
                 };
-            GridFilter leagueFilter = new GridFilter(allLeagues, leagueDefault, "matchLeagues");
-            GridFilter seasonFilter = new GridFilter(allSeasons, defaultSeason, "matchSeasons");
-            //GridFilter groupFilter = new GridFilter(allGroups, groupDefault, "matchGroups");
-            GridFilter teamFilter = new GridFilter(allTeams, teamDefault, "matchTeams");
-            GridFilter stageFilter = new GridFilter(stageFilters, stageDefault, "matchStages");
+            GridFilter leagueFilter = new GridFilter(allLeagues, leagueDefault, "matchLeague");
+            if (matchLeaguesId == null)
+            {
+                matchLeaguesId = leagueFilter.SetIdByDefault(matchLeaguesId);
+            }
+            GridFilter seasonFilter = new GridFilter(allSeasons, defaultSeason, "matchSeason");
+            if (matchSeasonsId == null)
+            {
+                matchSeasonsId = seasonFilter.SetIdByDefault(matchSeasonsId);
+            }
+            /*GridFilter groupFilter = new GridFilter(allGroups, groupDefault, "matchGroup");          
+            if (matchGroupId == null)
+            {
+                matchGroupId = groupFilter.SetIdByDefault(matchGroupId);
+            } */
+            GridFilter teamFilter = new GridFilter(allTeams, teamDefault, "matchTeam");
+            if (matchTeamsId == null)
+            {
+                matchTeamsId = teamFilter.SetIdByDefault(matchTeamsId);
+            }
+            GridFilter stageFilter = new GridFilter(stageFilters, stageDefault, "matchStage");
+            if (string.IsNullOrEmpty(matchStagesId))
+            {
+                matchStagesId = stageFilter.SetIdByDefault(matchStagesId);
+            }
 
             List<GridFilter> allFilters = new List<GridFilter>();
             allFilters.Add(seasonFilter);
@@ -74,8 +90,11 @@ namespace DALK.PL_ANALYZER.Models.Matches
             allFilters.Add(teamFilter);
             allFilters.Add(stageFilter);
 
+            List<Match> matches = db.GetMatches(matchSeasonsId, matchLeaguesId, matchTeamsId, matchGroupId, matchStagesId).ToList<Match>();
+            matchesMV = new MatchesModelView(matches);
+
             matchesMV.GridFilters = new GridFilters(allFilters);
-            matchesMV.SetFilters(seasonId, seasonLeagueId, teamLeagueId, groupSeasonId, stage);
+            matchesMV.SetFilters(matchSeasonsId, matchLeaguesId, matchTeamsId, matchGroupId, matchStagesId);
         }
     }
 }

@@ -17,9 +17,9 @@ namespace DALK.PL_ANALYZER.Controllers
 
         // GET: Matches
         [HttpGet]
-        public ViewResult Index(int? seasonId = null, int? seasonLeagueId = null, int? teamLeagueId = null, int? groupSeasonId = null, string stage = null)
-        {
-            MatchesModelView matchesMV = new MatchesModelViewFactory(seasonId, seasonLeagueId, teamLeagueId, groupSeasonId, stage).matchesMV;
+        public ViewResult Index(int? matchSeasonsId = null, int? matchLeaguesId = null, int? matchTeamsId = null, int? matchGroupId = null, string matchStagesId = null)
+        {          
+            MatchesModelView matchesMV = new MatchesModelViewFactory(matchSeasonsId, matchLeaguesId, matchTeamsId, matchGroupId, matchStagesId).matchesMV;
             return View(matchesMV);
         }
     }

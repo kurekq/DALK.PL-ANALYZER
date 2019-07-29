@@ -77,9 +77,10 @@ function getMVPMaxHeight()
 }
 
 
-function updateMatchesFilters()
+function updateMatchesFilters(parameterName, value)
 {
-    start();
+    console.log("parameterName: " + parameterName + " value: " + value);
+    /*start();
     $.ajax({
         url: '/Matches/GetMatchesJson',
         type: 'GET',
@@ -91,7 +92,7 @@ function updateMatchesFilters()
         error: function (xhr, status, error) {
             console.log('no ok');
         }
-    });
+    });*/
 
 }
 

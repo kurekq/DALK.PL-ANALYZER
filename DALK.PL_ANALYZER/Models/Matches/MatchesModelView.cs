@@ -23,9 +23,9 @@ namespace DALK.PL_ANALYZER.Models.Matches
             }
             MatchesClassName = Matches.Count == 1 ? "layer singleMatch" : "layer matches";
         }
-        public void SetFilters(int? seasonId = null, int? seasonLeagueId = null, int? teamLeagueId = null, int? groupSeasonId = null, string stage = null)
+        public void SetFilters(int? matchSeasonsId = null, int? matchLeaguesId = null, int? matchTeamsId = null, int? matchGroupId = null, string matchStagesId = null)
         {
-            MatchesFiltersValues filterValues = new MatchesFiltersValues(seasonId, seasonLeagueId, teamLeagueId, groupSeasonId, stage);
+            MatchesFiltersValues filterValues = new MatchesFiltersValues(matchSeasonsId, matchLeaguesId, matchTeamsId, matchGroupId, matchStagesId);
             foreach (FilterValue fV in filterValues.filterValues)
             {
                 GridFilters.SetFilterSelected(fV);

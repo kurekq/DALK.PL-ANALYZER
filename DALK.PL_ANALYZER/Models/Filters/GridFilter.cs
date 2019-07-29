@@ -39,6 +39,12 @@ namespace DALK.PL_ANALYZER.Models.Filters
         {
             return new List<ItemInFilter>(items).OrderBy(x => x.GetText()).OrderByDescending(x => x.Equals(defaultItem));
         }
+
+        public string GetParameterName()
+        {
+            return name + "Id";
+        }
+
         public IFilterableItem GetSelectedItem()
         {
             foreach (ItemInFilter i in items)
@@ -59,6 +65,28 @@ namespace DALK.PL_ANALYZER.Models.Filters
             {
                 UnselectSelected();
                 items.First(x => x.GetValue() == byValue).Select();
+            }
+        }
+        public int? SetIdByDefault(int? id)
+        {
+            if (!GetDefaultItem().IsEmptyValue())
+            {
+                return int.Parse(GetDefaultItem().GetValue());
+            }
+            else
+            {
+                return id;
+            }
+        }
+        public string SetIdByDefault(string id)
+        {
+            if (!GetDefaultItem().IsEmptyValue())
+            {
+                return GetDefaultItem().GetValue();
+            }
+            else
+            {
+                return id;
             }
         }
         private void UnselectSelected()

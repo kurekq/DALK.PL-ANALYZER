@@ -9,52 +9,52 @@ namespace DALK.PL_ANALYZER.Models.Matches
     public class MatchesFiltersValues
     {
         public readonly List<FilterValue> filterValues;
-        public MatchesFiltersValues(int? seasonId = null, int? seasonLeagueId = null, int? teamLeagueId = null, int? groupSeasonId = null, string stage = null)
+        public MatchesFiltersValues(int? matchSeasonsId = null, int? matchLeaguesId = null, int? matchTeamsId = null, int? matchGroupId = null, string matchStagesId = null)
         {
             filterValues = new List<FilterValue>();
-            if (seasonId != null)
+            if (matchSeasonsId != null)
             {
                 filterValues.Add(
                     new FilterValue()
                     {
                         TypeOfClass = typeof(SeasonFilterData).ToString(),
-                        Value = seasonId.ToString()
+                        Value = matchSeasonsId.ToString()
                     });                              
             }
-            if (seasonLeagueId != null)
+            if (matchLeaguesId != null)
             {
                 filterValues.Add(
                     new FilterValue()
                     {
                         TypeOfClass = typeof(LeagueFilterData).ToString(),
-                        Value = seasonLeagueId.ToString()
+                        Value = matchLeaguesId.ToString()
                     });
             }
-            if (teamLeagueId != null)
+            if (matchTeamsId != null)
             {
                 filterValues.Add(
                     new FilterValue()
                     {
                         TypeOfClass = typeof(TeamFilterData).ToString(),
-                        Value = teamLeagueId.ToString()
+                        Value = matchTeamsId.ToString()
                     });
             }
-            if (groupSeasonId != null)
+            if (matchGroupId != null)
             {
                 filterValues.Add(
                     new FilterValue()
                     {
                         TypeOfClass = typeof(GroupFilterData).ToString(),
-                        Value = groupSeasonId.ToString()
+                        Value = matchGroupId.ToString()
                     });
             }
-            if (stage != null)
+            if (matchStagesId != null)
             {
                 filterValues.Add(
                     new FilterValue()
                     {
                         TypeOfClass = typeof(ConstantFilterData).ToString(),
-                        Value = stage.ToString()
+                        Value = matchStagesId.ToString()
                     });
             }
         }

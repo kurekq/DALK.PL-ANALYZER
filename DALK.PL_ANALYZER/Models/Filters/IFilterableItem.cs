@@ -13,6 +13,7 @@ namespace DALK.PL_ANALYZER.Models.Filters
         string GetText();
         HtmlString GetHtmlText();
         string GetValue();
+        bool IsEmptyValue();
         void Select();
         void Unselect();
         string GetItemTypeName();

@@ -15,5 +15,8 @@ namespace DALK.PL_ANALYZER.Models.Filters
         void SetAsSelected(IFilterableItem i);
         void SetAsSelected(string byValue);
         string GetCSSId();
+        int? SetIdByDefault(int? id);
+        string SetIdByDefault(string id);
+        string GetParameterName();
     }
 }

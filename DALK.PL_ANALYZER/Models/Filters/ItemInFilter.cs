@@ -66,5 +66,9 @@ namespace DALK.PL_ANALYZER.Models.Filters
         {
             return base.GetHashCode();
         }
+        public bool IsEmptyValue()
+        {
+            return string.IsNullOrEmpty(GetValue()) || GetValue() == "0";
+        }
     }
 }
