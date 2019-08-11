@@ -67,26 +67,18 @@ namespace DALK.PL_ANALYZER.Models.Filters
                 items.First(x => x.GetValue() == byValue).Select();
             }
         }
-        public int? SetIdByDefault(int? id)
+        public void SetIdByDefault(ref int? id)
         {
-            if (!GetDefaultItem().IsEmptyValue())
+            if (!GetDefaultItem().IsEmptyValue() && id == null)
             {
-                return int.Parse(GetDefaultItem().GetValue());
-            }
-            else
-            {
-                return id;
+                id = int.Parse(GetDefaultItem().GetValue());
             }
         }
-        public string SetIdByDefault(string id)
+        public void SetIdByDefault(ref string id)
         {
-            if (!GetDefaultItem().IsEmptyValue())
+            if (!GetDefaultItem().IsEmptyValue() && string.IsNullOrEmpty(id))
             {
-                return GetDefaultItem().GetValue();
-            }
-            else
-            {
-                return id;
+                id = GetDefaultItem().GetValue();
             }
         }
         private void UnselectSelected()
