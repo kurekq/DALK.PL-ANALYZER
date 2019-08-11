@@ -77,23 +77,36 @@ function getMVPMaxHeight()
 }
 
 
-function updateMatchesFilters(parameterName, value)
+function updateMatchesFilters()
 {
-    console.log("parameterName: " + parameterName + " value: " + value);
-    /*start();
-    $.ajax({
-        url: '/Matches/GetMatchesJson',
-        type: 'GET',
-        contentType: 'application/json',
-        success: function (data) {
-            end('updateMatchesFilters');
-            changeJsonAndSend(data);          
-        },
-        error: function (xhr, status, error) {
-            console.log('no ok');
+    let filters = document.getElementsByClassName("js-matchesFilter");
+    let nextLocation = 'Index';
+    Array.from(filters).forEach(function (el) {
+        let filter = el.getElementsByClassName('js-selectedDropDown')[0];
+        let name = filter.getAttribute('name');
+        let textContent = filter.textContent.trim();
+        let paramValue = findValueByTextContent(el, textContent);
+        if (paramValue != null) {
+            if (nextLocation == 'Index')
+                nextLocation += '?';
+            else
+                nextLocation += '&';
+            nextLocation += name + "=" + paramValue
         }
-    });*/
+    });
+    document.location = nextLocation;
+}
 
+function findValueByTextContent(filter, textContent) {
+    let dropDownList = filter.getElementsByClassName('js-dropDownList')[0];
+    let dropdownItems = dropDownList.getElementsByClassName('dropdown-item');
+    let value = null;
+    Array.from(dropdownItems).forEach(function (dropdownItem) {
+        if (dropdownItem.textContent == textContent) {
+            value = dropdownItem.getAttribute('value');
+        }
+    });
+    return value;
 }
 
 function changeJsonAndSend(jsonObj)
