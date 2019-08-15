@@ -9,41 +9,48 @@ namespace DALK.PL_ANALYZER.Models.Matches
 {
     public class GridFilterFactory
     {
-        private List<IFilterData> filterDataset;
         private EmptyFilterDataItem emptyFilter;
         private IFilterData defaultFilter;
-        private string gridFilterName;
+        private GridFilter gridFilter;
 
-        public GridFilterFactory(List<IFilterData> filterDataset, string emptyFilterName, string gridFilterName)
+        public GridFilter GetGridFilter(List<IFilterData> filterDataset, string emptyFilterName, string gridFilterName)
         {
-            this.filterDataset = filterDataset;
-            this.gridFilterName = gridFilterName;
-            emptyFilter = new EmptyFilterDataItem(emptyFilterName, Configs.DEFAULT_FILTER_ICON);
-            this.defaultFilter = emptyFilter;
+            setEmptyFilter(emptyFilterName);
+            SetDefaultFilter();
+            SetUpGridFilter(filterDataset, gridFilterName);
+            return gridFilter;
         }
-        public void SetDefaultFilter(IFilterData defaultFilter)
+        public GridFilter GetGridFilter(List<IFilterData> filterDataset, string emptyFilterName, string gridFilterName, IFilterData defaultFilter)
         {
-            this.defaultFilter = defaultFilter;
+            setEmptyFilter(emptyFilterName);
+            SetDefaultFilter(defaultFilter);
+            SetEmptyFilterNotSelected();
+            SetUpGridFilter(filterDataset, gridFilterName);
+            return gridFilter;
         }
-        public GridFilter GetGridFilter()
-        {
+        private void SetUpGridFilter(List<IFilterData> filterDataset, string gridFilterName)
+        {                      
             if (!filterDataset.Contains(emptyFilter))
             {
                 filterDataset.Add(emptyFilter);
             }
-            return new GridFilter(filterDataset, defaultFilter, gridFilterName);
+            gridFilter = new GridFilter(filterDataset, defaultFilter, gridFilterName);
         }
-        public void SetIdByDefault(int? value)
-        {
-            GetGridFilter().SetIdByDefault(ref value);
-        }
-        public void SetIdByDefault(string value)
-        {
-            GetGridFilter().SetIdByDefault(ref value);
-        }
-        public void SetEmptyFilterNotSelected()
+        private void SetEmptyFilterNotSelected()
         {
             emptyFilter.Selected = false;
+        }
+        private void SetDefaultFilter()
+        {            
+            this.defaultFilter = emptyFilter;
+        }
+        private void SetDefaultFilter(IFilterData defaultFilter)
+        {
+            this.defaultFilter = defaultFilter;
+        }
+        private void setEmptyFilter(string emptyFilterName)
+        {
+            emptyFilter = new EmptyFilterDataItem(emptyFilterName, Configs.DEFAULT_FILTER_ICON);
         }
     }
 }
