@@ -7,10 +7,10 @@ namespace DALK.PL_ANALYZER.Models.Matches
 {
     public class RawFilterValues
     {
-        public int? matchSeasonsId { get; set; }
-        public int? matchLeaguesId { get; set; }
-        public int? matchTeamsId { get; set; }
+        public int? matchSeasonId { get; set; }
+        public int? matchLeagueId { get; set; }
+        public int? matchTeamId { get; set; }
         //public int? matchGroupId { get; set; }
-        public string matchStagesId { get; set; }
+        public string matchStageId { get; set; }
     }
 }
