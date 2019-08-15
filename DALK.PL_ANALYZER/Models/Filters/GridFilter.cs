@@ -42,7 +42,7 @@ namespace DALK.PL_ANALYZER.Models.Filters
 
         public string GetParameterName()
         {
-            return name + "Id";
+            return name;
         }
 
         public IFilterableItem GetSelectedItem()
