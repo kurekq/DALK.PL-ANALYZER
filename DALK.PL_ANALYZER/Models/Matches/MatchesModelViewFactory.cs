@@ -13,35 +13,54 @@ namespace DALK.PL_ANALYZER.Models.Matches
     {
         private FakeDB db;
         public MatchesModelView matchesMV;
-        public MatchesModelViewFactory(int? matchSeasonsId = null, int? matchLeaguesId = null, int? matchTeamsId = null, int? matchGroupId = null, string matchStagesId = null)
+        public MatchesModelViewFactory(RawFilterValues rawParameters)
         {
             db = new FakeDB();
+            MatchesFiltersValues filterValues = new MatchesFiltersValues(rawParameters);                    
+            List<Match> matches = db.GetMatches(rawParameters).ToList<Match>();
+            matchesMV = new MatchesModelView(matches);
+            matchesMV.GridFilters = getAllFilters(rawParameters);
+            matchesMV.SetFilters(filterValues);
+        }
+        private GridFilters getAllFilters(RawFilterValues rawParameters)
+        {            
+            List<GridFilter> allFilters = new List<GridFilter>();
+            GridFilterFactory gFilterFactory = new GridFilterFactory();
 
-            LeaguesSeason leaguesSeason = db.GetLeaguesSeason();
-            TeamsSeason teamSeason = db.GetTeamsSeason();
             Seasons seasons = db.GetSeasons();
             SeasonFilterData defaultSeason = seasons.GetDefaultSeason();
+            GridFilter seasonGridFilter = gFilterFactory.GetGridFilter(seasons.GetSeasons().ToList<IFilterData>(), "Każdy sezon", nameof(rawParameters.matchSeasonsId), defaultSeason);
+            rawParameters.matchSeasonsId = seasonGridFilter.SetIdByDefault(rawParameters.matchSeasonsId);
+            allFilters.Add(seasonGridFilter);
 
-            List<IFilterData> allSeasons = seasons.GetSeasons().ToList<IFilterData>();
-            EmptyFilterDataItem allSeasonFilter = new EmptyFilterDataItem("Każdy sezon", Configs.DEFAULT_FILTER_ICON, false);
-            allSeasons.Add(allSeasonFilter);
+            LeaguesSeason leaguesSeason = db.GetLeaguesSeason();
+            GridFilter leagueGridFilter = gFilterFactory.GetGridFilter(leaguesSeason.GetLeagueFilterData(defaultSeason).ToList<IFilterData>(), "Każda liga", nameof(rawParameters.matchLeaguesId));
+            rawParameters.matchLeaguesId = leagueGridFilter.SetIdByDefault(rawParameters.matchLeaguesId);
+            allFilters.Add(leagueGridFilter);
 
-            List<IFilterData> allLeagues = leaguesSeason.GetLeagueFilterData(defaultSeason).ToList<IFilterData>();
-            EmptyFilterDataItem leagueDefault = new EmptyFilterDataItem("Każda liga", Configs.DEFAULT_FILTER_ICON);
-            allLeagues.Add(leagueDefault);
+            TeamsSeason teamSeason = db.GetTeamsSeason();
+            GridFilter teamGridFilter = gFilterFactory.GetGridFilter(teamSeason.GetTeamFilterData(defaultSeason).ToList<IFilterData>(), "Każdy zespół", nameof(rawParameters.matchTeamsId));
+            rawParameters.matchTeamsId = leagueGridFilter.SetIdByDefault(rawParameters.matchTeamsId);
+            allFilters.Add(teamGridFilter);
 
-            //List<IFilterData> allGroups = db.GetGroups().ToList<IFilterData>();
-            //EmptyFilterDataItem groupDefault = new EmptyFilterDataItem("Każda grupa", Configs.DEFAULT_FILTER_ICON);
-            //allGroups.Add(groupDefault);
+            GridFilter stageGridFilter = gFilterFactory.GetGridFilter(getStageFilters(), "Każda faza rozgrywek", nameof(rawParameters.matchStagesId));
+            rawParameters.matchStagesId = stageGridFilter.SetIdByDefault(rawParameters.matchStagesId);
+            allFilters.Add(stageGridFilter);
 
-            List<IFilterData> allTeams = teamSeason.GetTeamFilterData(defaultSeason).ToList<IFilterData>();
-            EmptyFilterDataItem teamDefault = new EmptyFilterDataItem("Każdy zespół", Configs.DEFAULT_FILTER_ICON);
-            allTeams.Add(teamDefault);
-
-            EmptyFilterDataItem stageDefault = new EmptyFilterDataItem("Każda faza rozgrywek", Configs.DEFAULT_FILTER_ICON);
-            IEnumerable<IFilterData> stageFilters = new List<IFilterData>()
-                {
-                    stageDefault,
+            /*
+            List<IFilterData> allGroups = db.GetGroups().ToList<IFilterData>();
+            EmptyFilterDataItem groupDefault = new EmptyFilterDataItem("Każda grupa", Configs.DEFAULT_FILTER_ICON);
+            allGroups.Add(groupDefault);
+            GridFilter groupFilter = new GridFilter(allGroups, groupDefault, "matchGroup");          
+            matchGroupId = groupFilter.SetIdByDefault(ref matchGroupId);
+            allFilters.Add(groupFilter)
+            */
+            return new GridFilters(allFilters);
+        }
+        private List<IFilterData> getStageFilters()
+        {
+            return new List<IFilterData>()
+            {
                     new ConstantFilterData()
                     {
                         Icon = null,
@@ -56,45 +75,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
                         Text = "Faza zasadnicza",
                         Value = "GroupStage"
                     }
-                };
-            GridFilter leagueFilter = new GridFilter(allLeagues, leagueDefault, "matchLeague");
-            if (matchLeaguesId == null)
-            {
-                matchLeaguesId = leagueFilter.SetIdByDefault(matchLeaguesId);
-            }
-            GridFilter seasonFilter = new GridFilter(allSeasons, defaultSeason, "matchSeason");
-            if (matchSeasonsId == null)
-            {
-                matchSeasonsId = seasonFilter.SetIdByDefault(matchSeasonsId);
-            }
-            /*GridFilter groupFilter = new GridFilter(allGroups, groupDefault, "matchGroup");          
-            if (matchGroupId == null)
-            {
-                matchGroupId = groupFilter.SetIdByDefault(matchGroupId);
-            } */
-            GridFilter teamFilter = new GridFilter(allTeams, teamDefault, "matchTeam");
-            if (matchTeamsId == null)
-            {
-                matchTeamsId = teamFilter.SetIdByDefault(matchTeamsId);
-            }
-            GridFilter stageFilter = new GridFilter(stageFilters, stageDefault, "matchStage");
-            if (string.IsNullOrEmpty(matchStagesId))
-            {
-                matchStagesId = stageFilter.SetIdByDefault(matchStagesId);
-            }
-
-            List<GridFilter> allFilters = new List<GridFilter>();
-            allFilters.Add(seasonFilter);
-            allFilters.Add(leagueFilter);
-            //allFilters.Add(groupFilter);
-            allFilters.Add(teamFilter);
-            allFilters.Add(stageFilter);
-
-            List<Match> matches = db.GetMatches(matchSeasonsId, matchLeaguesId, matchTeamsId, matchGroupId, matchStagesId).ToList<Match>();
-            matchesMV = new MatchesModelView(matches);
-
-            matchesMV.GridFilters = new GridFilters(allFilters);
-            matchesMV.SetFilters(matchSeasonsId, matchLeaguesId, matchTeamsId, matchGroupId, matchStagesId);
+            };
         }
     }
 }

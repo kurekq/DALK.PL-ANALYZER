@@ -30,18 +30,18 @@ namespace DALK.PL_ANALYZER.DB.FAKE
             return GetDataFromFile(FileDataPaths.NotPlayedMatchesPath);
         }
 
-        public IEnumerable<Match> GetMatches(int? matchSeasonsId = null, int? matchLeaguesId = null, int? matchTeamsId = null, int? matchGroupId = null, string matchStagesId = null)
+        public IEnumerable<Match> GetMatches(RawFilterValues parameters)
         {
             List<Match> notPlayedMatches = new JavaScriptSerializer().Deserialize<List<Match>>(GetNotPlayedMatchesJson());
             List<PlayedMatch> playedMatches = new JavaScriptSerializer().Deserialize<List<PlayedMatch>>(GetPlayedMatchesJson());
             List<Match> allMatches = notPlayedMatches.Concat(playedMatches).ToList<Match>();
 
             allMatches = allMatches.Where(x =>
-                (x.Home.GroupSeason.LeagueSeason.Season.Id == matchSeasonsId || matchSeasonsId == null) &&
-                (x.Home.GroupSeason.LeagueSeason.Id == matchLeaguesId || matchLeaguesId == null) &&
-                (x.Home.Team.Id == matchTeamsId || matchTeamsId == null) &&
-                (x.Home.GroupSeason.Id == matchGroupId || matchGroupId == null) &&
-                (x.Stage.StageName == matchStagesId || matchStagesId == null)
+                (x.Home.GroupSeason.LeagueSeason.Season.Id == parameters.matchSeasonsId || parameters.matchSeasonsId == null) &&
+                (x.Home.GroupSeason.LeagueSeason.Id == parameters.matchLeaguesId || parameters.matchLeaguesId == null) &&
+                (x.Home.Team.Id == parameters.matchTeamsId || parameters.matchTeamsId == null) &&
+                //(x.Home.GroupSeason.Id == parameters.matchGroupId || parameters.matchGroupId == null) &&
+                (x.Stage.StageName == parameters.matchStagesId || parameters.matchStagesId == null)
             ).ToList<Match>();
 
             //List<PlayedMatch> playedM = GetPlayedMatches().ToList<PlayedMatch>();
