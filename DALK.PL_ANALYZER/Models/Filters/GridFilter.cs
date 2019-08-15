@@ -42,7 +42,7 @@ namespace DALK.PL_ANALYZER.Models.Filters
 
         public string GetParameterName()
         {
-            return name + "Id";
+            return name;
         }
 
         public IFilterableItem GetSelectedItem()
@@ -69,25 +69,19 @@ namespace DALK.PL_ANALYZER.Models.Filters
         }
         public int? SetIdByDefault(int? id)
         {
-            if (!GetDefaultItem().IsEmptyValue())
+            if (!GetDefaultItem().IsEmptyValue() && id == null)
             {
-                return int.Parse(GetDefaultItem().GetValue());
+                id = int.Parse(GetDefaultItem().GetValue());
             }
-            else
-            {
-                return id;
-            }
+            return id;
         }
         public string SetIdByDefault(string id)
         {
-            if (!GetDefaultItem().IsEmptyValue())
+            if (!GetDefaultItem().IsEmptyValue() && string.IsNullOrEmpty(id))
             {
-                return GetDefaultItem().GetValue();
+                id = GetDefaultItem().GetValue();
             }
-            else
-            {
-                return id;
-            }
+            return id;
         }
         private void UnselectSelected()
         {

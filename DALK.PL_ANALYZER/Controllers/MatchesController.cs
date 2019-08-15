@@ -14,12 +14,10 @@ namespace DALK.PL_ANALYZER.Controllers
 {
     public class MatchesController : Controller
     {
-
-        // GET: Matches
         [HttpGet]
-        public ViewResult Index(int? matchSeasonsId = null, int? matchLeaguesId = null, int? matchTeamsId = null, int? matchGroupId = null, string matchStagesId = null)
+        public ViewResult Index(RawFilterValues parameters)
         {          
-            MatchesModelView matchesMV = new MatchesModelViewFactory(matchSeasonsId, matchLeaguesId, matchTeamsId, matchGroupId, matchStagesId).matchesMV;
+            MatchesModelView matchesMV = new MatchesModelViewFactory(parameters).matchesMV;
             return View(matchesMV);
         }
     }
