@@ -29,22 +29,22 @@ namespace DALK.PL_ANALYZER.Models.Matches
 
             Seasons seasons = db.GetSeasons();
             SeasonFilterData defaultSeason = seasons.GetDefaultSeason();
-            GridFilter seasonGridFilter = gFilterFactory.GetGridFilter(seasons.GetSeasons().ToList<IFilterData>(), "Każdy sezon", nameof(rawParameters.matchSeasonsId), defaultSeason);
-            rawParameters.matchSeasonsId = seasonGridFilter.SetIdByDefault(rawParameters.matchSeasonsId);
+            GridFilter seasonGridFilter = gFilterFactory.GetGridFilter(seasons.GetSeasons().ToList<IFilterData>(), "Każdy sezon", nameof(rawParameters.matchSeasonId), defaultSeason);
+            rawParameters.matchSeasonId = seasonGridFilter.SetIdByDefault(rawParameters.matchSeasonId);
             allFilters.Add(seasonGridFilter);
 
             LeaguesSeason leaguesSeason = db.GetLeaguesSeason();
-            GridFilter leagueGridFilter = gFilterFactory.GetGridFilter(leaguesSeason.GetLeagueFilterData(defaultSeason).ToList<IFilterData>(), "Każda liga", nameof(rawParameters.matchLeaguesId));
-            rawParameters.matchLeaguesId = leagueGridFilter.SetIdByDefault(rawParameters.matchLeaguesId);
+            GridFilter leagueGridFilter = gFilterFactory.GetGridFilter(leaguesSeason.GetLeagueFilterData(defaultSeason).ToList<IFilterData>(), "Każda liga", nameof(rawParameters.matchLeagueId));
+            rawParameters.matchLeagueId = leagueGridFilter.SetIdByDefault(rawParameters.matchLeagueId);
             allFilters.Add(leagueGridFilter);
 
             TeamsSeason teamSeason = db.GetTeamsSeason();
-            GridFilter teamGridFilter = gFilterFactory.GetGridFilter(teamSeason.GetTeamFilterData(defaultSeason).ToList<IFilterData>(), "Każdy zespół", nameof(rawParameters.matchTeamsId));
-            rawParameters.matchTeamsId = leagueGridFilter.SetIdByDefault(rawParameters.matchTeamsId);
+            GridFilter teamGridFilter = gFilterFactory.GetGridFilter(teamSeason.GetTeamFilterData(defaultSeason).ToList<IFilterData>(), "Każdy zespół", nameof(rawParameters.matchTeamId));
+            rawParameters.matchTeamId = leagueGridFilter.SetIdByDefault(rawParameters.matchTeamId);
             allFilters.Add(teamGridFilter);
 
-            GridFilter stageGridFilter = gFilterFactory.GetGridFilter(getStageFilters(), "Każda faza rozgrywek", nameof(rawParameters.matchStagesId));
-            rawParameters.matchStagesId = stageGridFilter.SetIdByDefault(rawParameters.matchStagesId);
+            GridFilter stageGridFilter = gFilterFactory.GetGridFilter(getStageFilters(), "Każda faza rozgrywek", nameof(rawParameters.matchStageId));
+            rawParameters.matchStageId = stageGridFilter.SetIdByDefault(rawParameters.matchStageId);
             allFilters.Add(stageGridFilter);
 
             /*

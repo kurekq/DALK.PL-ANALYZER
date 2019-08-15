@@ -37,11 +37,11 @@ namespace DALK.PL_ANALYZER.DB.FAKE
             List<Match> allMatches = notPlayedMatches.Concat(playedMatches).ToList<Match>();
 
             allMatches = allMatches.Where(x =>
-                (x.Home.GroupSeason.LeagueSeason.Season.Id == parameters.matchSeasonsId || parameters.matchSeasonsId == null) &&
-                (x.Home.GroupSeason.LeagueSeason.Id == parameters.matchLeaguesId || parameters.matchLeaguesId == null) &&
-                (x.Home.Team.Id == parameters.matchTeamsId || parameters.matchTeamsId == null) &&
+                (x.Home.GroupSeason.LeagueSeason.Season.Id == parameters.matchSeasonId || parameters.matchSeasonId == null) &&
+                (x.Home.GroupSeason.LeagueSeason.Id == parameters.matchLeagueId || parameters.matchLeagueId == null) &&
+                (x.Home.Team.Id == parameters.matchTeamId || parameters.matchTeamId == null) &&
                 //(x.Home.GroupSeason.Id == parameters.matchGroupId || parameters.matchGroupId == null) &&
-                (x.Stage.StageName == parameters.matchStagesId || parameters.matchStagesId == null)
+                (x.Stage.StageName == parameters.matchStageId || parameters.matchStageId == null)
             ).ToList<Match>();
 
             //List<PlayedMatch> playedM = GetPlayedMatches().ToList<PlayedMatch>();
