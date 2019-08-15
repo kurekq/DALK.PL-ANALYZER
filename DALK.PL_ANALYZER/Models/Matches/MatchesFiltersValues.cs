@@ -6,10 +6,10 @@ using DALK.PL_ANALYZER.Models.Filters;
 
 namespace DALK.PL_ANALYZER.Models.Matches
 {
-    public class MatchesFiltersValues
+    public class MatchesFiltersValues 
     {
         public readonly List<FilterValue> filterValues;
-        public MatchesFiltersValues(RawFilterValues parameters)
+        public MatchesFiltersValues(MatchesRawFilterValues parameters)
         {
             filterValues = new List<FilterValue>();
             filterValues.Add(

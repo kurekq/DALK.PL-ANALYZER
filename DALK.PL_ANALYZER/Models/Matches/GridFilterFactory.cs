@@ -15,16 +15,22 @@ namespace DALK.PL_ANALYZER.Models.Matches
 
         public GridFilter GetGridFilter(List<IFilterData> filterDataset, string emptyFilterName, string gridFilterName)
         {
-            setEmptyFilter(emptyFilterName);
-            SetDefaultFilter();
+            SetEmptyFilter(emptyFilterName);
+            SetDefaultFilterAsEmptyFilter();
             SetUpGridFilter(filterDataset, gridFilterName);
             return gridFilter;
         }
-        public GridFilter GetGridFilter(List<IFilterData> filterDataset, string emptyFilterName, string gridFilterName, IFilterData defaultFilter)
+        public GridFilter GetGridFilter(List<IFilterData> filterDataset, string emptyFilterName, string gridFilterName, IFilterData defaultFilter, bool setDefaultFilter)
         {
-            setEmptyFilter(emptyFilterName);
-            SetDefaultFilter(defaultFilter);
-            SetEmptyFilterNotSelected();
+            SetEmptyFilter(emptyFilterName);
+            if (setDefaultFilter)
+            {
+                SetDefaultFilter(defaultFilter);
+                SetEmptyFilterNotSelected();
+            }             
+            else
+                SetDefaultFilterAsEmptyFilter();
+            
             SetUpGridFilter(filterDataset, gridFilterName);
             return gridFilter;
         }
@@ -40,7 +46,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
         {
             emptyFilter.Selected = false;
         }
-        private void SetDefaultFilter()
+        private void SetDefaultFilterAsEmptyFilter()
         {            
             this.defaultFilter = emptyFilter;
         }
@@ -48,7 +54,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
         {
             this.defaultFilter = defaultFilter;
         }
-        private void setEmptyFilter(string emptyFilterName)
+        private void SetEmptyFilter(string emptyFilterName)
         {
             emptyFilter = new EmptyFilterDataItem(emptyFilterName, Configs.DEFAULT_FILTER_ICON);
         }

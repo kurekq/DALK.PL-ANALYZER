@@ -30,7 +30,7 @@ namespace DALK.PL_ANALYZER.DB.FAKE
             return GetDataFromFile(FileDataPaths.NotPlayedMatchesPath);
         }
 
-        public IEnumerable<Match> GetMatches(RawFilterValues parameters)
+        public IEnumerable<Match> GetMatches(MatchesRawFilterValues parameters)
         {
             List<Match> notPlayedMatches = new JavaScriptSerializer().Deserialize<List<Match>>(GetNotPlayedMatchesJson());
             List<PlayedMatch> playedMatches = new JavaScriptSerializer().Deserialize<List<PlayedMatch>>(GetPlayedMatchesJson());
@@ -38,7 +38,7 @@ namespace DALK.PL_ANALYZER.DB.FAKE
 
             allMatches = allMatches.Where(x =>
                 (x.Home.GroupSeason.LeagueSeason.Season.Id == parameters.matchSeasonId || parameters.matchSeasonId == null) &&
-                (x.Home.GroupSeason.LeagueSeason.Id == parameters.matchLeagueId || parameters.matchLeagueId == null) &&
+                (x.Home.GroupSeason.LeagueSeason.League.Id == parameters.matchLeagueId || parameters.matchLeagueId == null) &&
                 (x.Home.Team.Id == parameters.matchTeamId || parameters.matchTeamId == null) &&
                 //(x.Home.GroupSeason.Id == parameters.matchGroupId || parameters.matchGroupId == null) &&
                 (x.Stage.StageName == parameters.matchStageId || parameters.matchStageId == null)

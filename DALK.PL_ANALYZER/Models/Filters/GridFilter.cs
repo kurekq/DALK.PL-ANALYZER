@@ -37,7 +37,7 @@ namespace DALK.PL_ANALYZER.Models.Filters
         }
         public IEnumerable<IFilterableItem> GetItems()
         {
-            return new List<ItemInFilter>(items).OrderBy(x => x.GetText()).OrderByDescending(x => x.Equals(defaultItem));
+            return new List<ItemInFilter>(items).OrderBy(x => x.GetText()).OrderByDescending(x => x.IsEmptyValue());
         }
 
         public string GetParameterName()

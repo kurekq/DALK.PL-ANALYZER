@@ -15,7 +15,7 @@ namespace DALK.PL_ANALYZER.Controllers
     public class MatchesController : Controller
     {
         [HttpGet]
-        public ViewResult Index(RawFilterValues parameters)
+        public ViewResult Index(MatchesRawFilterValues parameters)
         {          
             MatchesModelView matchesMV = new MatchesModelViewFactory(parameters).matchesMV;
             return View(matchesMV);

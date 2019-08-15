@@ -144,6 +144,7 @@
     <Compile Include="Models\Filters\GridFilters.cs" />
     <Compile Include="Models\Filters\IFilterableList.cs" />
     <Compile Include="Models\Filters\ItemInFilterData.cs" />
+    <Compile Include="Models\Filters\RawFilterValues.cs" />
     <Compile Include="Models\Matches\ConstantFilterData.cs" />
     <Compile Include="Models\Matches\DefaultIcons.cs" />
     <Compile Include="Models\Filters\EmptyFilterDataItem.cs" />
@@ -162,7 +163,7 @@
     <Compile Include="Models\Matches\LeaguesSeason.cs" />
     <Compile Include="Models\Matches\MatchesFiltersValues.cs" />
     <Compile Include="Models\Matches\MatchesModelViewFactory.cs" />
-    <Compile Include="Models\Matches\RawFilterValues.cs" />
+    <Compile Include="Models\Matches\MatchesRawFilterValues.cs" />
     <Compile Include="Models\Matches\Seasons.cs" />
     <Compile Include="Models\Matches\TeamSeason.cs" />
     <Compile Include="Models\Matches\TeamsSeason.cs" />

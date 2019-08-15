@@ -13,7 +13,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
     {
         private FakeDB db;
         public MatchesModelView matchesMV;
-        public MatchesModelViewFactory(RawFilterValues rawParameters)
+        public MatchesModelViewFactory(MatchesRawFilterValues rawParameters)
         {
             db = new FakeDB();
             MatchesFiltersValues filterValues = new MatchesFiltersValues(rawParameters);                    
@@ -22,16 +22,19 @@ namespace DALK.PL_ANALYZER.Models.Matches
             matchesMV.GridFilters = getAllFilters(rawParameters);
             matchesMV.SetFilters(filterValues);
         }
-        private GridFilters getAllFilters(RawFilterValues rawParameters)
+        private GridFilters getAllFilters(MatchesRawFilterValues rawParameters)
         {            
             List<GridFilter> allFilters = new List<GridFilter>();
             GridFilterFactory gFilterFactory = new GridFilterFactory();
 
             Seasons seasons = db.GetSeasons();
             SeasonFilterData defaultSeason = seasons.GetDefaultSeason();
-            GridFilter seasonGridFilter = gFilterFactory.GetGridFilter(seasons.GetSeasons().ToList<IFilterData>(), "Każdy sezon", nameof(rawParameters.matchSeasonId), defaultSeason);
+            GridFilter seasonGridFilter = gFilterFactory.GetGridFilter(seasons.GetSeasons().ToList<IFilterData>(), "Każdy sezon", nameof(rawParameters.matchSeasonId), defaultSeason, rawParameters.SetDefaultFilters);
             rawParameters.matchSeasonId = seasonGridFilter.SetIdByDefault(rawParameters.matchSeasonId);
             allFilters.Add(seasonGridFilter);
+
+            List<ItemInFilter> items = seasonGridFilter.items;
+            List<IFilterableItem> sortedItems = seasonGridFilter.GetItems().ToList<IFilterableItem>();
 
             LeaguesSeason leaguesSeason = db.GetLeaguesSeason();
             GridFilter leagueGridFilter = gFilterFactory.GetGridFilter(leaguesSeason.GetLeagueFilterData(defaultSeason).ToList<IFilterData>(), "Każda liga", nameof(rawParameters.matchLeagueId));
