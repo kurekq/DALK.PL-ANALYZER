@@ -7,39 +7,49 @@ namespace DALK.PL_ANALYZER.Models.Matches
 {
     public class Team
     {
-        private string name;
-
-        private string _url;
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string URL { get; set; }
+        public Team() { }
+        public Team(int id)
+        {
+            Id = id;
+        }
         public string IconUrl
         {
             get
             {
-                if (string.IsNullOrEmpty(_url))
+                if (string.IsNullOrEmpty(URL))
                 {
                     DefaultIcons di = new DefaultIcons();
                     return di.GetDefaultIcon(StructureWithIcons.TEAM);
                 }
                 else
                 {
-                    return _url;
+                    return URL;
                 }
             }
         }
-
-        public Team (string name, string url = "")
+        public override bool Equals(object obj)
         {
-            this.name = name;
-            this._url = url;
+            if (obj is Team)
+            {
+                return this.Id == ((Team)obj).Id;
+            }
+            else
+            {
+                return base.Equals(obj);
+            }
+            
         }
-
         public override string ToString()
         {
-            return name;
+            return Name;
         }
 
         public override int GetHashCode()
         {
-            return name.GetHashCode();
+            return Name.GetHashCode();
         }
     }
 }

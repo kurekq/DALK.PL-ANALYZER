@@ -7,9 +7,17 @@ namespace DALK.PL_ANALYZER.Models.Matches
 {
     public class Season
     {
+        public int Id { get; set; }
         public int FirstYear { get; set; }
         public int SecondYear { get; set; }
         public bool IsSummerSeason { get; set; }
+        public DateTime FromDate { get; set; }
+        public DateTime ToDate { get; set; }
+        public Season() { }
+        public Season(int id)
+        {
+            Id = id;
+        }
         public string GetName()
         {
             string name = FirstYear.ToString();
@@ -23,6 +31,20 @@ namespace DALK.PL_ANALYZER.Models.Matches
         {
             return GetName();
         }
-
+        public override bool Equals(object obj)
+        {
+            if (obj is Season)
+            {
+                return ((Season)obj).Id == this.Id;
+            }
+            else
+            {
+                return base.Equals(obj);
+            }
+        }
+        public override int GetHashCode()
+        {
+            return this.Id;
+        }
     }
 }

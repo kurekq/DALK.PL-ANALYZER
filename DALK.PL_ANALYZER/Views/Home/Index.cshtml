@@ -1,31 +1,64 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    Layout = null;
 }
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>DALK ANALYZER</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
+    <meta content="Coderthemes" name="author">
+    <link rel="shortcut icon" href="~/Content/images/favicon.ico">
+    <style>
+        body.loading {
+            visibility: hidden
+        }
+    </style>
+    <link rel="shortcut icon" href="~/Content/images/favicon.ico">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="loading">
+    <div class="wrapper">
+        @Html.Partial("_LeftSideBar")
+        <div class="content-page">
+            <div class="content">
+                <div class="navbar-custom">
+                    <ul class="list-unstyled topbar-right-menu float-right mb-0">
+                        <li class="notification-list topbar-dropdown d-lg-block"></li>
+                    </ul>
+                    <button class="button-menu-mobile open-left disable-btn"><i class="mdi mdi-menu" id="button-menu-mobile-toggle"></i></button>
+                    <div class="app-search">
+                        <h4>Stronka startowa</h4>
+                    </div>
+                </div>
+                <div class="container-fluid">
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+                    <h1>Strona startowa :) </h1>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">2019 © Hyper - Coderthemes.com</div>
+                    <div class="col-md-6">
+                        <div class="text-md-right footer-links d-none d-md-block">
+                            <a href="https://coderthemes.com/" target="_blank">About</a>
+                            <a href="https://coderthemes.com/" target="_blank">Support</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/popper")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/js")
+    
+
+</body>

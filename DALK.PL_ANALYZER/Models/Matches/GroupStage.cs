@@ -5,20 +5,12 @@ using System.Web;
 
 namespace DALK.PL_ANALYZER.Models.Matches
 {
-    public class GroupStage : IStage
+    public class GroupStage : Stage
     {
-        private byte round;
-        private byte maxRound;
-
-        public GroupStage(byte round, byte maxRound)
+        public GroupStage(byte Round, byte MaxRound)
         {
-            this.round = round;
-            this.maxRound = maxRound;
-        }
-
-        public string GetStageName()
-        {
-            return round.ToString() + "/" + maxRound.ToString();
+            DisplayStageName = "Kolejka " + Round.ToString() + "/" + MaxRound.ToString();
+            StageName = "GroupStage";
         }
     }
 }

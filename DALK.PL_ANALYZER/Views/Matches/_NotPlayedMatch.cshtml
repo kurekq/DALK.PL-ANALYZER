@@ -1,0 +1,30 @@
+﻿@model DALK.PL_ANALYZER.Models.Matches.MatchModelView
+
+    <div class="match js-NotPlayedMatch">
+        <div class="match__heading">           
+            <div class="match__level">@Model.League @Model.Season, @Model.DateTime</div>       
+            <div class="match__gametitle">@Model.GameTitle</div>
+        </div>
+        <div class="match__result js-matchResult">
+            <div class="centered_div">
+                <div class="match__team match__winner js-matchTeam1">
+                    <img class="match__icon" src="@Model.HomeIconUrl">
+                    <div class="match__teamname">@Model.Home</div>
+                </div>
+                <div class="match__team match__winner js-matchTeam2">
+                    <img class="match__icon" src="@Model.AwayIconUrl">
+                    <div class="match__teamname">@Model.Away</div>
+                </div>
+            </div>
+        </div>
+        <div class="match__description js-matchDesc"><div class="centered_div">@Model.MatchDescription</div></div>
+        <div class="match__navigation js-matchNav">
+
+            <a href="#" class="match__button">ZOBACZ</a>
+            <a href="#" class="match__button">SZCZEGÓŁY</a>
+            <a href="#" class="match__button">ANALIZUJ</a>
+
+        </div>
+    </div>
+
+

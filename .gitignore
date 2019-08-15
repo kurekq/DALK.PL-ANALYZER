@@ -1,4 +1,6 @@
 packages
 **/.vs
-DALK.PL_ANALYZER/bin
-DALK.PL_ANALYZER/obj
+DALK.PL_ANALYZER/bin**
+DALK.PL_ANALYZER/obj**
+NUNIT_TESTS/bin**
+NUNIT_TESTS/obj**
