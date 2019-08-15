@@ -13,19 +13,19 @@ namespace DALK.PL_ANALYZER.Models.Matches
         {
             filterValues = new List<FilterValue>();
             filterValues.Add(
-                new FilterValue(parameters.matchSeasonsId)
+                new FilterValue(parameters.matchSeasonId)
                 {
                     TypeOfClass = typeof(SeasonFilterData).ToString()
                 });
 
             filterValues.Add(
-                new FilterValue(parameters.matchLeaguesId)
+                new FilterValue(parameters.matchLeagueId)
                 {
                     TypeOfClass = typeof(LeagueFilterData).ToString()
                 });
 
             filterValues.Add(
-                new FilterValue(parameters.matchTeamsId)
+                new FilterValue(parameters.matchTeamId)
                 {
                     TypeOfClass = typeof(TeamFilterData).ToString()
                 });
@@ -37,7 +37,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
                 });*/
     
             filterValues.Add(
-                new FilterValue(parameters.matchStagesId)
+                new FilterValue(parameters.matchStageId)
                 {
                     TypeOfClass = typeof(ConstantFilterData).ToString()
                 });
