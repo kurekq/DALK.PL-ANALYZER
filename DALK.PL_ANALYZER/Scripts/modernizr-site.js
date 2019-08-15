@@ -78,23 +78,28 @@ function getMVPMaxHeight()
 
 
 function updateMatchesFilters()
+{   
+    document.location = getUrlFromParams();
+}
+
+function getUrlFromParams()
 {
     let filters = document.getElementsByClassName("js-matchesFilter");
     let nextLocation = 'Index';
+    let paramsObj = new Object();
     Array.from(filters).forEach(function (el) {
         let filter = el.getElementsByClassName('js-selectedDropDown')[0];
         let name = filter.getAttribute('name');
         let textContent = filter.textContent.trim();
         let paramValue = findValueByTextContent(el, textContent);
         if (paramValue != null) {
-            if (nextLocation == 'Index')
-                nextLocation += '?';
-            else
-                nextLocation += '&';
-            nextLocation += name + "=" + paramValue
+            paramsObj[name] = paramValue;
         }
     });
-    document.location = nextLocation;
+    var urlWithParams = $.param(paramsObj);
+    if (urlWithParams > '')
+        nextLocation += '?' + urlWithParams;
+    return nextLocation;
 }
 
 function findValueByTextContent(filter, textContent) {
