@@ -20,7 +20,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
         {
             seasons.ToList<Season>().Add(season);
         }
-        public IEnumerable<SeasonFilterData> GetSeasons()
+        public IEnumerable<SeasonFilterData> GetSeasonFilterData()
         {
             return new List<SeasonFilterData>(seasons);
         }

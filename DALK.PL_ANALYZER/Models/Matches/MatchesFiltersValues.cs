@@ -30,11 +30,12 @@ namespace DALK.PL_ANALYZER.Models.Matches
                     TypeOfClass = typeof(TeamFilterData).ToString()
                 });
 
-            /*filterValues.Add(
+            filterValues.Add(
                 new FilterValue(parameters.matchGroupId)
                 {
-                    TypeOfClass = typeof(GroupFilterData).ToString()
-                });*/
+                    TypeOfClass = typeof(GroupFilterData).ToString(),
+                    Visible = parameters.matchLeagueId != null && parameters.matchSeasonId != null
+                });
     
             filterValues.Add(
                 new FilterValue(parameters.matchStageId)

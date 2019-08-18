@@ -8,28 +8,32 @@ namespace DALK.PL_ANALYZER.Models.Filters
 {
     public class GridFilters : IFilterableList
     {
-        private readonly List<GridFilter> Fiters;
-
+        private readonly List<GridFilter> Filters;
         public GridFilters() { }
         public GridFilters(List<GridFilter> f)
         {
-            Fiters = new List<GridFilter>(f);
+            Filters = new List<GridFilter>(f);
         }
         private GridFilter GetGridFilter(string typeOfItem)
         {
-            return Fiters
-                .Where(x => x.GetItems().First(y => y.GetItemTypeName() != typeof(EmptyFilterDataItem).ToString()).GetItemTypeName() == typeOfItem)
-                .First();
+            foreach (GridFilter f in Filters)
+            {
+                foreach (IFilterableItem i in f.GetItems().Where(x => x.GetItemTypeName() != typeof(EmptyFilterDataItem).ToString()).Take(1))
+                {
+                    if (i.GetItemTypeName() == typeOfItem)
+                        return f;
+                }
+            }
+            throw new Exception();
         }
         public void SetFilterSelected(FilterValue fV)
         {
             var grid = GetGridFilter(fV.TypeOfClass);
             grid.SetAsSelected(fV.Value);
         }
-
         public IEnumerable<IFilterable> GetFiters()
         {
-            return Fiters;
+            return Filters;
         }
     }
 }

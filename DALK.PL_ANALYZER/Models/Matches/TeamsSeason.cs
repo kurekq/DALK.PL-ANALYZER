@@ -7,7 +7,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
 {
     public class TeamsSeason
     {
-        private IEnumerable<TeamSeason> teamSeasons;
+        private readonly IEnumerable<TeamSeason> teamSeasons;
         public TeamsSeason()
         {
             teamSeasons = new List<TeamSeason>();
@@ -27,11 +27,13 @@ namespace DALK.PL_ANALYZER.Models.Matches
         {
             teamSeasons.ToList<TeamSeason>().Add(ts);
         }
-        public IEnumerable<TeamFilterData> GetTeamFilterData(Season season = null, GroupSeason group = null)
+        public IEnumerable<TeamSeason> Get()
         {
-            return teamSeasons
-                 .Where(x => (x.GroupSeason.LeagueSeason.Season.Equals(season) || season == null) && (x.GroupSeason.Equals(group) || group == null))
-                 .Select(x => x.Team).Distinct();
+            return teamSeasons;
+        }
+        public IEnumerable<TeamFilterData> GetTeamFilterData()
+        {
+            return teamSeasons.Select(x => x.Team).Distinct();
         }
     }
 }
