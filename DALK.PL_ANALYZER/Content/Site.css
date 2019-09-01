@@ -211,3 +211,9 @@ body {
         margin: 0 auto;
     }
 }
+
+.autoScroll {
+    overflow: auto;
+    max-height: 400px;
+}
+

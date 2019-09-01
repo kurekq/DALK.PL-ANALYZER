@@ -10,7 +10,7 @@
                 @f.GetSelectedItem().GetHtmlText()
             }
         </button>
-        <div class="dropdown-menu dropdown-menu-animated js-dropDownList" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+        <div class="dropdown-menu dropdown-menu-animated js-dropDownList autoScroll" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
             @foreach (IFilterableItem i in f.GetItems())
             {
                 <a role="button" class="dropdown-item" value="@i.GetValue()" onclick="setInnerHtml('@f.GetCSSId()', @string.Concat("\"",i.GetHtmlText(), "\")"); updateMatchesFilters();">@i.GetHtmlText()</a>
