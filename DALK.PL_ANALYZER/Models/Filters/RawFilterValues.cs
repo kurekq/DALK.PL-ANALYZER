@@ -5,7 +5,7 @@ using System.Web;
 
 namespace DALK.PL_ANALYZER.Models.Filters
 {
-    public class RawFilterValues
+    public class RawFilterValues : RawFiltarableValues
     {
         public bool SetDefaultFilters { get; set; }
     }

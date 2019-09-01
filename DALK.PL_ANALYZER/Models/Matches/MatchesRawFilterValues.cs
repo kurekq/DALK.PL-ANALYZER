@@ -11,8 +11,11 @@ namespace DALK.PL_ANALYZER.Models.Matches
         public int? matchSeasonId { get; set; }
         public int? matchLeagueId { get; set; }
         public int? matchTeamId { get; set; }
-        //public int? matchGroupId { get; set; }
-        public string matchStageId { get; set; }
-        
+        public int? matchGroupId { get; set; }
+        public string matchStageId { get; set; }      
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }

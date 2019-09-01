@@ -40,7 +40,7 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                 (x.Home.GroupSeason.LeagueSeason.Season.Id == parameters.matchSeasonId || parameters.matchSeasonId == null) &&
                 (x.Home.GroupSeason.LeagueSeason.League.Id == parameters.matchLeagueId || parameters.matchLeagueId == null) &&
                 (x.Home.Team.Id == parameters.matchTeamId || parameters.matchTeamId == null) &&
-                //(x.Home.GroupSeason.Id == parameters.matchGroupId || parameters.matchGroupId == null) &&
+                (x.Home.GroupSeason.Id == parameters.matchGroupId || parameters.matchGroupId == null) &&
                 (x.Stage.StageName == parameters.matchStageId || parameters.matchStageId == null)
             ).ToList<Match>();
 
@@ -75,7 +75,7 @@ namespace DALK.PL_ANALYZER.DB.FAKE
         {
             List<TeamSeason> teams = GetListOfTeamSeason().Take(9).ToList<TeamSeason>();
             LeagueFilterData ourLeague = GetPureLeagues().ToList<LeagueFilterData>()[0];
-            SeasonFilterData ourSeason = GetSeasons().GetSeasons().ToList<SeasonFilterData>()[0];
+            SeasonFilterData ourSeason = GetSeasons().GetSeasonFilterData().ToList<SeasonFilterData>()[0];
             GroupFilterData ourGroup = GetGroups().ToList<GroupFilterData>()[0];
             List<Stage> stages = GetStages().ToList<Stage>();
             Player Mrozo = GetPlayers().ToList<Player>()[0];
@@ -159,7 +159,7 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                 MVP = new MVP() { Player = Kurek, PerformanceDesciption = "Double-double (10 punktów (63%), 12 zbiórek)" },
                 Stage = stages[6]
             };
-            
+
             foreach (TeamSeason home in GetListOfTeamSeason())
             {
                 TeamFilterData HomeRandom = home.Team;
@@ -198,7 +198,7 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                         Stage = StageRandom,
                         MVP = PlayerRandom,
                     };
-                } 
+                }
             }
         }
         public IEnumerable<LeagueSeason> GetListOfLeagueSeason()
@@ -207,24 +207,24 @@ namespace DALK.PL_ANALYZER.DB.FAKE
             LeagueFilterData League1 = GetPureLeagues().ToList<LeagueFilterData>()[1];
             LeagueFilterData ExtraLeague = GetPureLeagues().ToList<LeagueFilterData>()[2];
 
-            Season season2019 = GetSeasons().GetSeasons().ToList<Season>()[0];
-            Season season2018_2019 = GetSeasons().GetSeasons().ToList<Season>()[1];
+            Season season2019 = GetSeasons().GetSeasonFilterData().ToList<Season>()[0];
+            Season season2018_2019 = GetSeasons().GetSeasonFilterData().ToList<Season>()[1];
             yield return new LeagueSeason(1)
             {
-                League = League2, 
+                League = League2,
                 Season = season2019
             };
-            yield return new LeagueSeason(1)
+            yield return new LeagueSeason(2)
             {
                 League = League2,
                 Season = season2018_2019
             };
-            yield return new LeagueSeason(1)
+            yield return new LeagueSeason(3)
             {
                 League = League1,
                 Season = season2019
             };
-            yield return new LeagueSeason(1)
+            yield return new LeagueSeason(4)
             {
                 League = ExtraLeague,
                 Season = season2019
@@ -249,12 +249,12 @@ namespace DALK.PL_ANALYZER.DB.FAKE
             yield return new PlayOffStage(5);
             yield return new PlayOffStage(0);
         }
-        public Seasons GetSeasons()
+        public Seasons GetSeasons(int? seasonId = null)
         {
             List<SeasonFilterData> season = new List<SeasonFilterData>();
             season.Add(new SeasonFilterData(1) { FirstYear = 2019, FromDate = new DateTime(2019, 3, 1), ToDate = new DateTime(2019, 6, 30) });
             season.Add(new SeasonFilterData(2) { FirstYear = 2018, SecondYear = 2019, FromDate = new DateTime(2018, 9, 1), ToDate = new DateTime(2019, 1, 31) });
-            return new Seasons(season);
+            return new Seasons(season.Where(x => x.Id == seasonId || seasonId == null));
         }
         public IEnumerable<TeamSeason> GetListOfTeamSeason()
         {
@@ -607,13 +607,23 @@ namespace DALK.PL_ANALYZER.DB.FAKE
             yield return new GroupFilterData(11) { LeagueSeason = ExtraLeagueSeason2019, Name = "A" };
             yield return new GroupFilterData(12) { LeagueSeason = ExtraLeagueSeason2019, Name = "B" };
         }
-        public LeaguesSeason GetLeaguesSeason()
+        public LeaguesSeason GetLeaguesSeason(int? seasonId = null)
         {
-            return new LeaguesSeason(GetListOfLeagueSeason());
+            return new LeaguesSeason(GetListOfLeagueSeason().Where(x => x.Season.Id == seasonId || seasonId == null));
         }
-        public TeamsSeason GetTeamsSeason()
+        public TeamsSeason GetTeamsSeason(int? seasonId = null, int? leagueId = null, int? groupId = null)
         {
-            return new TeamsSeason(GetListOfTeamSeason());
+            return new TeamsSeason(GetListOfTeamSeason().
+                Where(x => (x.GroupSeason.LeagueSeason.League.Id == leagueId || leagueId == null) &&
+                           (x.GroupSeason.LeagueSeason.Season.Id == seasonId || seasonId == null) &&
+                           (x.GroupSeason.Id == groupId || groupId == null)
+            ));
+        }
+        public GroupsSeason GetGroupsSeason(int? seasonId = null, int? leagueId = null)
+        {
+            return new GroupsSeason(
+                GetGroups().Where(x => (x.LeagueSeason.League.Id == leagueId || leagueId == null) &&
+                                       (x.LeagueSeason.Season.Id == seasonId || seasonId == null)));
         }
     }
 }
