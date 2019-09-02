@@ -14,21 +14,13 @@ namespace DALK.PL_ANALYZER.Models.Filters
         {
             Filters = new List<GridFilter>(f);
         }
-        private GridFilter GetGridFilter(string typeOfItem)
+        private GridFilter GetGridFilter(string gridFilterName)
         {
-            foreach (GridFilter f in Filters)
-            {
-                foreach (IFilterableItem i in f.GetItems().Where(x => x.GetItemTypeName() != typeof(EmptyFilterDataItem).ToString()).Take(1))
-                {
-                    if (i.GetItemTypeName() == typeOfItem)
-                        return f;
-                }
-            }
-            throw new Exception();
+            return Filters.FirstOrDefault(x => x.name == gridFilterName);
         }
         public void SetFilterSelected(FilterValue fV)
         {
-            var grid = GetGridFilter(fV.TypeOfClass);
+            var grid = GetGridFilter(fV.Name);
             grid.SetAsSelected(fV.Value);
         }
         public IEnumerable<IFilterable> GetFiters()

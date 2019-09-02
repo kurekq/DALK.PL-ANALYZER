@@ -15,32 +15,37 @@ namespace DALK.PL_ANALYZER.Models.Matches
             filterValues.Add(
                 new FilterValue(parameters.matchSeasonId)
                 {
-                    TypeOfClass = typeof(SeasonFilterData).ToString()
+                    TypeOfClass = typeof(SeasonFilterData).ToString(),
+                    Name = nameof(parameters.matchSeasonId)
                 });
 
             filterValues.Add(
                 new FilterValue(parameters.matchLeagueId)
                 {
-                    TypeOfClass = typeof(LeagueFilterData).ToString()
+                    TypeOfClass = typeof(LeagueFilterData).ToString(),
+                    Name = nameof(parameters.matchLeagueId)
                 });
 
             filterValues.Add(
                 new FilterValue(parameters.matchTeamId)
                 {
-                    TypeOfClass = typeof(TeamFilterData).ToString()
+                    TypeOfClass = typeof(TeamFilterData).ToString(),
+                    Name = nameof(parameters.matchTeamId)
                 });
 
             filterValues.Add(
                 new FilterValue(parameters.matchGroupId)
                 {
                     TypeOfClass = typeof(GroupFilterData).ToString(),
-                    Visible = parameters.matchLeagueId != null && parameters.matchSeasonId != null
+                    Name = nameof(parameters.matchGroupId),
+                    Visible = parameters.matchLeagueId != null && parameters.matchSeasonId != null                  
                 });
     
             filterValues.Add(
                 new FilterValue(parameters.matchStageId)
                 {
-                    TypeOfClass = typeof(ConstantFilterData).ToString()
+                    TypeOfClass = typeof(ConstantFilterData).ToString(),
+                    Name = nameof(parameters.matchStageId)
                 });
         }
     }
