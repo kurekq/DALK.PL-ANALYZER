@@ -32,6 +32,6 @@ namespace DALK.PL_ANALYZER.Models.Matches
         }
         public bool Selected { get; set; }
 
-        public GroupFilterData(int id) : base(id) { }
+        public GroupFilterData(Guid id) : base(id) { }
     }
 }

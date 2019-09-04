@@ -7,6 +7,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
 {
     public class Player
     {
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string Surname { get; set; }
         public Team Team { get; set; }

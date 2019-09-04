@@ -39,23 +39,23 @@ namespace DALK.PL_ANALYZER.Models.Matches
         private bool IsLeagueIdCohensionable()
         {
             return filterData.LeaguesSeason.Get()
-                .Any(x => (x.League.Id == matchesParameters.matchLeagueId) && 
-                          (x.Season.Id == matchesParameters.matchSeasonId || matchesParameters.matchSeasonId == null));
+                .Any(x => (x.League.Id.ToString() == matchesParameters.matchLeagueId) && 
+                          (x.Season.Id.ToString() == matchesParameters.matchSeasonId || matchesParameters.matchSeasonId == null));
         }
         private bool IsTeamIdCohensionable()
         {
             return filterData.TeamsSeason.Get()
-                .Any(x => (x.GroupSeason.Id == matchesParameters.matchGroupId || matchesParameters.matchGroupId == null) &&
-                            (x.GroupSeason.LeagueSeason.League.Id == matchesParameters.matchLeagueId || matchesParameters.matchLeagueId == null) &&
-                            (x.GroupSeason.LeagueSeason.Season.Id == matchesParameters.matchSeasonId || matchesParameters.matchSeasonId == null) &&
-                            (x.Team.Id == matchesParameters.matchTeamId));
+                .Any(x => (x.GroupSeason.Id.ToString() == matchesParameters.matchGroupId || matchesParameters.matchGroupId == null) &&
+                            (x.GroupSeason.LeagueSeason.League.Id.ToString() == matchesParameters.matchLeagueId || matchesParameters.matchLeagueId == null) &&
+                            (x.GroupSeason.LeagueSeason.Season.Id.ToString() == matchesParameters.matchSeasonId || matchesParameters.matchSeasonId == null) &&
+                            (x.Team.Id.ToString() == matchesParameters.matchTeamId));
         }
         private bool IsGroupIdCohensionable()
         {
             return filterData.GroupsSeason.Get()
-                .Any(x => (x.LeagueSeason.League.Id == matchesParameters.matchLeagueId) &&
-                            (x.LeagueSeason.Season.Id == matchesParameters.matchSeasonId) &&
-                            (x.Id == matchesParameters.matchGroupId));
+                .Any(x => (x.LeagueSeason.League.Id.ToString() == matchesParameters.matchLeagueId) &&
+                            (x.LeagueSeason.Season.Id.ToString() == matchesParameters.matchSeasonId) &&
+                            (x.Id.ToString() == matchesParameters.matchGroupId));
         }
     }
 }

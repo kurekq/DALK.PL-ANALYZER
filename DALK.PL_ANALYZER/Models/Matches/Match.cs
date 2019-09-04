@@ -7,7 +7,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
 {
     public class Match
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public Stage Stage { get; set; }
         public DateTime DateTime { get; set; }
         public TeamSeason Home { get; set; }       

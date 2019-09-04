@@ -7,7 +7,6 @@ namespace DALK.PL_ANALYZER.Models.Matches
 {
     public class DefaultIcons
     {
-
         public string GetDefaultIcon(StructureWithIcons forWho)
         {
             switch(forWho)

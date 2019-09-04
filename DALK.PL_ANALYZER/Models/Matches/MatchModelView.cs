@@ -8,15 +8,15 @@ namespace DALK.PL_ANALYZER.Models.Matches
     public class MatchModelView
     {
         public bool IsPlayedMatch { get; set; }
-        public int GroupId { get; set; }
-        public int LeagueId { get; set; }
+        public string GroupId { get; set; }
+        public string LeagueId { get; set; }
         public string League { get; set; }
-        public int SeasonId { get; set; }
+        public string SeasonId { get; set; }
         public string Season { get; set; }
         public string DateTime { get; set; }
         public string HomeIconUrl { get; set; }
-        public int FirstTeamId { get; set; }
-        public int SecondTeamId { get; set; }
+        public string FirstTeamId { get; set; }
+        public string SecondTeamId { get; set; }
         public string Home { get; set; }
         public string AwayIconUrl { get; set; }
         public string Away { get; set; }
@@ -41,14 +41,14 @@ namespace DALK.PL_ANALYZER.Models.Matches
         {
             IsPlayedMatch = m is PlayedMatch;
             League = m.Home.GroupSeason.LeagueSeason.League.ToString();
-            LeagueId = m.Home.GroupSeason.LeagueSeason.League.Id;
+            LeagueId = m.Home.GroupSeason.LeagueSeason.League.Id.ToString();
             Season = m.Home.GroupSeason.LeagueSeason.Season.ToString();
-            SeasonId = m.Home.GroupSeason.LeagueSeason.Season.Id;
+            SeasonId = m.Home.GroupSeason.LeagueSeason.Season.Id.ToString();
             DateTime = m.DateTime.ToString("yyyy-MM-dd HH:mm:ss");
             HomeIconUrl = m.Home.Team.IconUrl;
             AwayIconUrl = m.Away.Team.IconUrl;
-            FirstTeamId = m.Home.Id;
-            SecondTeamId = m.Away.Id;
+            FirstTeamId = m.Home.Id.ToString();
+            SecondTeamId = m.Away.Id.ToString();
             Home = m.Home.Team.ToString();
             Away = m.Away.Team.ToString();
             MatchDescription = m.MatchDescription;
@@ -56,7 +56,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
             if (m.Stage.StageName == "GroupStage")
             {
                 GameTitle = m.Home.GroupSeason.ToString() + ", " + m.Stage.GetDisplayStageName();
-                GroupId = m.Home.GroupSeason.Id;
+                GroupId = m.Home.GroupSeason.Id.ToString();
                 Stage = m.Stage.StageName;
             }
             else if (m.Stage.StageName == "PlayOff")

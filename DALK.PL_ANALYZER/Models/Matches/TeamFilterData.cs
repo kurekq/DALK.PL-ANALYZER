@@ -32,7 +32,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
         }
         public bool Selected { get; set; }
         public TeamFilterData() { }
-        public TeamFilterData(int id) : base(id) { }
+        public TeamFilterData(Guid id) : base(id) { }
         public override string ToString()
         {
             return base.ToString();

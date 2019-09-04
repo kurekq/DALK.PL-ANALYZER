@@ -32,6 +32,6 @@ namespace DALK.PL_ANALYZER.Models.Matches
         }
         public bool Selected { get; set; }
 
-        public SeasonFilterData(int id) : base(id) { }
+        public SeasonFilterData(Guid id) : base(id) { }
     }
 }

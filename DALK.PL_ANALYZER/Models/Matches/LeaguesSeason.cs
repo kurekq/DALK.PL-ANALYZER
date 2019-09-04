@@ -31,7 +31,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
         {
             return leagueSeasons;
         }
-        public LeagueSeason GetLeagueSeason(int seasonId, int leagueId)
+        public LeagueSeason GetLeagueSeason(Guid seasonId, Guid leagueId)
         {
             return leagueSeasons.Where(x => x.League.Id == leagueId && x.Season.Id == seasonId).First();
         }

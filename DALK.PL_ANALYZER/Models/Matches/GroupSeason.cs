@@ -7,11 +7,11 @@ namespace DALK.PL_ANALYZER.Models.Matches
 {
     public class GroupSeason
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public LeagueSeason LeagueSeason { get; set; }
         public string Name { get; set; }
         public GroupSeason() { }
-        public GroupSeason (int id)
+        public GroupSeason (Guid id)
         {
             Id = id;
         }

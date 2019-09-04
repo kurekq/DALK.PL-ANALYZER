@@ -7,14 +7,14 @@ namespace DALK.PL_ANALYZER.Models.Matches
 {
     public class Season
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public int FirstYear { get; set; }
         public int SecondYear { get; set; }
         public bool IsSummerSeason { get; set; }
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
         public Season() { }
-        public Season(int id)
+        public Season(Guid id)
         {
             Id = id;
         }
@@ -44,7 +44,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
         }
         public override int GetHashCode()
         {
-            return this.Id;
+            return this.Id.GetHashCode();
         }
     }
 }

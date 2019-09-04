@@ -7,11 +7,11 @@ namespace DALK.PL_ANALYZER.Models.Matches
 {
     public class LeagueSeason
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public LeagueFilterData League { get; set; }
         public Season Season { get; set; }
         public LeagueSeason() { }
-        public LeagueSeason(int id)
+        public LeagueSeason(Guid id)
         {
             Id = id;
         }
@@ -19,7 +19,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
         {
             if (obj is LeagueSeason)
             {
-                return ((LeagueSeason)obj).Id == this.Id;
+                return ((LeagueSeason)obj).Id.Equals(this.Id);
             }
             else
             {
@@ -28,7 +28,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
         }
         public override int GetHashCode()
         {
-            return this.Id;
+            return this.Id.GetHashCode();
         }
     }
 }

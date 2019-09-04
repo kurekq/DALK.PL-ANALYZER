@@ -29,24 +29,13 @@ namespace DALK.PL_ANALYZER.Models.Matches
         }
         public void FilterDataByCohensionable(MatchesRawFilterValues cohensionableParameters)
         {
+            List<LeagueSeason> lS = LeaguesSeason.Get().ToList<LeagueSeason>();
             if (cohensionableParameters.matchSeasonId != null)
-            {
-                LeaguesSeason = new LeaguesSeason(LeaguesSeason.Get().Where(x => x.Season.Id == cohensionableParameters.matchSeasonId));
+            {               
+                LeaguesSeason = new LeaguesSeason(LeaguesSeason.Get().Where(x => x.Season.Id.ToString() == cohensionableParameters.matchSeasonId));
             }
-            
-            if (cohensionableParameters.matchSeasonId != null || cohensionableParameters.matchLeagueId != null)
-            {
-                List<TeamSeason> timPrzed = TeamsSeason.Get().ToList<TeamSeason>();
-                List<TeamSeason> tim = TeamsSeason.Get()
-                    .Where(x => (x.GroupSeason.LeagueSeason.League.Id == cohensionableParameters.matchLeagueId || cohensionableParameters.matchLeagueId == null) &&
-                                (x.GroupSeason.LeagueSeason.Season.Id == cohensionableParameters.matchSeasonId || cohensionableParameters.matchSeasonId == null) &&
-                                (x.GroupSeason.Id == cohensionableParameters.matchGroupId || cohensionableParameters.matchGroupId == null)).ToList<TeamSeason>();
 
-                TeamsSeason = new TeamsSeason(TeamsSeason.Get()
-                    .Where(x => (x.GroupSeason.LeagueSeason.League.Id == cohensionableParameters.matchLeagueId || cohensionableParameters.matchLeagueId == null) &&
-                                (x.GroupSeason.LeagueSeason.Season.Id == cohensionableParameters.matchSeasonId || cohensionableParameters.matchSeasonId == null) &&
-                                (x.GroupSeason.Id == cohensionableParameters.matchGroupId || cohensionableParameters.matchGroupId == null)));
-            }           
+            List<LeagueSeason> list = LeaguesSeason.Get().ToList<LeagueSeason>();           
         }
         private List<IFilterData> getStageFilters()
         {
