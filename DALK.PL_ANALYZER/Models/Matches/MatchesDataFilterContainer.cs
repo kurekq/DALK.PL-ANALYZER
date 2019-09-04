@@ -29,13 +29,17 @@ namespace DALK.PL_ANALYZER.Models.Matches
         }
         public void FilterDataByCohensionable(MatchesRawFilterValues cohensionableParameters)
         {
-            List<LeagueSeason> lS = LeaguesSeason.Get().ToList<LeagueSeason>();
             if (cohensionableParameters.matchSeasonId != null)
             {               
                 LeaguesSeason = new LeaguesSeason(LeaguesSeason.Get().Where(x => x.Season.Id.ToString() == cohensionableParameters.matchSeasonId));
             }
-
-            List<LeagueSeason> list = LeaguesSeason.Get().ToList<LeagueSeason>();           
+            if (cohensionableParameters.matchSeasonId != null || cohensionableParameters.matchLeagueId != null)
+            {
+                TeamsSeason = new TeamsSeason(TeamsSeason.Get()
+                    .Where(x => (x.GroupSeason.LeagueSeason.League.Id.ToString() == cohensionableParameters.matchLeagueId || cohensionableParameters.matchLeagueId == null) &&
+                                (x.GroupSeason.LeagueSeason.Season.Id.ToString() == cohensionableParameters.matchSeasonId || cohensionableParameters.matchSeasonId == null) &&
+                                (x.GroupSeason.Id.ToString() == cohensionableParameters.matchGroupId || cohensionableParameters.matchGroupId == null)));
+            }    
         }
         private List<IFilterData> getStageFilters()
         {
