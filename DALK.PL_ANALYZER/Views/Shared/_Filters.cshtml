@@ -2,6 +2,11 @@
 @using IFilterable = DALK.PL_ANALYZER.Models.Filters.IFilterable
 @model IEnumerable<IFilterable>
 
+
+<div class="form-group">
+    <label>Autoclose</label>
+    <input type="text" class="form-control" data-provide="datepicker" data-date-autoclose="true">
+</div>
 @foreach (IFilterable f in Model)
 {
     <div class="dropdown btn-group mt-3 js-matchesFilter" style="margin: 5px">
