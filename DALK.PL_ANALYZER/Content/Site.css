@@ -217,3 +217,11 @@ body {
     max-height: 400px;
 }
 
+.datePickerControl {
+    width: 103px;
+}
+
+.datePickerLabel {
+    margin: 0.5rem;"
+}
+
