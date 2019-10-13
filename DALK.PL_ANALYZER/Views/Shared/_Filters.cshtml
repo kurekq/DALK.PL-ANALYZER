@@ -1,42 +1,27 @@
-﻿@using IFilterableItem = DALK.PL_ANALYZER.Models.Filters.IFilterableItem
-@using IFilterable = DALK.PL_ANALYZER.Models.Filters.IFilterable
-@model IEnumerable<IFilterable>
+﻿@using IDropDownListItem = DALK.PL_ANALYZER.Models.GridFilter.IDropDownListItem
+@using IDropDownList = DALK.PL_ANALYZER.Models.GridFilter.IDropDownList
+@using Filters = DALK.PL_ANALYZER.Models.GridFilter.Filters
+@using IFilter = DALK.PL_ANALYZER.Models.GridFilter.IFilter
+@using DatePicker = DALK.PL_ANALYZER.Models.GridFilter.DatePicker
+@using IDatePicker = DALK.PL_ANALYZER.Models.GridFilter.IDatePicker
+@using DropDownModelView = DALK.PL_ANALYZER.Models.GridFilter.DropDownModelView
+@using DatePickerModelView = DALK.PL_ANALYZER.Models.GridFilter.DatePickerModelView
 
+@model Filters
 
-@{  int counter = 0;
-    foreach (IFilterable f in Model)
-    {
+@foreach (IFilter filter in Model.List)
+{
     <div class="dropdown btn-group mt-3 js-matchesFilter" style="margin: 5px">
-        <button class="btn btn-light dropdown-toggle js-selectedDropDown" name="@f.GetParameterName()" id="@f.GetCSSId()" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            @{
-                @f.GetSelectedItem().GetHtmlText()
-            }
-        </button>
-        <div class="dropdown-menu dropdown-menu-animated js-dropDownList autoScroll" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
-            @foreach (IFilterableItem i in f.GetItems())
-            {
-                <a role="button" class="dropdown-item" value="@i.GetValue()" onclick="setInnerHtml('@f.GetCSSId()', @string.Concat("\"",i.GetHtmlText(), "\")"); updateMatchesFilters();">@i.GetHtmlText()</a>
-            }
-        </div>
-        @if (counter == 0)
+        @if (filter is IDropDownList)
         {
+            DropDownModelView dropDownModelView = new DropDownModelView(filter);
+            @Html.Partial("_DropDown", dropDownModelView);
 
-            <table>
-                <tr>
-                    <td>
-                        <label class="datePickerLabel">Data od:</label>
-                    </td>
-                    <td><input type="text" class="form-control datePickerControl" data-provide="datepicker" data-date-autoclose="true"></td>
-                    <td>
-                        <label class="datePickerLabel">Data do:</label>
-                    </td>
-                    <td><input type="text" class="form-control datePickerControl" data-provide="datepicker" data-date-autoclose="true"></td>
-                </tr>
-            </table>
+        }
+        else if (filter is IDatePicker)
+        {
+            DatePickerModelView datePickerModelView = new DatePickerModelView(filter);
+            @Html.Partial("_DatePicker", datePickerModelView);
         }
     </div>
-
-                        counter++;
-    }
-    
 }

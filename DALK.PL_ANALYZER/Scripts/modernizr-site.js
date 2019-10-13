@@ -79,7 +79,9 @@ function getMVPMaxHeight()
 
 function updateMatchesFilters()
 {   
-    document.location = getUrlFromParams();
+    let nextLocation = getUrlFromParams();
+    if (nextLocation != document.location)
+        document.location = nextLocation;
 }
 
 function getUrlFromParams()
@@ -88,18 +90,41 @@ function getUrlFromParams()
     let nextLocation = 'Index';
     let paramsObj = new Object();
     Array.from(filters).forEach(function (el) {
-        let filter = el.getElementsByClassName('js-selectedDropDown')[0];
-        let name = filter.getAttribute('name');
-        let textContent = filter.textContent.trim();
-        let paramValue = findValueByTextContent(el, textContent);
-        if (paramValue != null) {
-            paramsObj[name] = paramValue;
+        let elProperties = getElementProperties(el);
+        if (elProperties.value != null && elProperties.value != '') {
+            paramsObj[elProperties.name] = elProperties.value;
         }
     });
     var urlWithParams = $.param(paramsObj);
     if (urlWithParams > '')
         nextLocation += '?' + urlWithParams;
     return nextLocation;
+}
+
+function getElementProperties(el) {
+    if (el.getElementsByClassName('js-selectedDropDown')[0] != null) {
+        return getDropDownElProperties(el);
+    }
+    else if (el.getElementsByClassName('js-datePickerControl')[0] != null) {
+        return getDatePickerElProperties(el);
+    }
+}
+
+function getDropDownElProperties(el) {   
+    let filter = el.getElementsByClassName('js-selectedDropDown')[0]; 
+    let textContent = filter.textContent.trim();
+    let obj = new Object();
+    obj.name = filter.getAttribute('name');
+    obj.value = findValueByTextContent(el, textContent);
+    return obj;
+}
+
+function getDatePickerElProperties(el) {
+    let filter = el.getElementsByClassName('js-datePickerControl')[0]; 
+    let obj = new Object();
+    obj.name = filter.getAttribute('name');
+    obj.value = filter.value;
+    return obj;
 }
 
 function findValueByTextContent(filter, textContent) {

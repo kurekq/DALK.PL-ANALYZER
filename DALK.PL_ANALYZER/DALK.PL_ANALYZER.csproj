@@ -141,26 +141,34 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="DB\FAKE\FakeDB.cs" />
-    <Compile Include="Models\Filters\FilterDataCohesion.cs" />
-    <Compile Include="Models\Filters\GridFilters.cs" />
-    <Compile Include="Models\Filters\IFilterableList.cs" />
-    <Compile Include="Models\Filters\ItemInFilterData.cs" />
-    <Compile Include="Models\Filters\RawFiltarableValues.cs" />
-    <Compile Include="Models\Filters\RawFilterValues.cs" />
+    <Compile Include="Models\GridFilter\DatePicker.cs" />
+    <Compile Include="Models\GridFilter\DatePickerModelView.cs" />
+    <Compile Include="Models\GridFilter\DatePickers.cs" />
+    <Compile Include="Models\GridFilter\DropDownItemModelView.cs" />
+    <Compile Include="Models\GridFilter\DropDownModelView.cs" />
+    <Compile Include="Models\GridFilter\FilterDataCohesion.cs" />
+    <Compile Include="Models\GridFilter\Filters.cs" />
+    <Compile Include="Models\GridFilter\DropDowns.cs" />
+    <Compile Include="Models\GridFilter\IDatePicker.cs" />
+    <Compile Include="Models\GridFilter\IFilter.cs" />
+    <Compile Include="Models\GridFilter\IListOfDropDowns.cs" />
+    <Compile Include="Models\GridFilter\DropDownItemData.cs" />
+    <Compile Include="Models\GridFilter\RawFiltarableValues.cs" />
+    <Compile Include="Models\GridFilter\RawFilterValues.cs" />
     <Compile Include="Models\Matches\ConstantFilterData.cs" />
     <Compile Include="Models\Matches\DefaultIcons.cs" />
-    <Compile Include="Models\Filters\EmptyFilterDataItem.cs" />
-    <Compile Include="Models\Filters\GridFilter.cs" />
-    <Compile Include="Models\Filters\FilterValue.cs" />
+    <Compile Include="Models\GridFilter\EmptyFilterDataItem.cs" />
+    <Compile Include="Models\GridFilter\DropDownFilter.cs" />
+    <Compile Include="Models\GridFilter\FilterValue.cs" />
     <Compile Include="Models\Matches\GridFilterFactory.cs" />
     <Compile Include="Models\Matches\GroupSeason.cs" />
     <Compile Include="Models\Matches\GroupFilterData.cs" />
     <Compile Include="Models\Matches\GroupsSeason.cs" />
     <Compile Include="Models\Matches\GroupStage.cs" />
-    <Compile Include="Models\Filters\IFilterable.cs" />
-    <Compile Include="Models\Filters\IFilterableItem.cs" />
-    <Compile Include="Models\Filters\IFilterData.cs" />
-    <Compile Include="Models\Filters\ItemInFilter.cs" />
+    <Compile Include="Models\GridFilter\IDropDownList.cs" />
+    <Compile Include="Models\GridFilter\IDropDownListItem.cs" />
+    <Compile Include="Models\GridFilter\IDropDownItemData.cs" />
+    <Compile Include="Models\GridFilter\DropDownItem.cs" />
     <Compile Include="Models\Matches\LeagueSeason.cs" />
     <Compile Include="Models\Matches\LeaguesSeason.cs" />
     <Compile Include="Models\Matches\MatchesDataFilterContainer.cs" />
@@ -172,6 +180,7 @@
     <Compile Include="Models\Matches\TeamSeason.cs" />
     <Compile Include="Models\Matches\TeamsSeason.cs" />
     <Compile Include="Models\Shared\Configs.cs" />
+    <Compile Include="Models\Shared\DateTimeFormatter.cs" />
     <Compile Include="Models\Shared\JsonJavascriptAnswer.cs" />
     <Compile Include="Models\Matches\League.cs" />
     <Compile Include="Models\Matches\LeagueFilterData.cs" />
@@ -497,6 +506,8 @@
     <Content Include="Views\Matches\_NotPlayedMatch.cshtml" />
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Shared\_Filters.cshtml" />
+    <Content Include="Views\Shared\_DropDown.cshtml" />
+    <Content Include="Views\Shared\_DatePicker.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

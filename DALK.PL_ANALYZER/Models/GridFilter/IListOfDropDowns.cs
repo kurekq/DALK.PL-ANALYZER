@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DALK.PL_ANALYZER.Models.Filters
+namespace DALK.PL_ANALYZER.Models.GridFilter
 {
-    interface IFilterableList
+    interface IListOfDropDowns
     {
         void SetFilterSelected(FilterValue fV);
-        IEnumerable<IFilterable> GetFiters();
+        IEnumerable<IDropDownList> GetList();
     }
 }

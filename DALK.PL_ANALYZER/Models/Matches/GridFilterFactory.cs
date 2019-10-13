@@ -1,4 +1,4 @@
-﻿using DALK.PL_ANALYZER.Models.Filters;
+﻿using DALK.PL_ANALYZER.Models.GridFilter;
 using DALK.PL_ANALYZER.Models.Shared;
 using System;
 using System.Collections.Generic;
@@ -10,17 +10,17 @@ namespace DALK.PL_ANALYZER.Models.Matches
     public class GridFilterFactory
     {
         private EmptyFilterDataItem emptyFilter;
-        private IFilterData defaultFilter;
-        private GridFilter gridFilter;
+        private IDropDownItemData defaultFilter;
+        private DropDownFilter gridFilter;
 
-        public GridFilter GetGridFilter(List<IFilterData> filterDataset, string emptyFilterName, string gridFilterName)
+        public DropDownFilter GetGridFilter(List<IDropDownItemData> filterDataset, string emptyFilterName, string gridFilterName)
         {
             SetEmptyFilter(emptyFilterName);
             SetDefaultFilterAsEmptyFilter();
             SetUpGridFilter(filterDataset, gridFilterName);
             return gridFilter;
         }
-        public GridFilter GetGridFilter(List<IFilterData> filterDataset, string emptyFilterName, string gridFilterName, IFilterData defaultFilter, bool setDefaultFilter)
+        public DropDownFilter GetGridFilter(List<IDropDownItemData> filterDataset, string emptyFilterName, string gridFilterName, IDropDownItemData defaultFilter, bool setDefaultFilter)
         {
             SetEmptyFilter(emptyFilterName);
             if (setDefaultFilter)
@@ -34,13 +34,13 @@ namespace DALK.PL_ANALYZER.Models.Matches
             SetUpGridFilter(filterDataset, gridFilterName);
             return gridFilter;
         }
-        private void SetUpGridFilter(List<IFilterData> filterDataset, string gridFilterName)
+        private void SetUpGridFilter(List<IDropDownItemData> filterDataset, string gridFilterName)
         {                      
             if (!filterDataset.Contains(emptyFilter))
             {
                 filterDataset.Add(emptyFilter);
             }
-            gridFilter = new GridFilter(filterDataset, defaultFilter, gridFilterName);
+            gridFilter = new DropDownFilter(filterDataset, defaultFilter, gridFilterName);
         }
         private void SetEmptyFilterNotSelected()
         {
@@ -50,7 +50,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
         {            
             this.defaultFilter = emptyFilter;
         }
-        private void SetDefaultFilter(IFilterData defaultFilter)
+        private void SetDefaultFilter(IDropDownItemData defaultFilter)
         {
             this.defaultFilter = defaultFilter;
         }

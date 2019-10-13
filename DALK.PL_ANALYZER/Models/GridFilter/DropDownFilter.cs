@@ -3,41 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace DALK.PL_ANALYZER.Models.Filters
+namespace DALK.PL_ANALYZER.Models.GridFilter
 {
-    public class GridFilter : IFilterable
+    public class DropDownFilter : IDropDownList, IFilter
     {
-        public List<ItemInFilter> items;
-        public ItemInFilter defaultItem;
+        public List<DropDownItem> items;
+        public DropDownItem defaultItem;
         public string name;
         public string CSSId;
 
-        public GridFilter() { }     
-        public GridFilter(IEnumerable<IFilterData> fD, IFilterData defaultFilterItem, string name)
+        public DropDownFilter() { }     
+        public DropDownFilter(IEnumerable<IDropDownItemData> fD, IDropDownItemData defaultFilterItem, string name)
         {
-            var items = new List<ItemInFilter>();
-            foreach (IFilterData f in fD)
+            var items = new List<DropDownItem>();
+            foreach (IDropDownItemData f in fD)
             {
                 if (f.Equals(defaultFilterItem))
                     f.Selected = true;
-                items.Add(new ItemInFilter(f));
+                items.Add(new DropDownItem(f));
             }
             this.items = items;
             this.name = name;
-            this.defaultItem = new ItemInFilter(defaultFilterItem);
+            this.defaultItem = new DropDownItem(defaultFilterItem);
             CSSId = "js_filter_" + name;
         }
         public string GetCSSId()
         {
             return CSSId;
         }
-        public IFilterableItem GetDefaultItem()
+        public IDropDownListItem GetDefaultItem()
         {
             return defaultItem;
         }
-        public IEnumerable<IFilterableItem> GetItems()
+        public IEnumerable<IDropDownListItem> GetItems()
         {
-            return new List<ItemInFilter>(items).OrderBy(x => x.GetText()).OrderByDescending(x => x.IsEmptyValue());
+            return new List<DropDownItem>(items).OrderBy(x => x.GetText()).OrderByDescending(x => x.IsEmptyValue());
         }
 
         public string GetParameterName()
@@ -45,16 +45,16 @@ namespace DALK.PL_ANALYZER.Models.Filters
             return name;
         }
 
-        public IFilterableItem GetSelectedItem()
+        public IDropDownListItem GetSelectedItem()
         {
-            foreach (ItemInFilter i in items)
+            foreach (DropDownItem i in items)
             {
                 if (i.IsSelected())
                     return i;
             }
             throw new Exception();
         }
-        public void SetAsSelected(IFilterableItem i)
+        public void SetAsSelected(IDropDownListItem i)
         {
             UnselectSelected();
             items.First(x => x == i).Select();
@@ -85,7 +85,7 @@ namespace DALK.PL_ANALYZER.Models.Filters
         }
         private void UnselectSelected()
         {
-            IFilterableItem actualSelected = GetSelectedItem();
+            IDropDownListItem actualSelected = GetSelectedItem();
             actualSelected.Unselect();
         }
     }

@@ -1,7 +1,8 @@
 ﻿using DALK.PL_ANALYZER.DB.JSONs;
 using DALK.PL_ANALYZER.Models;
-using DALK.PL_ANALYZER.Models.Filters;
+using DALK.PL_ANALYZER.Models.GridFilter;
 using DALK.PL_ANALYZER.Models.Matches;
+using DALK.PL_ANALYZER.Models.Shared;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -36,12 +37,16 @@ namespace DALK.PL_ANALYZER.DB.FAKE
             List<PlayedMatch> playedMatches = new JavaScriptSerializer().Deserialize<List<PlayedMatch>>(GetPlayedMatchesJson());
             List<Match> allMatches = notPlayedMatches.Concat(playedMatches).ToList<Match>();
 
+            DateTime? fromDate = DateTimeFormatter.GetDateTime(parameters.matchFromDate);
+            DateTime? toDate = DateTimeFormatter.GetDateTime(parameters.matchToDate);
             allMatches = allMatches.Where(x =>
                 (x.Home.GroupSeason.LeagueSeason.Season.Id.ToString() == parameters.matchSeasonId || parameters.matchSeasonId == null) &&
                 (x.Home.GroupSeason.LeagueSeason.League.Id.ToString() == parameters.matchLeagueId || parameters.matchLeagueId == null) &&
                 (x.Home.Team.Id.ToString() == parameters.matchTeamId || parameters.matchTeamId == null) &&
                 (x.Home.GroupSeason.Id.ToString() == parameters.matchGroupId || parameters.matchGroupId == null) &&
-                (x.Stage.StageName == parameters.matchStageId || parameters.matchStageId == null)
+                (x.Stage.StageName == parameters.matchStageId || parameters.matchStageId == null) && 
+                (x.DateTime >= fromDate || fromDate == null) &&
+                (x.DateTime <= toDate || toDate == null)
             ).ToList<Match>();
 
             return allMatches; 

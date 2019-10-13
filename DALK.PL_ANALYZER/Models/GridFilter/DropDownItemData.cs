@@ -4,17 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace DALK.PL_ANALYZER.Models.Filters
+namespace DALK.PL_ANALYZER.Models.GridFilter
 {
-    public class ItemInFilterData : IFilterData
+    public class DropDownItemData : IDropDownItemData
     {
         public string Text { get; set; }
         public string Value { get; set; }
         public string Icon { get; set; }
         public bool Selected { get; set; }
 
-        public ItemInFilterData() { }
-        public ItemInFilterData(IFilterData fD)
+        public DropDownItemData() { }
+        public DropDownItemData(IDropDownItemData fD)
         {
             this.Text = fD.Text;
             this.Value = fD.Value;

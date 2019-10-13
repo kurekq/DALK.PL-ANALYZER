@@ -1,4 +1,4 @@
-﻿using DALK.PL_ANALYZER.Models.Filters;
+﻿using DALK.PL_ANALYZER.Models.GridFilter;
 using System;
 using System.Collections.Generic;
 using System.Linq;

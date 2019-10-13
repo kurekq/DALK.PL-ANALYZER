@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
-using DALK.PL_ANALYZER.Models.Filters;
+using DALK.PL_ANALYZER.Models.GridFilter;
 using DALK.PL_ANALYZER.Models.Matches;
 
 namespace DALK.PL_ANALYZER.Models.Matches
@@ -27,15 +27,33 @@ namespace DALK.PL_ANALYZER.Models.Matches
         {
             foreach (FilterValue fV in filterValues.filterValues.Where(x => x.Visible))
             {
-                GridFilters.SetFilterSelected(fV);
+                DropDowns.SetFilterSelected(fV);
             }
         }
-        public GridFilters GridFilters
+        public DropDowns DropDowns
         {
             get;
             set;
         } 
+        public DatePickers DatePickers
+        {
+            get;
+            set;
+        }
+        public Filters GetFilters()
+        {
+            Filters filters = new Filters();
 
+            foreach (IFilter f in DropDowns.GetList())
+            {
+                filters.Add(f);
+            }
+            foreach (IFilter f in DatePickers.GetList())
+            {
+                filters.Add(f);
+            }
+            return filters;
+        }
         public string GetJson()
         {          
             string data = new JavaScriptSerializer().Serialize(this);

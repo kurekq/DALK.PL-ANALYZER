@@ -13,7 +13,7 @@
 </div>
 <div class="container-fluid">
     <div class="layer matches__filters">
-        @Html.Partial("_Filters", Model.GridFilters.GetFiters())
+        @Html.Partial("_Filters", Model.GetFilters())
     </div>
 
     <div class="@Model.MatchesClassName">

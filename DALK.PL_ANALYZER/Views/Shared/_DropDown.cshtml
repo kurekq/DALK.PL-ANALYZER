@@ -1,0 +1,15 @@
+﻿@using DropDownModelView = DALK.PL_ANALYZER.Models.GridFilter.DropDownModelView
+@using DropDownItemModelView = DALK.PL_ANALYZER.Models.GridFilter.DropDownItemModelView
+@model DropDownModelView
+
+<button class="btn btn-light dropdown-toggle js-selectedDropDown" name="@Model.DropDown.GetParameterName()" id="@Model.DropDown.GetCSSId()" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    @{
+        @Model.DropDown.GetSelectedItem().GetHtmlText()
+    }
+</button>
+<div class="dropdown-menu dropdown-menu-animated js-dropDownList autoScroll" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 37px, 0px);">
+    @foreach (DropDownItemModelView item in Model.items)
+    {
+        <a role="button" class="dropdown-item" value="@item.Value" onclick="setInnerHtml('@Model.DropDown.GetCSSId()', @item.HtmlTextBetweenQuotes); updateMatchesFilters();">@item.HtmlText</a>
+    }
+</div>

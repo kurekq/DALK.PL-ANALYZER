@@ -1,0 +1,11 @@
+﻿@using DatePickerModelView = DALK.PL_ANALYZER.Models.GridFilter.DatePickerModelView
+@model DatePickerModelView
+
+<table>
+    <tr>
+        <td>
+            <label class="datePickerLabel">@Model.LabelName</label>
+        </td>
+        <td><input type="text" name="@Model.ParameterName" value="@Model.Date" class="form-control datePickerControl js-datePickerControl" onchange="updateMatchesFilters();" data-provide="datepicker" data-date-autoclose="true"></td>
+    </tr>
+</table>

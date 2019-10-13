@@ -1,5 +1,5 @@
 ﻿using DALK.PL_ANALYZER.DB.FAKE;
-using DALK.PL_ANALYZER.Models.Filters;
+using DALK.PL_ANALYZER.Models.GridFilter;
 using DALK.PL_ANALYZER.Models.Matches;
 using DALK.PL_ANALYZER.Models.Shared;
 using Newtonsoft.Json;
