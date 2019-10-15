@@ -1,5 +1,5 @@
 ﻿using DALK.PL_ANALYZER.DB.FAKE;
-using DALK.PL_ANALYZER.Models.Filters;
+using DALK.PL_ANALYZER.Models.GridFilter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ namespace DALK.PL_ANALYZER.Models.Matches
         public LeaguesSeason LeaguesSeason { get; set; }
         public GroupsSeason GroupsSeason { get; set; }
         public TeamsSeason TeamsSeason { get; set; }
-        public List<IFilterData> Stages { get; set; }
+        public List<IDropDownItemData> Stages { get; set; }
 
         public MatchesDataFilterContainer(MatchesRawFilterValues rawParameters)
         {
@@ -41,9 +41,9 @@ namespace DALK.PL_ANALYZER.Models.Matches
                                 (x.GroupSeason.Id.ToString() == cohensionableParameters.matchGroupId || cohensionableParameters.matchGroupId == null)));
             }    
         }
-        private List<IFilterData> getStageFilters()
+        private List<IDropDownItemData> getStageFilters()
         {
-            return new List<IFilterData>()
+            return new List<IDropDownItemData>()
             {
                     new ConstantFilterData()
                     {

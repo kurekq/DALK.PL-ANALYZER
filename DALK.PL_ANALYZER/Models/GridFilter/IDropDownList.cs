@@ -5,18 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace DALK.PL_ANALYZER.Models.Filters
+namespace DALK.PL_ANALYZER.Models.GridFilter
 {
-    public interface IFilterable
+    public interface IDropDownList
     {
-        IEnumerable<IFilterableItem> GetItems();
-        IFilterableItem GetDefaultItem();       
-        IFilterableItem GetSelectedItem();
-        void SetAsSelected(IFilterableItem i);
+        IEnumerable<IDropDownListItem> GetItems();
+        IDropDownListItem GetDefaultItem();       
+        IDropDownListItem GetSelectedItem();
+        void SetAsSelected(IDropDownListItem i);
         void SetAsSelected(string byValue);
         string GetCSSId();
         int? SetIdByDefault(int? id);
         string SetIdByDefault(string id);
-        string GetParameterName();
     }
 }

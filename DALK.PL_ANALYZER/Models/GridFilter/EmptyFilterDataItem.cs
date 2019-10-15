@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace DALK.PL_ANALYZER.Models.Filters
+namespace DALK.PL_ANALYZER.Models.GridFilter
 {
-    public class EmptyFilterDataItem : IFilterData
+    public class EmptyFilterDataItem : IDropDownItemData
     {
         public string Text { get; set; }
         public string Value { get; set; }

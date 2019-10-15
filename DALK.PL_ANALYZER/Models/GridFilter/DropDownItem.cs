@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace DALK.PL_ANALYZER.Models.Filters
+namespace DALK.PL_ANALYZER.Models.GridFilter
 {
-    public class ItemInFilter : IFilterableItem
+    public class DropDownItem : IDropDownListItem
     {
-        public ItemInFilterData filterData;
+        public DropDownItemData filterData;
         public string itemType;
 
-        public ItemInFilter() { }
-        public ItemInFilter(IFilterData fD)
+        public DropDownItem() { }
+        public DropDownItem(IDropDownItemData fD)
         {
-            filterData = new ItemInFilterData(fD);
+            filterData = new DropDownItemData(fD);
             itemType = fD.GetType().ToString();
         }
         public void Select()
@@ -51,7 +51,7 @@ namespace DALK.PL_ANALYZER.Models.Filters
         }
         public override bool Equals(object obj)
         {
-            ItemInFilter fd = obj as ItemInFilter;             
+            DropDownItem fd = obj as DropDownItem;             
             if (fd != null)
             {
                 return fd.filterData.Text == this.filterData.Text &&
