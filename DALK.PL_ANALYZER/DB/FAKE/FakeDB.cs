@@ -45,8 +45,8 @@ namespace DALK.PL_ANALYZER.DB.FAKE
                 (x.Home.Team.Id.ToString() == parameters.matchTeamId || parameters.matchTeamId == null) &&
                 (x.Home.GroupSeason.Id.ToString() == parameters.matchGroupId || parameters.matchGroupId == null) &&
                 (x.Stage.StageName == parameters.matchStageId || parameters.matchStageId == null) && 
-                (x.DateTime >= fromDate || fromDate == null) &&
-                (x.DateTime <= toDate || toDate == null)
+                (x.DateTime.Date >= fromDate || fromDate == null) &&
+                (x.DateTime.Date <= toDate || toDate == null)
             ).ToList<Match>();
 
             return allMatches; 
